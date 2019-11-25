@@ -1,0 +1,28 @@
+﻿//[Ul/Pre] Verify all functions work correctly after tap "Force Reapply All Tunings" button
+
+//coonect mobile and Open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//Go to Integration Test Screen
+put global main.open_Integration_screen()
+
+Repeat 4 times
+	put global functions.swipeup()
+End repeat
+Tap global integration.integration().Force_reapply_img
+
+//check if All tunings reapplied" toast appear on UI
+if global integration.check_toast_alltunings_appear() is true then
+	LogSuccess "All tunings reapplied toast appear on UI"
+	cleanup
+else
+	put global functions.error("All tunings reapplied toast does NOT appear on UI")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

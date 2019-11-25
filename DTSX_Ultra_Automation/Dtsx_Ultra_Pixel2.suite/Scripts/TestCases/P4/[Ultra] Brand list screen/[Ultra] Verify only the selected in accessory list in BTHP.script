@@ -1,0 +1,46 @@
+﻿//[Ultra] Verify only the selected Accessory list is in enable mode and the other accessory list is in disabled mode with BT
+
+//Root and connect device and open app
+put global functions.root()
+put global functions.open_app()
+
+//Connect BT headphone. Need to set up connect BT HP before
+put global functions.change_state_deviceBT("ON")
+wait 5
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+
+//Choose Over-ear accessory
+put global bthp.select_name_Headphones("Over-ear Headphones")
+put global functions.captureimage(Over_ear) into Over_ear
+
+//Choose Earbuds accessory
+put global bthp.select_name_Headphones("Earbuds")
+//Check if Over-ear is NOT chosen
+if global functions.check_imagefound_image(Over_ear) is false then
+	put global functions.captureimage(Earbuds) into Earbuds
+	//Choose Over-ear accessory
+	put global bthp.select_name_Headphones("Over-ear Headphones")
+	//Check if Earbuds is NOT chosen
+	if global functions.check_imagefound_image(Earbuds) is false then
+		LogSuccess "Accessory list is in enable mode and the other accessory list is in disabled"
+		cleanup
+	else
+		put global functions.error("Accessory list is in enable mode and the other accessory list is NOT in disabled")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Accessory list is in enable mode and the other accessory list is NOT in disabled")
+	cleanup
+	return false
+end if
+
+To cleanup
+	put global bthp.select_name_Headphones("Earbuds")
+	put global functions.close_app()
+	put global functions.change_state_deviceBT("OFF")
+	wait 5
+	put global functions.disconnect_mobile()
+End cleanup

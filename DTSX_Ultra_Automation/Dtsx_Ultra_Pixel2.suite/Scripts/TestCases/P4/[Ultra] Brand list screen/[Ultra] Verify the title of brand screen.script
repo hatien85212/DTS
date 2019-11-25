@@ -1,0 +1,25 @@
+﻿//[Ultra] Verify the title of brand screen
+
+//connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+//Go to Brand list screen
+put global bthp.open_Brand_list_screen()
+
+//Check if the title is "Brands"
+if global bthp.check_name_title_Brands() is true then
+	LogSuccess "Correct title"
+	cleanup
+else
+	put global functions.error("Incorrect title")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

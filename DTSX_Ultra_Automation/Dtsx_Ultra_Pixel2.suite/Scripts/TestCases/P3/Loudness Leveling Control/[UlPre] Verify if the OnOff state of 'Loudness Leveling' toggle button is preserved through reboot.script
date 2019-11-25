@@ -1,0 +1,47 @@
+﻿//[Ul/Pre] Verify if the On/Off state of 'Loudness Leveling' toggle button is preserved through reboot
+
+
+//connect moblie
+put global functions.connect_mobile()
+//Go to Loudness_leveling toggle
+Goto_Loudness_leveling
+// turn on Loudness leveling and CaptureScreen
+put global functions.captureimage(global personalpref.turn_on_loudness()) into Loudness_leveling_ON
+//reboot device
+put global functions.reboot()
+Goto_Loudness_leveling
+// check if if the On/Off state of 'Loudness Leveling' toggle button is preserved when we on and off
+if global functions.check_imagefound_image(Loudness_leveling_ON) is true then
+	put global functions.captureimage(global personalpref.turn_off_loudness()) into Loudness_leveling_OFF
+	put global functions.reboot()
+	Goto_Loudness_leveling
+	if global functions.check_imagefound_image(Loudness_leveling_OFF) is true then
+		LogSuccess "The On/Off state of 'Loudness Leveling' toggle button is preserved through reboot"
+		cleanup
+	else
+		put global functions.error("The On/Off state of 'Loudness Leveling' toggle button is NOT preserved through reboot")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("The On/Off state of 'Loudness Leveling' toggle button is NOT preserved through reboot")
+	//cleanup
+	put global personalpref.turn_off_loudness()
+	cleanup
+	return false
+end if	
+
+to Goto_Loudness_leveling
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	wait 5
+	Repeat 2 times
+		put global functions.swipeup()
+	End repeat
+end Goto_Loudness_leveling
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

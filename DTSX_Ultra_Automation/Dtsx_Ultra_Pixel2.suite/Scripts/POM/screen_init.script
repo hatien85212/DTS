@@ -1,0 +1,24 @@
+﻿#Init all screens
+
+function screen_init()
+	return (\
+	main:"POM/MainScreen",\
+			about:"POM/AboutScreen",\
+			bthp:"POM/BluetoothheadphoneScreen",\
+			brandlist:"POM/BrandsListScreen",\
+			demo:"POM/DemoScreen",\
+			geq:"POM/GeqScreen",\
+			lp:"POM/ListeningProfileScreen",\
+			model:"POM/ModelScreen",\
+			noti:"POM/NotificationTray",\
+			setting:"POM/SettingScreen",\
+			sp:"POM/StereoPreferenceScreen",\
+			wiredhp:"POM/WiredheadphoneScreen",\
+			personalpref:"POM/PersonalAudioPreference",\
+			integration: "POM/IntegrationScreen",\
+			usbhp:"POM/USBheadphoneScreen",\
+			other:"POM/Other",\
+			EULAAccept:"POM/EULAAcceptanceScreen",\
+			EULA:"POM/EULAScreen",\
+			)
+		end screen_init

@@ -1,0 +1,45 @@
+﻿#Everything relate to Other thing
+
+function Other()
+	return(\
+	appicon:"Other/icon",\
+			phone_main_button:"Other/main",\
+			phone_menu_app_button:"Other/menu_app_button",\
+			phone_menu_backbutton:"Other/",\
+			cfgfilepath: ResourcePath()&"/customer.cfg",\
+			full_kvp_cfgfilepath: ResourcePath()&"/customer_full.cfg",\
+			demo_hide_kvp_true:"ui_hide_demo_screen=true",\
+			demo_hide_kvp_false:"ui_hide_demo_screen=false",\
+			stereopref_hide_kvp_true: "ui_hide_stereo_preference=true",\
+			stereopref_hide_kvp_false: "ui_hide_stereo_preference=false",\
+			setting_hide_kvp_true: "ui_hide_settings_screen=true",\
+			usb_hide_kvp_true:"ui_hide_usb_accessory_recommendation=true",\
+			usb_hide_kvp_false:"ui_hide_usb_accessory_recommendation=false",\
+			bt_hide_kvp_true:"ui_hide_bt_accessory_recommendation=true",\
+			bt_hide_kvp_false:"ui_hide_bt_accessory_recommendation=false",\
+			setting_hide_kvp_false: "ui_hide_settings_screen=false",\
+			notification_hide_kvp_true: "ui_hide_settings_notifications=true",\
+			notification_hide_kvp_false: "ui_hide_settings_notifications=false",\
+			integration_hide_kvp_true: "ui_hide_integration_test_screen=true",\
+			integration_hide_kvp_false: "ui_hide_integration_test_screen=false",\
+			geq_hide_kvp_true: "ui_hide_geq=true",\
+			geq_hide_kvp_false: "ui_hide_geq=false",\
+			geq_disable_kvp_true: "disable_geq=true",\
+			geq_disable_kvp_false: "disable_geq=false",\
+			enable_button_hide_kvp_true: "ui_hide_enable_button=true",\
+			enable_button_hide_kvp_false: "ui_hide_enable_button=false",\
+			treble_disable_kvp_true: "disable_treble_level=true",\
+			treble_disable_kvp_false: "disable_treble_level=false",\
+			notification_option1_kvp:"ui_notification_system_config=service_uses_app_notification",\
+			notification_option2_kvp:"ui_notification_system_config=service_uses_dummy_notification",\
+			notification_delete_kvp:"",\
+			apk_location: ResourcePath()&"/1.0.2.26_dtsx-ultra-ui-pixelCUS-release.apk",\
+			debug_apk_location: ResourcePath()&"/1.0.2.26_dtsx-ultra-ui-pixelCUS-debug.apk",\
+			logcat_path: ResourcePath()&"/log.txt",\
+			eaglelicense_path: ResourcePath()&"/dts-eagle.lic",\
+			cfgfilepath_blank_space_and_line: ResourcePath()&"/customer_blank.cfg",\
+			dts_m6m8_key: ResourcePath()&"/dts-m6m8-lic.key",\
+			export_file: ResourcePath()&"/export_file.txt",\
+			export_bat: ResourcePath()&"/Getexport.bat",\
+			)
+		end Other

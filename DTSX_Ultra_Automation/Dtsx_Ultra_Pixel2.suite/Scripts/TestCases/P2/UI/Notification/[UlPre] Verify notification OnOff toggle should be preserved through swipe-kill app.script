@@ -1,0 +1,55 @@
+﻿//[Ul/Pre] Verify notification On/Off toggle should be preserved through swipe-kill app 
+
+
+//Go to setting screen
+Go_to_setting_screen
+
+//Turn On
+put global setting.change_state_Notification("ON")
+put global functions.captureimage(Notification_On) into Notification_On
+
+//Close and open app and go to setting screen
+put global functions.close_app()
+wait 3
+Go_to_setting_screen
+
+//Check if the toggle of Notification is preserved
+if global functions.check_imagefound_image(Notification_On) is true then
+	//Turn off 
+	put global setting.change_state_Notification("OFF")
+	put global functions.captureimage(Notification_Off) into Notification_Off
+	//Close and open app and go to setting screen
+	put global functions.close_app()
+	wait 3
+	Go_to_setting_screen
+	if global functions.check_imagefound_image(Notification_Off) is true then
+		LogSuccess "Notification On/Off toggle should be preserved through swipe-kill app"
+		cleanup
+	else
+		put global functions.error("notification On/Off toggle should NOT be preserved through swipe-kill app")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("notification On/Off toggle should NOT be preserved through swipe-kill app")
+	cleanup
+	return false	
+end if	
+
+to Go_to_Setting_screen
+	//Connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	//open Setting Screen
+	put global main.open_setting_screen()
+end Go_to_Setting_screen
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+
+
+

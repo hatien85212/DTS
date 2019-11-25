@@ -1,0 +1,45 @@
+﻿#[Ul/Pre] Verify layout of "Integration test" screen
+
+Try
+	#connect mobile
+	put global functions.connect_mobile()
+	
+	#open app
+	put global functions.open_app()
+	
+	#reset to default
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	
+	#press back to main screen
+	PressBackButton
+	
+	#scroll down 3 times to show integration screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#Open integration screen
+	put global main.open_integration_screen()
+	
+	#check default layout of integration screen in portrait
+	if global integration.check_default_layout("portrait") is false then
+		put global functions.error("Integration test screen is not correct")
+		cleanup
+	else
+		LogSuccess "Verify layout done"
+	end if
+	
+	#cleanup
+	cleanup
+Catch exception
+	put exception 's reason
+	put global functions.error("Integration test screen is not correct")
+	cleanup
+End try
+
+to cleanup
+	#close app and disconnect server
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

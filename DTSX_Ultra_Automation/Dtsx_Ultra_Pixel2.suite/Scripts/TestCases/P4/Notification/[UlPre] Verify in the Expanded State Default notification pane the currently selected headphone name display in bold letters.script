@@ -1,0 +1,48 @@
+﻿//[Ul/Pre] Verify in the Expanded State Default notification pane the currently selected headphone name display in bold letters
+
+//Precondition
+//Connect device open app, go to setting screen and turn on Notification
+put global functions.root()
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+//open app and turn on Notification
+put global functions.open_app()
+put global main.open_setting_screen()
+put global setting.change_state_notification("ON")
+
+//Expand notification
+Put global noti.the_status_bar("Expand")
+//Tap Search button
+put global noti.Tap_name_button("Search")
+//Select CushBlue headphone
+put global bthp.select_name_Headphones("CushBlu")
+PressBackButton
+
+// Step
+//Expand notification
+Put global noti.the_status_bar("Expand")
+// Check if selected headphone name display in bold letters
+if global noti.check_Noti_CushBlu_appear() is true then
+	LogSuccess "Selected headphone name display in bold letters"
+	cleanup
+else
+	put global functions.error("Selected headphone name do NOT display in bold letters")
+	cleanup
+	return false
+end if
+
+to cleanup
+	Put global noti.the_status_bar("Collapse")
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	put global setting.change_state_notification("OFF")
+	put global setting.reset_OEM_default()
+	PressBackButton
+	put global main.open_personalpref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+End cleanup

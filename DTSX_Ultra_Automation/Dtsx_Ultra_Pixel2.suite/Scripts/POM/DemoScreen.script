@@ -1,0 +1,105 @@
+﻿##Everything relate to DemoScreen
+
+function DemoScreen()
+	return(\
+	demoscreen_portrait_img: "DemoScreen/DemoScreen_portrait_default_layout",\
+			demoscreen_landscape_img: "DemoScreen/DemoScreen_landscape_default_layout",\
+			resetlp_text:"Reset Listening profile",\
+			resetlp_ok_text:"OK",\
+			resetLP_dialog_img: "DemoScreen/ResetLP_dialog_img",\
+			usersetting_img: "DemoScreen/usersetting_after_updateLP",\
+			usersetting_img1: "DemoScreen/usersetting_after_updateLP1",\
+			usersetting_img2: "DemoScreen/usersetting_after_updateLP2",\
+			usersetting_img3: "DemoScreen/usersetting_after_updateLP3",\
+			currentvalue_img: "DemoScreen/currentvalue_after_selectUsersetting",\
+			currentvalue_img1: "DemoScreen/currentvalue_after_selectUsersetting1",\
+			currentvalue_img2: "DemoScreen/currentvalue_after_selectUsersetting2",\
+			currentvalue_img3: "DemoScreen/currentvalue_after_selectUsersetting3",\
+			PerfectHearing_txt: "Perfect hearing",\
+			PoorHearing_txt: "Poor hearing",\
+			UserSetting_txt: "User Setting",\
+			currentvalue_afterresetlp_img: "DemoScreen/Current_value_-1dB",\
+			)
+		end DemoScreen
+
+function check_default_layout(scr_rotate)
+	If scr_rotate is "portrait" and if global functions.check_imagefound_image( DemoScreen().demoscreen_portrait_img) then
+		return true
+	else if scr_rotate is "landscape" and if global functions.check_imagefound_image( DemoScreen().demoscreen_landscape_img)
+		return true
+	else
+		return false
+	End if
+end check_default_layout
+
+#use this function to reset lp without checking lp toast
+function reset_listening_profile()
+	if ImageFound(2, text: DemoScreen().resetlp_text) then
+		Click FoundImageLocation()
+		wait 2
+		
+		//check if reset listening profile dialog appear
+		if global functions.check_imagefound_image(DemoScreen().resetLP_dialog_img) then
+			Click (text:DemoScreen().resetlp_ok_text)
+			return true
+		else
+			return false
+		end if	
+	else 
+		return false
+	end if
+end reset_listening_profile
+
+//return true if ok, false if not
+function check_user_setting()
+	if global functions.check_imagefound_image(DemoScreen().usersetting_img) and if global functions.check_imagefound_image(DemoScreen().usersetting_img1) and if global functions.check_imagefound_image(DemoScreen().usersetting_img2) and if global functions.check_imagefound_image(DemoScreen().usersetting_img3) then
+		return true
+	else
+		return false
+	end if
+end check_user_setting
+
+//return true if ok, false if not
+function check_current_value()
+	if global functions.check_imagefound_image(DemoScreen().currentvalue_img) and if global functions.check_imagefound_image(DemoScreen().currentvalue_img1) and if global functions.check_imagefound_image(DemoScreen().currentvalue_img2) and if global functions.check_imagefound_image(DemoScreen().currentvalue_img3) then
+		return true
+	else
+		return false
+	end if
+end check_current_value
+
+function select_perfect_hearing()
+	put DemoScreen().PerfectHearing_txt into PerfectHearing_txt
+	Try
+		if ImageFound(3, (text:PerfectHearing_txt)) then
+			click FoundImageLocation()
+		end if
+	Catch exception
+		//Do nothing
+	End try
+end select_perfect_hearing
+
+function select_user_setting()
+	put DemoScreen().UserSetting_txt into UserSetting_txt
+	Try
+		if ImageFound(3, (text:UserSetting_txt)) then
+			click FoundImageLocation()
+		end if
+	Catch exception
+		//Do nothing
+	End try
+end select_user_setting
+
+//check current value after reset LP, all value should be -1
+function check_current_value_after_resetLP()
+	if global functions.check_imagefound_image(DemoScreen().currentvalue_afterresetlp_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_current_value_after_resetLP
+
+
+
+
+

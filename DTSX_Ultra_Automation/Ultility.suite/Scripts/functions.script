@@ -1,0 +1,487 @@
+﻿
+function var()
+	return(\
+	full_kvp_cfgfilepath: ResourcePath()&"/customer_full.cfg",\
+			)
+		end var
+
+
+
+##Capture image and log error
+function error(msg)
+	CaptureScreen (Name: msg)
+	LogError msg
+	(*put close_app()
+	Disconnect
+	Exit to top*)
+end error
+
+function connect_mobile()
+	Repeat until the connectioninfo.connected is true
+		if the repeatindex = 15 then 
+			logerror("Can't connect mobile again")
+			Exit to top
+		end if //Throws an errror if the repeat loop iterates 15 times
+		wait 3
+		Try
+			Connect (ServerID:"127.0.0.1")
+		Catch exception
+			put exception 's reason
+		End try
+	End repeat
+end connect_mobile
+
+function disconnect_mobile()
+	Try 
+		wait 5
+		Disconnect
+		wait 5
+	Catch exception
+		put exception 's reason
+		LogError "No mobile connection"
+		Exit to top
+	End try
+end disconnect_mobile
+
+function root()
+	Try
+		wait 5
+		ADBCall("root")
+		wait 10
+		ADBCall("remount")
+		put connect_mobile()
+	Catch exception
+		put exception 's reason
+		LogError "Get root fail"
+		Exit to top
+	End try
+end root
+
+function open_app()
+	Try
+		LaunchApp "com.dts.dtsxultra"
+		Wait 2
+		SetDeviceOrientation Portrait
+		Wait 2
+	Catch exception
+		put exception 's reason
+		LogError "No DTSX Ultra install"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end open_app
+
+function close_app()
+	Try
+		Wait 2
+		SetDeviceOrientation Portrait
+		Wait 2
+		KillApp "com.dts.dtsxultra"
+	Catch exception
+		put exception 's reason
+		LogError "No DTSX Ultra install"
+		Disconnect
+		Exit to top
+	End try
+end close_app
+
+
+##close webview on device pixel 2
+function close_webview()
+	Try
+		Wait 2
+		SetDeviceOrientation Portrait
+		Wait 2
+		KillApp "org.chromium.webview_shell"
+	Catch exception
+		put exception 's reason
+		LogError "No Webview install"
+		Disconnect
+		Exit to top
+	End try
+end close_webview
+
+
+function Reboot()
+	Try
+		Wait 5
+		ADBCall("reboot") //adb reboot
+		//wait 15 second to root the device before Android gateway connect. This keep AG to connect so many times, causing lost connect.
+		Wait 15 // this 15 second is calculated based on reboot time of pixel 2. Other device might be different
+		put root()
+	Catch exception
+		put exception 's reason
+		LogError "Error while rebooting"
+		Exit to top
+	end try
+end Reboot
+
+function remove_datafile()
+	Try
+		ExecuteRemoteCommand("rm /data/misc/dts/dts_audio_settings")
+	Catch exception
+		LogError "Can't remove setting file"
+		put exception 's reason
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end remove_datafile
+
+#remove eagle license
+function remove_licensefile()
+	Try
+		ExecuteRemoteCommand("rm /vendor/etc/dts/dts-eagle.lic")
+	Catch exception
+		put exception 's reason
+		LogError "Can't remove license file"
+	End try
+end remove_licensefile
+
+#push eagle license
+function push_licensefile(licensefilePath)
+	Try
+		copy file licensefilePath to "SUT:/vendor/etc/dts/dts-eagle.lic"
+	Catch exception
+		put exception 's reason
+		LogError "Can't push license file"
+	End try
+end push_licensefile
+
+##Open a screen return true / false
+function open_screen(TextOrImage, params)
+	If TextOrImage is "text" then
+		if ImageFound(5, text:params)
+			Click (Text:params)
+			return true
+		else
+			return false
+		end if
+	Else If TextOrImage is "image" then
+		if check_imagefound_image(params)
+			Click (params)
+			return true
+		else
+			return false
+		end if
+	End if
+end open_screen
+
+(*##Open a screen via image return true / false
+function open_screen_viaImage(params)
+	if check_imagefound(params)
+		Click (params)
+		return true
+	else
+		return false
+	end if
+end open_screen_viaImage*)
+
+to copy_customercfgfromdevice(cfgfilepath)
+	#delete config file for copy new file
+	Try
+		Delete file cfgfilepath
+	Catch exception
+		put exception 's reason
+		#Do nothing
+	End try
+	#start copy customer.cfg from device
+	#if no customer.cfg in device, delete customer.cfg in current suite if exist. Make sure no customercfg appear when copy file
+	Try
+		copy file "SUT:/vendor/etc/dts/customer.cfg" to cfgfilepath
+	Catch exception
+		put exception 's reason
+		Try
+			Delete file cfgfilepath
+		Catch exception
+			put exception 's reason
+			#Do nothing
+		End try
+	end try
+end copy_customercfgfromdevice
+
+##Check if kvp exist in customer.cfg, return true/false
+function check_kvp(kvp,cfgfilepath)
+	Try
+		#copy customercfg from device
+		#if no customer.cfg in device, delete customer.cfg in current suite if exist. Make sure no customercfg appear when copy file
+		copy_customercfgfromdevice(cfgfilepath)
+		If kvp is in file cfgfilepath then
+			return true
+		else
+			return false
+		End if
+	Catch exception
+		put exception 's reason
+		LogError "Can't check kvp"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end check_kvp
+
+##Push customer.cfg
+function push_customercfg(cfgfilepath)
+	Try
+		copy file cfgfilepath to "SUT:/vendor/etc/dts/customer.cfg"
+	Catch exception
+		put exception 's reason
+		LogError "No cfg file avaialble"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end push_customercfg
+
+##remove customer.cfg
+function remove_customercfg()
+	(*TypeText "adb root && adb remount"
+	TypeText "adb shell rm /data/misc/dts/dts_audio_settings"*)
+	Try
+		ExecuteRemoteCommand("rm /vendor/etc/dts/customer.cfg")
+	Catch exception
+		LogError "Can't remove customer.cfg file"
+		put exception 's reason
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end remove_customercfg
+
+//use to change kvp in customer.cfg
+function change_kvp(oldkvp, newkvp,cfgfilepath)
+	Try
+		if cfgfilepath is empty then
+			LogError "No cfg file path"
+			put close_app()
+			Disconnect
+			Exit to top
+		else
+			#copy customercfg from device
+			#if no customer.cfg in device, delete customer.cfg in current suite if exist. Make sure no customercfg appear when copy file
+			copy_customercfgfromdevice(cfgfilepath)
+			
+			#check kvp exist in customer.cfg, if not then rewrite
+			if oldkvp is in file cfgfilepath then
+				replace every occurrence of oldkvp in file cfgfilepath with newkvp 
+			else if newkvp is in file cfgfilepath then
+				//do nothing
+			else
+				put newkvp & return before file cfgfilepath
+			end if
+		end if
+	Catch exception
+		put exception 's reason
+		LogError "Can't change kvp"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end change_kvp
+
+##Uninstall app
+function uninstall_app()
+	Try
+		UninstallApp("com.dts.dtsxultra")
+	Catch exception
+		put exception 's reason
+		LogError "No DTSX Ultra installed"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end uninstall_app
+
+##install app
+function install_app(apk_location)
+	Try
+		InstallApp (applicationPath:apk_location)
+	Catch exception
+		put exception 's reason
+		LogError "Can't install DTSX Ultra"
+		put close_app()
+		Disconnect
+		Exit to top
+	End try
+end install_app
+
+
+##customize ImageFound function
+function check_imagefound_image(img)
+	(*If ImageFound(image:img,scale:1.0, WaitFor:2) then
+		return true
+	Else
+		return false
+	End if*)
+	(*put img into image*)
+	(*repeat until ImageFound(image:img,scale:1.0, WaitFor:1) //Repeats until a particular image is found, allowing only 1 scan for the image for each iteration.
+		if the repeatindex = 5 then 
+			return false
+		end if //Throws an errror if the repeat loop iterates 5 times
+	end repeat
+	return true*)
+	Try
+		WaitFor 5, img
+		return true
+	Catch exception
+		return false
+	End try
+	
+	
+end check_imagefound_image
+
+##To scroll until found a text or image
+(*function ScrollUntilFound(TextOrImg, foundObject,Direction,errorMsg)
+	If TextOrImg is "text" then
+		repeat until imagefound (text:foundObject,waitFor:1) //Repeats until a particular image is found, allowing only 1 scan for the image for each iteration.
+			if the repeatindex = 5 then 
+				put error(errorMsg)
+			end if //Throws an errror if the repeat loop iterates 5 times
+			
+			if Direction is "up" then
+				put SwipeUp()
+			else if Direction is "down" then
+				put swipedown()
+			else if Direction is "right" then
+				put swiperight()
+			else if Direction is "left" then
+				put swipeleft()
+			end if
+			
+			(*Do "Swipe" & Direction //Uses the Do command to combine a string and variable into a command*)
+			
+			wait 2 //Waits two seconds to allow the screen to settle after the swipe
+		end repeat
+	Else if TextOrImg is "image" then
+		repeat until imagefound (image:foundObject,waitFor:1) //Repeats until a particular image is found, allowing only 1 scan for the image for each iteration.
+			if the repeatindex = 5 then 
+				put error(errorMsg)
+			end if //Throws an errror if the repeat loop iterates 5 times
+			
+			Do "Swipe" & Direction //Uses the Do command to combine a string and variable into a command
+			
+			wait 2 //Waits two seconds to allow the screen to settle after the swipe
+		end repeat
+	End if
+end ScrollUntilFound*)
+
+function clear_logcat()
+	ExecuteRemoteCommand("logcat -c")
+end clear_logcat
+
+function get_logcat(logfile)
+	#note: please clear logcat before execute this command. If not, the data will be too much to put into a file.
+	put ExecuteRemoteCommand("logcat -d") into file logfile
+end get_logcat
+
+function read_logcat(logfile, keyword)
+	Try
+		open file logfile
+		Repeat with each line of file logfile 
+			if it contains keyword Then
+				return true
+			End if
+		End repeat
+		return false
+	Catch
+		put exception 's reason
+		return false
+	End try
+end read_logcat
+
+function swipeup()
+	set ScreenSize to remoteScreenSize() //Stores the resolution of the SUT in a variable
+	SwipeUp ScreenSize*(.9,.8),ScreenSize*(.9,.2) //Begins the swipe 90% across and 70% down the SUT screen and ends it 90% across and 20% down
+	wait 2 //wait 2 seconds for initialing remote screen
+end swipeup
+
+function swipedown()
+	set ScreenSize to remoteScreenSize() //Stores the resolution of the SUT in a variable
+	SwipeDown ScreenSize*(.9,.2),ScreenSize*(.9,.8) //Begins the swipe 90% across and 0% down the SUT screen and ends it 90% across and 80% down
+	wait 2 //wait 2 seconds for initialing remote screen
+end swipedown
+
+function swiperight()
+	set ScreenSize to remoteScreenSize() //Stores the resolution of the SUT in a variable
+	SwipeRight ScreenSize*(.3,.5),ScreenSize*(.7,.5) //Begins the swipe 30% across and 50% down the SUT screen and ends it 70% across and 50% down
+	wait 2 //wait 2 seconds for initialing remote screen
+end swiperight
+
+function swipeleft()
+	set ScreenSize to remoteScreenSize() //Stores the resolution of the SUT in a variable
+	SwipeLeft ScreenSize*(.7,.5),ScreenSize*(.3,.5) //Begins the swipe 70% across and 50% down the SUT screen and ends it 30% across and 50% down
+	wait 2 //wait 2 seconds for initialing remote screen
+end swipeleft
+
+#to capture image
+#return an image
+function captureimage(name)
+	#capture the image. The rectangle can be checked with the image save in result folder.
+	Wait 3
+	CaptureScreen (Name: name, Rectangle: (20,90,1070,1760))
+	return the result
+end captureimage
+
+//push dts m6m8 license key
+function push_dts_m6m8_key (m6m8key)
+	Try
+		copy file m6m8key to "SUT:vendor/etc/dts/dts-m6m8-lic.key"
+	catch exception
+		put exception 's reason
+		LogError "Can't push m6m8 license key file"
+	end try
+end push_dts_m6m8_key
+
+//Connect or disconnect BT. Need run function root() prior.
+function change_state_deviceBT( ON, OFF)
+	if ON is "ON" then
+		ExecuteRemoteCommand("service call bluetooth_manager 6")
+		wait 10
+	else
+		ExecuteRemoteCommand("service call bluetooth_manager 8")
+		wait 5
+	end if
+end change_state_deviceBT
+
+// Change state DTS app notification in setting of device. Need execute root() function prior. 
+function change_state_DTS_app_notification_in_settings_of_device (ON, OFF)
+	ExecuteRemoteCommand("am start -a android.settings.SETTINGS")
+	wait 2
+	Tap (Text:"Apps & notifications")
+	Tap (Text:"DTS:X Ultra")
+	Tap (Text:"App notifications")
+	wait 2
+	If ON is "ON" then 
+		Tap (1008,535)
+	else
+		Tap (952,535)
+	End If
+	return 
+end change_state_DTS_app_notification_in_settings_of_device
+
+//Remove dts setting
+function remove_dts_setting()
+	ExecuteRemoteCommand("rm -r /data/misc/dts/")
+	wait 2
+end remove_dts_setting
+
+//Lock or unlock device screen
+function device_screen (Lock, Unlock)
+	if Lock is "Lock" then
+		ExecuteRemoteCommand("input keyevent 26")
+	else
+		ExecuteRemoteCommand("input keyevent 82")
+	end if
+end device_screen
+
+//Swipe up to Unlock device screen
+function swipe_unlock_device_screen  
+	Repeat 2 times
+		ExecuteRemoteCommand("input touchscreen swipe 530 1420 530 1120")
+	End repeat
+end swipe_unlock_device_screen  
+
+
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FireFoxTest"
+           tests="24"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="3106.759">
+  <properties />
+  
+  
+            <testcase name="TC040DTS_08" time="135.506" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DMS_02" time="159.806" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_09" time="140.956" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_06" time="114.213" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_15" time="104.710" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_12" time="140.588" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_17" time="133.907" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_11" time="134.858" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_07" time="120.597" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_20" time="96.400" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_10" time="151.643" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DMS_01" time="128.992" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_18" time="169.932" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_03" time="111.391" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_01" time="48.826" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_02" time="93.357" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_16" time="137.881" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_04" time="95.253" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_13" time="140.912" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DMS_05" time="198.916" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DMS_03" time="181.408" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_14" time="84.276" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DTS_05" time="110.536" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+                <testcase name="TC040DMS_04" time="171.895" classname="com.dts.adminportal.dts.test.DTSProducts040DTuningState" />
+      
+</testsuite>

@@ -1,0 +1,66 @@
+﻿#[UlPre]Verify_app_enable_metrics_to_send_report_when_checking_checkbox
+
+#Connect mobile
+put global functions.connect_mobile()
+
+#Install debug app reboot device
+put global functions.uninstall_app()
+Wait 10
+put global functions.install_app(global other.Other().debug_apk_location)
+Wait 10
+(*Disconnect
+wait 5
+put global functions.Reboot()*)
+
+try
+	#Open app
+	put global functions.open_app()
+	
+	#clear logcat
+	Wait 5
+	put global functions.clear_logcat()
+	
+	#Check metrics enable
+	if global eulaaccept.check_metrics() is false then
+		put global functions.error("Can't enable metric")
+		cleanup
+	end if
+	
+	
+	#tap continue
+	put global eulaaccept.open_mainscreen()
+	
+	#stop logcat and read logcat
+	put global functions.get_logcat(global other.Other().logcat_path)
+	if global functions.read_logcat(global other.Other().logcat_path, "Metrics enabled set to: true") is false then
+		put global functions.error("Logcat fail")
+		cleanup
+	else
+		LogSuccess "Verify logcat done"
+	end if
+	
+	#clean up for next tc
+	cleanup
+catch exception
+	put exception 's reason
+	put global functions.error("Logcat fail")
+	cleanup
+end Try
+
+to cleanup
+	#Install realease apk and reset OEM default
+	put global functions.uninstall_app()
+	Wait 10
+	put global functions.install_app(global other.Other().apk_location)
+	Wait 10
+	(*Disconnect
+	wait 5
+	put global functions.Reboot()*)
+	put global functions.open_app() 
+	put global eulaaccept.open_mainscreen()
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

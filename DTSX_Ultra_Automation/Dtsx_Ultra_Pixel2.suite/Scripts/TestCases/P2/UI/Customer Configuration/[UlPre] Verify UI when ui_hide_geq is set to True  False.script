@@ -1,0 +1,80 @@
+﻿#[UlPre] Verify UI when ui_hide_geq is set to True  False
+try
+	//get root permission, connect device
+	put global functions.root()
+	
+	//pull customer.cfg to PC and change kvp from ui_hide_geq=false to true and push back to device
+	put global functions.change_kvp(global other.Other().geq_hide_kvp_false, global other.Other().geq_hide_kvp_true, global other.Other().cfgfilepath)
+	put global functions.push_customercfg(global other.Other().cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	
+	//open app and open personal pref screen
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//scroll down 3 times to show bottom of screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	
+	//check geq tab is hidden
+	if global personalpref.check_geq_appear() then
+		put global functions.error("GEQ tab appears when disabled in customer.cfg")
+		cleanup
+	else
+		LogSuccess "GEQ tab not appear when disabled in customer.cfg"
+	end if
+	
+	
+	//push original customercfg
+	pushoriginalcustomercfg
+	
+	//open app and open personal pref screen
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//scroll down 3 times to show bottom of screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check geq tab don't appear
+	if global personalpref.check_geq_appear() is false then
+		put global functions.error("GEQ tab not appears when enabled in customer.cfg")
+		cleanup
+	else
+		LogSuccess "GEQ tab appear when enabled in customer.cfg"
+	end if
+	
+	//cleanup
+	cleanup
+	
+	Catch exception
+	put exception 's reason
+	//push original customercfg for cleaning up this cases
+	pushoriginalcustomercfg
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to pushoriginalcustomercfg
+	//get root permission, connect device
+	put global functions.root()
+	
+	//push original customer.cfg file
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+end pushoriginalcustomercfg

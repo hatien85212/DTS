@@ -1,0 +1,161 @@
+﻿##Everything relate to BT headphone screen
+
+function BluetoothheadphoneScreen()
+	return(\
+	bthp_screen_portrait_img:"BTHP/BTHP_defaultlayout_portrait",\
+			bthp_screen_landscape_img: "BTHP/BTHP_defaultlayout_landscape",\
+			OverEarHP_text: "Over-Ear Headphones",\
+			Earbuds_text: "Earbuds",\
+			Earpiece_text: "Earpiece",\
+			ExSpeaker_text: "External Speaker",\
+			Car_text: "Car Audio",\
+			plus_img:"BTHP/plus",\
+			Brands_title_img:"BTHP/Brands_title",\
+			Brand_name_img:"BTHP/Brand's_name",\
+			Model_list_screen_img:"BTHP/model_list_screen",\
+			Branded_HP_img:"BTHP/Brandedheadphones",\
+			)
+		end BluetoothheadphoneScreen
+
+function check_default_layout(Scr_rotate)
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(BluetoothheadphoneScreen().bthp_screen_portrait_img) then
+		return true
+	else if Scr_rotate is "landscape" and if functions.check_imagefound_image( BluetoothheadphoneScreen().bthp_screen_landscape_img)
+		return true
+	else
+		return false
+	End if
+	
+end check_default_layout
+
+#select standard OE headphone
+function select_standardHP_OverEar()
+	if ImageFound(2, (text:BluetoothheadphoneScreen().OverEarHP_text)) then
+		click FoundImageLocation()
+		return true
+	else
+		return false
+	end if
+end select_standardHP_OverEar
+
+function open_Brand_list_screen ()
+	put global functions.open_screen("image",BluetoothheadphoneScreen().plus_img)
+end open_Brand_list_screen
+
+function check_name_title_Brands()
+	if global functions.check_imagefound_image(BluetoothheadphoneScreen().Brands_title_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_name_title_Brands
+
+function name_of_brand_are_sorted ()
+	if global functions.check_imagefound_image(BluetoothheadphoneScreen().Brand_name_img) is true then
+		return true
+	else
+		return false
+	end if
+end name_of_brand_are_sorted
+
+function Model_list_screen_of_Brand (Brand_name)
+	Click (Text:Brand_name)
+	if ReadText((143,106), (447,169)) is Brand_name and if global functions.check_imagefound_image(BluetoothheadphoneScreen().Model_list_screen_img) is true then
+		return true
+	else
+		return false
+	end if
+end Model_list_screen_of_Brand
+
+function select_name_Headphones (Name)
+	if ImageFound(2, (text:Name)) then
+		click FoundImageLocation()
+		return true
+	else
+		return false
+	end if
+end select_name_Headphones
+
+(*function choose_first_modelHp_of_Brands (TEXT)
+	try
+		put Model_list_screen_of (TEXT)
+		wait 2
+		put ReadText((215,445), (429,489)) into Name
+		Click (Text:Name)
+		
+		wait 2
+		if ReadText((209,1006), (530,1060)) is TEXT&" "&Name then
+			return true
+		else
+			return false
+		end if
+	catch exception
+		put exception 's reason
+		return false
+	end try	
+end choose_first_modelHp_of_Brands*)
+
+function select_modelHP_of_brand (Brand_name, Model_name)
+	Try
+		put Model_list_screen_of_Brand (Brand_name)
+		wait 2
+		Click (Text:Model_name)
+		if ReadText((209,1006), (530,1060)) is Brand_name&" "&Model_name then
+			return true
+		else
+			return false
+		end if
+	catch exception
+		put exception 's reason
+		return false
+	end try	
+end select_modelHP_of_brand
+
+//Verify the text "Branded headphones" 
+function Display_1_branded_HP()
+	if ImageLocation(Text:"Branded headphones") is (269,1549) then
+		return true
+	else
+		return false
+	end if
+end Display_1_branded_HP
+
+//Check the item in the list sorted by alphabetically
+function check_sorted_alphabetically()
+	put ReadText((84,307), (115,1768)) into A
+	put A sorted alphabetically into B
+	if B is A then
+		return true
+	else
+		return false
+	end if
+end check_sorted_alphabetically
+
+// Remove BrandedHeadphonePref.xml. Neet execute "adb root" prior
+function remove_BrandedHPpref_xml()
+	ExecuteRemoteCommand("rm -r data/data/com.dts.dtsxultra/shared_prefs/BrandedHeadphonePref.xml")
+	wait 2
+end remove_BrandedHPpref_xml
+
+function check_branded_HP_appear()
+	if global functions.check_imagefound_image(BluetoothheadphoneScreen().Branded_HP_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_branded_HP_appear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

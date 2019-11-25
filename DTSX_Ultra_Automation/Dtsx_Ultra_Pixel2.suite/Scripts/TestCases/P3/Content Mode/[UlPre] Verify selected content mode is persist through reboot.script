@@ -1,0 +1,46 @@
+﻿#[Ul/Pre] Verify selected content mode is persist through swipe kill app
+
+#Connect mobile
+put global functions.connect_mobile()
+
+try
+	#Open app
+	put global functions.open_app()
+	
+	
+	#Open personal pref screen
+	put global main.open_PersonalPref_screen()
+	
+	#Select mode 4
+	put global personalpref.select_mode(4)
+	
+	#reboot device
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	
+	#check if mode 4 still perrsist
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	if global personalpref.check_contentmode_state(4) is false then
+		put global functions.error("Mode 4 not persist after swipe kill")
+		cleanup
+	else
+		LogSuccess "Verify mode 4 is persist"
+	end if
+	
+	#clean up for next tc
+	cleanup
+catch exception
+	put exception 's reason
+	put global functions.error("Mode 4 not persist after swipe kill")
+	cleanup
+end Try
+
+to cleanup
+	#Reset setting and close app
+	put global personalpref.reset_setting()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

@@ -1,0 +1,35 @@
+﻿#Check if ui_hide_demo_screen=false appear in customer.cfg
+set old_kvp=other.Other().demo_hide_kvp_true
+set kvp=other.Other().demo_hide_kvp_false
+set cfgfilepath=other.Other().cfgfilepath
+If functions.check_kvp(kvp,cfgfilepath) is false then
+	put functions.change_kvp(old_kvp,kvp,cfgfilepath)
+	put functions.root()
+	put functions.push_customercfg(cfgfilepath)
+	put functions.Reboot()
+End if
+
+
+
+
+
+
+
+
+function Play_stereo SR
+	LaunchApp "com.google.android.music"
+	Tap (75,135)
+	Tap (Text:"Music library")
+	if SR = "44k" then
+		Repeat until ImageFound(1,(text:"stereo_44_pink"))
+			SwipeUp 			
+		End repeat
+		Tap (Text:"stereo_44_pink")
+	else
+		Repeat until ImageFound((text:"stereo_48_pink"))
+			SwipeUp
+		End repeat
+		Tap (Text:"stereo_48_pink")
+	end if
+end Play_stereo
+

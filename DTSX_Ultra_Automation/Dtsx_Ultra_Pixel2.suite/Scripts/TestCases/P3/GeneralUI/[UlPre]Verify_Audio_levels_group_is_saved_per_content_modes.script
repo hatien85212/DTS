@@ -1,0 +1,92 @@
+﻿#[UlPre]Verify_Audio_levels_group_is_saved_per_content_modes
+
+#Connect mobile
+put global functions.connect_mobile()
+
+Try
+	#Open app
+	put global functions.open_app()
+	
+	#go to personal audio preference screen
+	put global main.open_PersonalPref_screen()
+	
+	#reset all setting to default
+	put global personalpref.reset_setting()
+	
+	#change mode 2
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#scroll down 3 times to show audio level group
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	
+	#change audio level group
+	put global personalpref.change_treble(600)
+	put global personalpref.change_bass(500)
+	put global personalpref.change_DE(200)
+	If global personalpref.check_state_loudness() then
+		put global personalpref.turn_off_loudness()
+	Else
+		put global personalpref.turn_on_loudness()
+	End if
+	
+	#capture the image after changing configuration. The rectangle can be checked with the image save in result folder.
+	put global functions.captureimage("mode2_audiolevelgroup") into mode2_audiolevelgroup
+	
+	#change mode 6
+	#scroll up 3 times to show the content mode
+	Repeat 3 times
+		put global functions.swipedown()
+	End repeat
+	if global personalpref.select_mode(6) is false then
+		put global functions.error("Can't select mode 6")
+		cleanup
+	end if
+	
+	#change back to mode 2
+	wait 3
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#check if the audio level group preserved
+	#scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	If global functions.check_imagefound_image(mode2_audiolevelgroup) is false then
+		put global functions.error("audio levels group of mode 2 is not preserved")
+		cleanup
+	else
+		LogSuccess "Audio levels group of mode 2 is preserved"
+	End if
+	
+	#clean up for next tc
+	cleanup
+	Catch exception
+	put exception 's reason
+	put global functions.error("audio levels group of mode 2 is not preserved")
+	cleanup
+End try
+
+
+to cleanup
+	#reset setting, then reset to oem default
+	Repeat 5 times
+		Do SwipeDown 
+	End repeat
+	put global personalpref.reset_setting()
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

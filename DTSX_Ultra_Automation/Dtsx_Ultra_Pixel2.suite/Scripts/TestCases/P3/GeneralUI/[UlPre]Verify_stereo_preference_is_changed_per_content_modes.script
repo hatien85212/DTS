@@ -1,0 +1,82 @@
+﻿#[UlPre]Verify_stereo_preference_is_changed_per_content_modes
+
+#Connect mobile
+put global functions.connect_mobile()
+
+try
+	#Open app
+	put global functions.open_app()
+	
+	#go to personal audio preference screen
+	put global main.open_PersonalPref_screen()
+	
+	#reset all setting
+	put global personalpref.reset_setting()
+	
+	#change mode 2
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#go to stereo preference and select wide mode
+	if global personalpref.open_StereoPref() is false and global sp.select_wide() is false then
+		put global functions.error("Can't select Wide")
+		cleanup
+	end if
+	PressBackButton
+	
+	#change mode 6
+	#scroll up 3 times to show the content mode
+	Repeat 3 times
+		put global functions.swipedown()
+	End repeat
+	
+	if global personalpref.select_mode(6) is false then
+		put global functions.error("Can't select mode 6")
+		cleanup
+	end if
+	
+	#scroll up 3 times to show stereo pref
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#open stereo preference screen
+	if global personalpref.open_StereoPref() is false then
+		put global functions.error("Can't select open stereo preference")
+		cleanup
+	end if
+	
+	#check stereo preference for mode 6 (should not be wide) as the default stereo preference mode of mode 6 differ from mode 2
+	If global sp.check_stereo_mode("wide") then
+		put global functions.error("stereo preference of mode 6 is the same as mode 2")
+		cleanup
+	else
+		LogSuccess "Stereo Preference of mode 6 is not the same as mode 2 as expected"
+	End if
+	
+	#clean up for next tc
+	cleanup
+	catch exception
+	put exception 's reason
+	put global functions.error("stereo preference of mode 6 is the same as mode 2")
+	cleanup
+end Try
+
+to cleanup
+	#reset setting, then reset to oem default
+	PressBackButton
+	put global personalpref.reset_setting()
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

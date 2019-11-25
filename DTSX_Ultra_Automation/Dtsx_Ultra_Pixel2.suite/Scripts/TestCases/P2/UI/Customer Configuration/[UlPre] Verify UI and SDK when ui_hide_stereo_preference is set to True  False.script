@@ -1,0 +1,80 @@
+﻿#[Ul/Pre] Verify UI and SDK when ui_hide_stereo_preference is set to True / False
+Try
+	//get root permission, connect device
+	put global functions.root()
+	
+	//pull customer.cfg to PC and change kvp from ui_hide_stereo_preference=false to true and push back to device
+	put global functions.change_kvp(global other.Other().stereopref_hide_kvp_false, global other.Other().stereopref_hide_kvp_true, global other.Other().cfgfilepath)
+	put global functions.push_customercfg(global other.Other().cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	
+	//open app and open personal audio pref screen
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check if stereo preference is hidden
+	if global personalpref.check_stereopref_appear() then
+		put global functions.error("Stereo preference appear when disabled")
+		//push original customercfg for cleaning up this cases
+		pushoriginalcustomercfg
+		cleanup
+	else
+		LogSuccess "Verify no stereo preference appear when disabled"
+	end if
+	
+	//push original customercfg
+	pushoriginalcustomercfg
+	
+	//open app and open personal audio pref screen
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check if stereo preference appear
+	if global personalpref.check_stereopref_appear() is false then
+		put global functions.error("Stereo preference not appear when enabled")
+		cleanup
+	else
+		LogSuccess "Verify stereo preference appear when enabled"
+	end if
+	
+	//cleanup
+	cleanup
+	
+Catch exception
+	put exception 's reason
+	//push original customercfg for cleaning up this cases
+	pushoriginalcustomercfg
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to pushoriginalcustomercfg
+	//get root permission, connect device
+	put global functions.root()
+	
+	//push original customer.cfg file
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+end pushoriginalcustomercfg

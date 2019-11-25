@@ -1,0 +1,13 @@
+<?xml version="1.0"?><TableScript xmlns="http://www.testplant.com/xmlns/TableScript/2014">
+<Lines>
+<Line><Action>Connect</Action><Arguments>Mobile</Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>Click</Action><Arguments>"HomePage/beijing_app"</Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>ImageFound</Action><Arguments>"HomePage/home_screen_title"</Arguments><ExpectedValueExpression>True</ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>Click</Action><Arguments>"HomePage/headphone"</Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>ImageFound</Action><Arguments>"AboutPage/about_title"</Arguments><ExpectedValueExpression>False</ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>Click</Action><Arguments>"AboutPage/website_badge"</Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>ImageFound</Action><Arguments>"AboutPage/website_dts"</Arguments><ExpectedValueExpression>true</ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>BL_01</Action><Arguments></Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+<Line><Action>BL_02</Action><Arguments></Arguments><ExpectedValueExpression></ExpectedValueExpression><Comment></Comment></Line>
+</Lines>
+</TableScript>

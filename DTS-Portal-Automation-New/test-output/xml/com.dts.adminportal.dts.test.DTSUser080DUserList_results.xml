@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FireFoxTest"
+           tests="6"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1176.387">
+  <properties />
+  
+  
+            <testcase name="TC080DUL_09" time="143.345" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+                <testcase name="TC080DUL_04" time="40.419" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+                <testcase name="TC080DUL_08" time="354.301" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+                <testcase name="TC080DUL_10" time="368.391" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+                <testcase name="TC080DUL_07" time="238.775" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+                <testcase name="TC080DUL_13" time="31.156" classname="com.dts.adminportal.dts.test.DTSUser080DUserList" />
+      
+</testsuite>

@@ -1,0 +1,73 @@
+﻿#[Ul/Pre] Verify UI and SDK when ui_hide_integration_test_screen is set to True / False
+try
+	//get root permission, connect device
+	put global functions.root()
+	
+	//pull customer.cfg to PC and change kvp from ui_hide_integration_test_screen=false to true and push back to device
+	put global functions.change_kvp(global other.Other().integration_hide_kvp_false, global other.Other().integration_hide_kvp_true, global other.Other().cfgfilepath)
+	put global functions.push_customercfg(global other.Other().cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	
+	//open app and scroll down 3 times
+	put global functions.open_app()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check Integration screen don't appear
+	if global main.check_integration_screen_appear() then
+		put global functions.error("Integration screen appears when disabled in customer.cfg")
+		cleanup
+	else
+		LogSuccess "Integration screen not appears when disabled in customer.cfg"
+	end if
+	
+	
+	//push original customercfg
+	pushoriginalcustomercfg
+	
+	//open app and scroll down 3 times
+	put global functions.open_app()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check Integration screen appear
+	if global main.check_integration_screen_appear() is false then
+		put global functions.error("Integration screen not appears when enabled in customer.cfg")
+		cleanup
+	else
+		LogSuccess "Integration screen appears when enabled in customer.cfg"
+	end if
+	
+	//cleanup
+	cleanup
+	
+	Catch exception
+	put exception 's reason
+	//push original customercfg for cleaning up this cases
+	pushoriginalcustomercfg
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to pushoriginalcustomercfg
+	//get root permission, connect device
+	put global functions.root()
+	
+	//push original customer.cfg file
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+end pushoriginalcustomercfg

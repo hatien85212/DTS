@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FireFoxTest"
+           tests="6"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1013.338">
+  <properties />
+  
+  
+            <testcase name="TC090DUI_01" time="91.859" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+                <testcase name="TC090DUI_06" time="118.758" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+                <testcase name="TC090DUI_10" time="82.856" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+                <testcase name="TC090DUI_03" time="180.803" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+                <testcase name="TC090DUI_05" time="167.748" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+                <testcase name="TC090DUI_09" time="371.314" classname="com.dts.adminportal.dts.test.DTSUser090DUserInfo" />
+      
+</testsuite>

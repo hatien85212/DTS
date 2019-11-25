@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Default test"
+           tests="9"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1245.547">
+  <properties />
+  
+  
+            <testcase name="TC630DaADL_08" time="46.855" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DbADL_08" time="196.254" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DaADL_07" time="68.179" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DaADL_09" time="350.871" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DbADL_01" time="88.397" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DaADL_06" time="68.025" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DaADL_01" time="73.260" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DbADL_06" time="167.758" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+                <testcase name="TC630DbADL_04" time="185.948" classname="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList" />
+      
+</testsuite>

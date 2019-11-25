@@ -1,0 +1,117 @@
+===== DTS DTS SDK INTEGRATION TEST REPORT =========================
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+----- VERSION ------------------------------------------------------
+SDK: 1.0.2.26
+Service: 1.0.5.9.0
+Eagle: 2.0.11.0.8651
+EaglePlatform: null
+FlurryAgent: Flurry_Android_236_6.8.0
+Dts Client: JAVA
+EagleDescription: DTS Eagle SDK
+ Version  2.0.11.0.8651
+ Time     Mar 29 2018 06:48:55 -0700
+ Source   unknown unknown
+ Math     32bit fixed point
+ OS       Android
+ CPU      ARM
+ Compiler GNU arm-linux-androideabi-gcc 4.9.0
+ Checksum 2e3b9159a73fb45585242252bae52b77
+ Component versions 
+  Eagle            2.0.11.0
+  Enhance v2       2.0.0.0
+  Loudness Control 3.0.1.0
+  Foundation lib   1.1.0.0
+  I3DA             1.0.0.0
+  Active EQ        lib 2.1.0.0 tech 1.0.0.0
+  Graphic EQ       lib 5.0.1.2 tech 2.6.1.0
+  TruBass HDX      lib 2.1.1.0 tech 2.9.0.2
+  SRS Common       lib 4.2.0.0 tech 3.1.0.0
+
+AudioManager.getParameters(DTS_EAGLE_PLATFORM_SUPPORT): DTS_EAGLE_PLATFORM_SUPPORT=true
+----- SYSTEM STATUS ------------------------------------------------
+SDK: [OK] SDK is running properly
+Service: [OK] Service is running properly
+License Exists: [OK] Result successful. - OK
+M6M8 License: [OK] Result successful. - true
+DB check: [OK] Result successful. - Datastore integrity report: No errors
+----- TOKENS -------------------------------------------------------
+dtsx_ultra
+branded_accessories
+featured_accessories
+generic_accessories
+inbox_accessory
+multi_ch_room
+listening_test
+web_update
+bt_accessory_recommendation
+usb_accessory_recommendation
+route_bluetooth
+route_line_out
+route_int_speaker
+route_usb
+stereo_preference
+geq
+speaker_modes
+treble_level
+bass_level
+dialog_level
+loudness_leveling_control
+----- CUSTOMER CONFIG ----------------------------------------------
+setting_speaker_dialog_level_max = 0.5
+ui_hide_stereo_preference = false
+disable_loudness_leveling_control = false
+disable_route_int_speaker = false
+ui_hide_integration_test_screen = false
+disable_bass_level = false
+disable_treble_level = false
+ui_hide_settings_screen = false
+disable_geq = false
+disable_route_usb = false
+ui_notification_system_config = service_uses_app_notification
+ui_hide_bt_accessory_recommendation = false
+disable_bt_accessory_recommendation = false
+ui_hide_usb_accessory_recommendation = false
+ui_hide_enable_button = false
+ui_hide_settings_notifications = false
+disable_listening_test = false
+disable_route_bluetooth = false
+disable_route_line_out = false
+disable_dialog_level = false
+ui_hide_geq = false
+setting_speaker_bass_level_max = 0.5
+setting_accessory_dialog_level_max = 0.5
+setting_accessory_bass_level_max = 0.6
+ui_hide_demo_screen = false
+disable_usb_accessory_recommendation = false
+----- Audio Levels ---------------------------------------------------------
+getTrebleLevel: [OK] Result successful. - 0
+getDialogLevel: [OK] Result successful. - 39
+getBassLevel: [OK] Result successful. - 38
+----- APIs ---------------------------------------------------------
+getDtsSdkStatus: [OK] SDK is running properly
+getDtsServiceStatus: [OK] Service is running properly
+getDtsLicenseExists: [OK] Result successful.
+getDtsEnabled: [OK] Result successful. - true
+getStereoPreference: [OK] Result successful. - TRADITIONAL
+getGEQEnabled: [OK] Result successful. - false
+getGEQGain(0): [OK] Result successful. - 0
+getGEQGain(1): [OK] Result successful. - 0
+getGEQGain(2): [OK] Result successful. - 0
+getGEQGain(3): [OK] Result successful. - 0
+getGEQGain(4): [OK] Result successful. - 0
+getGEQGain(5): [OK] Result successful. - 0
+getGEQGain(6): [OK] Result successful. - 0
+getGEQGain(7): [OK] Result successful. - 0
+getGEQGain(8): [OK] Result successful. - 0
+getGEQGain(9): [OK] Result successful. - 0
+getAllGEQGains=: [OK] Result successful. - [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+getListeningTest (0): [OK] Result successful. - -1.0
+getListeningTest (1): [OK] Result successful. - -1.0
+getListeningTest (2): [OK] Result successful. - -1.0
+getListeningTest (3): [OK] Result successful. - -1.0
+getContentModeOnSpeakerUuid: [OK] Result successful. - f08a4c48-0887-11e4-9191-0800200c9a19
+getAccessoryUuid(BLUETOOTH): [OK] Result successful. - f08a4c48-0887-11e4-9191-0800200c9a13
+getAccessoryUuid(LINE_OUT): [OK] Result successful. - f08a4c48-0887-11e4-9191-0800200c9a13
+getAccessoryUuid(USB): [OK] Result successful. - f08a4c48-0887-11e4-9191-0800200c9a13
+getDbLevels: [OK] Result successful. - [-80000, -80000, -80000, -80000, -80000, -80000, -80000, -80000, -80000, -80000]

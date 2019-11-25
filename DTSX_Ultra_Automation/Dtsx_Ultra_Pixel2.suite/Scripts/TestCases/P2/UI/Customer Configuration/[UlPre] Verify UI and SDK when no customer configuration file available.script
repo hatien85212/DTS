@@ -1,0 +1,67 @@
+﻿#[Ul/Pre] Verify UI and SDK when no customer configuration file available
+
+Try
+	//get root permission, connect device and remove customercfg
+	put global functions.root()
+	put global functions.remove_customercfg()
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	
+	//open app and scroll down 3 times
+	put global functions.open_app()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check Integration screen don't appear
+	if global main.check_integration_screen_appear() then
+		put global functions.error("Integration screen appears when no customer.cfg in device")
+		cleanup
+	else
+		LogSuccess "Integration screen not appears"
+	end if
+	
+	//check demo screen don't appear
+	if global main.check_demo_screen_appear() then
+		put global functions.error("Demo screen appears when no customer.cfg in device")
+		cleanup
+	else
+		LogSuccess "Demo screen not appear"
+	end if
+	//go to personal audio Pref screen and scroll down 3 times
+	put global main.open_PersonalPref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check if audio level group appear
+	if global personalpref.check_default_audiolevel_group(0) then
+		put global functions.error("Treble / DE / Bass boost appear when no customer.cfg in device")
+		cleanup
+	else
+		LogSuccess "Treble / DE / Bass boost not appear "
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put reason of exception
+	put global functions.error("UI does not work correctly when no customer.cfg")
+	
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	#push customer.cfg again for next tc
+	put global functions.root()
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	Wait 3
+	put global functions.disconnect_mobile()
+	Wait 10
+	put global functions.Reboot()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

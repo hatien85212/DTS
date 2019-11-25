@@ -1,0 +1,35 @@
+﻿//[Ul/Pre] Verify the app is opened when click on main notification
+
+//Precondition
+//Connect device and open app
+put global functions.root()
+put global functions.open_app()
+//open Setting Screen
+put global main.open_setting_screen()
+//Turn on Notification
+put global setting.change_state_Notification("ON")
+//Close app
+put global functions.close_app()
+wait 3
+
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+put global noti.Tap_name_button("DTS")
+wait 2
+//Check if Main screen is shown
+If global main.check_default_layout(GetDeviceOrientation()) is true then
+	LogSuccess "The app is opened when click on main notification"
+	cleanup
+else
+	put global functions.error("The app is NOT opened when click on main notification")
+	cleanup
+	return false
+End if
+
+to cleanup
+	put global main.open_setting_screen()
+	//Turn off Notification
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

@@ -1,0 +1,42 @@
+﻿//[Ul/Pre] Verify the Broadcast API is automatically changed from Off to On on the integration test screen when HPX is On
+
+//Root and connect device
+put global functions.root()
+//Uninstall release apk version.
+put global functions.uninstall_app()
+//Install debug apk version to check logcat fully.
+put global functions. install_app(global other.Other().debug_apk_location)
+//open app and go to main screen after acept eula 
+put global functions.open_app()
+put global eulaaccept.open_mainscreen()
+//Precondition HPX OFF
+put global main.turn_off_hpx()
+//celar logcat
+put global functions.clear_logcat()
+//start logcat
+put global main. turn_on_hpx()
+put global main.open_integration_screen()
+//get logcat
+put global functions.get_logcat(global other.other().logcat_path)
+
+//check logcat
+if global functions.read_logcat(global other.other().logcat_path,"MainFragment: Received intent. Action: dts.dtssdk.intent.status.DTS_STATE_CHANGED") and if global functions.read_logcat(global other.other().logcat_path,"MainFragment: Received EXTRA_DTS_STATE: true") and if  global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: dts.dtssdk.intent.status.GET_DTS_RESULT") and if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: resultCode: OK") and if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: Getting DTS state using broadcast API was successful. DTS enabled: true") is true then
+	LogSuccess "The Broadcast API is automatically changed from Off to On status. Logcat should indicate Broadcast API On"
+	//clean up
+	cleanup
+else
+	put global functions.error("the Broadcast API is NOT changed from OFF to ON on the integration test screen when HPX is ON")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.uninstall_app()
+	put global functions. install_app(global other.Other().apk_location)
+	put global functions.open_app()
+	put global eulaaccept.open_mainscreen()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+

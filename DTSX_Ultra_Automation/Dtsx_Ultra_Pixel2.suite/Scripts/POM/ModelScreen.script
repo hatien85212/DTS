@@ -1,0 +1,14 @@
+﻿## Everything relate to ModelScreen
+
+function ModelScreen()
+	put(\
+	earbuds_disable:"ModelPage/earbuds_disable",\
+			earbuds_enable:"ModelPage/earbuds_enable",\
+			model_headphone_01:"ModelPage/model_headphone_01",\
+			over_ear_disable:"ModelPage/over_ear_disable",\
+			over_ear_enable:"ModelPage/over_ear_enable",\
+			IE2Bose: "ModelPage/IE2Bose",\
+			IE2_Bose: "ModelPage/IE2_Bose",\
+			) into ModelScreen
+			return ModelScreen
+end ModelScreen

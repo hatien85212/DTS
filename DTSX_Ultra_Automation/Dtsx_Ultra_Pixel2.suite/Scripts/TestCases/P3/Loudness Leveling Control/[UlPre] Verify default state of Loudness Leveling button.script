@@ -1,0 +1,30 @@
+﻿//[Ul/Pre] Verify default state of Loudness Leveling button 
+
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_PersonalPref_screen()
+wait 3
+if global personalpref.check_default_layout(GetDeviceOrientation()) is true then
+	LogSuccess "Loudness Leveling is OFF at Personal Preference Screen"
+	PressBackButton
+	put global main.open_Integration_screen()
+	if global integration.check_default_layout(GetDeviceOrientation()) is true then
+		LogSuccess "Loudness Leveling is OFF at Integration TestScreen"
+		//clean up
+		cleanup
+	else
+		put global functions.error("Loudness Leveling is NOT OFF at Integration Test Screen")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Loudness Leveling is NOT OFF at Personal Preference Screen")
+	cleanup
+	return false
+end if
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

@@ -1,0 +1,54 @@
+﻿###Everything relate to EULA Acceptance screen is here#
+function EULAAcceptanceScreen()
+	return (\
+	EULAAccept_portrait_img: "EULAAcceptanceScreen/EULAAccept_portrait_layout",\ 
+			EULAAccept_landscapel_img: "EULAAcceptanceScreen/EULAAccept_landscape_layout",\
+			AcceptAndContinue_img: "EULAAcceptanceScreen/ACCEPTCONTINUE_btn_img",\
+			AcceptAndContinue_landscape_img: "EULAAcceptanceScreen/ACCEPTCONTINUE_btn_landscape_img",\
+			EULALink_text:"DTS End User License Agreement",\
+			metric_checkbox_img: "EULAAcceptanceScreen/metric_checkbox_img",\ 
+)
+end EULAAcceptanceScreen
+
+function check_default_layout(Scr_rotate)
+	#check if the screen is portrait or landscape, and image is exist, if not report error
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(EULAAcceptanceScreen().EULAAccept_portrait_img) then 
+		return true
+	else if Scr_rotate is "landscape" and if global functions.check_imagefound_image( EULAAcceptanceScreen().EULAAccept_landscapel_img) then
+		#scroll down 2 times
+		repeat 2 times
+			put global functions.swipeup()
+		end repeat
+		
+		#check if accept and continue button appear in landscape mode
+		if global functions.check_imagefound_image(EULAAcceptanceScreen().AcceptAndContinue_landscape_img) then
+			return true
+		else 
+			return false
+		end if
+		else
+		return false
+	End if
+end check_default_layout
+
+function open_mainscreen()
+	If global functions.open_screen("image",EULAAcceptanceScreen().AcceptAndContinue_img) is false then
+		return false
+	End if
+end open_mainscreen
+
+function open_eulascreen()
+	If global functions.open_screen("text",EULAAcceptanceScreen().EULALink_text) is false then
+		return false
+	End if
+end open_eulascreen
+
+function check_metrics()
+	if global functions.open_screen("image",EULAAcceptanceScreen().metric_checkbox_img) is false then
+		return false
+	end if
+end check_metrics
+
+
+
+

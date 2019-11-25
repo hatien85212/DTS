@@ -1,0 +1,44 @@
+﻿//[Ultra] Verify only one notification shown up when connecting USB for recommendation.
+
+//Preconditions
+//Root device and connect mobile
+put global functions.root()
+//Open app
+put global functions.open_app()
+//Go to Setting screen
+put global main.setting_screen()
+// Turn on Notification
+put global setting.change_state_Notification("ON")
+// Reset USB tunings
+put global setting.Reset_tunings_of("USB")
+wait 5
+
+// Need connecting USB Headphone.
+
+
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Check if USB audio connecte appear
+if global noti.USB_audio_connected() is true then
+	LogSuccess "The only one notification shown up when connecting USB headphone"
+	cleanup
+else
+	put global functions.error("When we connect USB headphone, Notication is not shown correctly")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global noti.the_status_bar("Collapse")
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+﻿// Verify Exprot function
+
+//root and connect
+put global functions.root()
+//open app
+put global functions.open_app()
+//open Integration Test Screen
+put global main.open_integration_screen()
+// Tap export button
+put global integration.export()
+
+if global integration.export_finish_toast_appear() is true then
+	LogSuccess "The directory is correct"
+	// Get export file from device and save it into Resource with name "Export_file"
+	put global integration.get_export_file(global other.other().export_file)
+	
+	// Check key word in export file
+	if global integration.read_export_file(global other.other().export_file,"DTS_EAGLE_PLATFORM_SUPPORT=true") and if global integration.read_export_file(global other.other().export_file,"SDK: [OK] SDK is running properly") and if global integration.read_export_file(global other.other().export_file,"Service: [OK] Service is running properly") and if global integration.read_export_file(global other.other().export_file,"License Exists: [OK] Result successful. - OK") and if global integration.read_export_file(global other.other().export_file,"M6M8 License: [OK] Result successful. - true") and if global integration.read_export_file(global other.other().export_file,"DB check: [OK] Result successful. - Datastore integrity report: No errors") and if global integration.read_export_file(global other.other().export_file,"CUSTOMER CONFIG") and if global integration.read_export_file(global other.other().export_file,"TOKENS") and if global integration.read_export_file(global other.other().export_file,"Audio Levels") and if global integration.read_export_file(global other.other().export_file,"APIs") is true then 
+		LogSuccess "OK"
+		cleanup
+	else
+		put global functions.error("")
+		return false
+	end if
+else
+	return false
+end if
+
+
+to cleanup
+	ExecuteRemoteCommand("rm -r /data/user/0/com.dts.dtsxultra/integrationtest/")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+

@@ -1,0 +1,7 @@
+﻿put global functions.connect_mobile()
+
+Drag menuButton
+
+
+put global functions.disconnect_mobile()
+

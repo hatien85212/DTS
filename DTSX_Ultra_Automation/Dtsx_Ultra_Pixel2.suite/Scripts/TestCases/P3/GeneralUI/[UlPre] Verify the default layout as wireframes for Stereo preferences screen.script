@@ -1,0 +1,55 @@
+﻿#[Ul/Pre] Verify the default layout as wireframes for Stereo preferences screen
+
+Try
+	//connect device, opena app, open personal audio pref screen
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//reset all settings
+	put global personalpref.reset_setting()
+	
+	//scroll down 3 times to show stereo pref screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//open GEQ screen
+	put global personalpref.open_StereoPref()
+	
+	//check default layout of GEQ screen in portrait
+	if global sp.check_default_layout("portrait") is false then
+		put global functions.error("Stereo Preferen screen layout is not correct")
+		cleanup
+	else
+		LogSuccess "Verify portrait layout done"
+	end if
+	
+	//rotate screen to landscape right
+	SetDeviceOrientation LandscapeRight 
+	
+	//check default layout of GEQ screen in landscape
+	if global sp.check_default_layout("landscape") is false then
+		put global functions.error("Stereo Preferen screen layout is not correct")
+		cleanup
+	else
+		LogSuccess "Verify landscape layout done"
+	end if
+	
+	//cleanup
+	cleanup
+	
+Catch exception
+	put reason of exception
+	put global functions.error("Stereo Preferen screen layout is not correct")
+	
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

@@ -1,0 +1,101 @@
+﻿##Everything relate GeqScreen
+
+function GeqScreen()
+	put(\
+	band_0: "GEQscreen/band0",\
+			band_1: "GEQscreen/band1",\ 
+			band_2: "GEQscreen/band2",\
+			band_3: "GEQscreen/band3",\
+			band_4: "GEQscreen/band4",\
+			band_5: "GEQscreen/band5",\
+			band_6: "GEQscreen/band6",\
+			band_7: "GEQscreen/band7",\
+			band_8: "GEQscreen/band8",\
+			band_9: "GEQscreen/band9",\
+			ChangeEQ:"GeqPage/ChangeEQ",\
+			geq_portrait_img:"GEQscreen/GEQ_portrait",\
+			geq_landscape_img:"GEQscreen/GEQ_landscape",\
+			reset_geq:"GEQscreen/reset_geq",\
+			default_geq_minus10_img: "GEQscreen/default_geq_minus10",\
+			geq_12db_portrait_img:"GEQscreen/GEQ_12dB_portrait",\
+			geq_12db_landscape_img:"GEQscreen/GEQ_12db_lanscape",\
+			) into GeqScreen
+			return GeqScreen
+end GeqScreen
+
+function check_default_layout(Scr_rotate)
+	Wait 5
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(GeqScreen().geq_portrait_img) then
+		return true
+	else if Scr_rotate is "Landscape" and if global functions.check_imagefound_image( GeqScreen().geq_landscape_img) then
+		return true
+	else
+		put global functions.error("Wrong_GEQscreen")
+	End if
+end check_default_layout
+
+#bandnumberfrom0to9 includes 10 variable from 0 to 9
+#toptobottom is the variable for changing band value. The value count from center of image:
+#positive number will move down the button. > 100 pixel is good
+#negative number will move up the button. > -100 pixel is good
+function change_GEQ_band(bandnumberfrom0to9,TopToBottom)
+	if bandnumberfrom0to9 >= 0 or if bandnumberfrom0to9 <= 9 then
+		Try
+			if global functions.check_imagefound_image(GeqScreen().("band_"&bandnumberfrom0to9)) then
+				Tap FoundImageLocation() + (0,TopToBottom)
+			else
+				(*put global functions.ScrollUntilFound("image",GeqScreen().("band_"+bandnumberfrom0to9),"Up","Can't change GEQ band")*)
+				return false
+			end if
+		Catch exception
+			put exception 's reason
+			return false
+		End try
+	else
+		return false
+	end if
+end change_GEQ_band
+
+#img is the value captured after changing bands using build-in capturescreen
+function check_GEQ_screen_afterchangingbands(img)
+	try
+		if global functions.check_imagefound_image(img) is false then
+			return false
+		end if
+	Catch exception
+		put exception 's reason
+		return false
+	End try
+end check_GEQ_screen_afterchangingbands
+
+function check_default_GEQ_bands()
+	if global functions.check_imagefound_image(GeqScreen().default_geq_minus10_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_default_GEQ_bands
+
+//check GEQ have 12db range when no customer.cfg
+function check_Geq_12db(Scr_rotate)
+	Wait 5
+	If Scr_rotate is "Portrait" and if global functions.check_imagefound_image(GeqScreen().geq_12db_portrait_img) then
+		return true
+	else if Scr_rotate is "Landscape" and if global functions.check_imagefound_image( GeqScreen().geq_12db_landscape_img) then
+		return true
+	else
+		put global functions.error("Wrong_GEQ_screen")
+	End if
+end check_Geq_12db
+
+//reset GEQ value to 0
+function reset_geq()
+	If global functions.open_screen("image",geqscreen().reset_geq) is false then
+		put global functions.error("no reset button")
+	else
+		return false
+	End If
+end reset_geq
+
+
+

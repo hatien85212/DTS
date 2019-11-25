@@ -1,0 +1,73 @@
+﻿#[Ul/Pre] Verify Stereo Preference should go to default when reset to OEM default
+
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//Go to Personal Audio Preferences and scroll down 3 times
+	put global main.open_PersonalPref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//Change Stereo Preference to Infront and back to personal audio pref screen
+	put global personalpref.open_StereoPref()
+	if  global sp.select_Infront() is false then
+		put global functions .error("Change stereo preference fail")
+		cleanup
+	end if
+	PressBackButton
+	
+	//Back to main screen and go to setting screen
+	PressBackButton
+	put global main.open_setting_screen()
+	
+	//Reset OEM default
+	if global setting.reset_OEM_default() is false then
+		put global functions.error("Reset OEM fail")
+		cleanup
+	end if
+	PressBackButton
+	
+	// Expectation: Check Stereo preference is traditional as default of mode 0 tuning
+	//go to personal audio pref screen for checking Stereo Pref
+	put global main.open_PersonalPref_screen()
+	
+	//check content mode 0 is selected
+	if global personalpref.check_contentmode_state(0) is false then
+		put global functions.error("Content mode 0 is not selected")
+		cleanup
+	else
+		LogSuccess "Verify content mode 0 is selected"
+	end if
+	
+	//scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//Check Stereo preference is traditional
+	if global personalpref.check_state_stereopref("traditional") is false then
+		put global functions.error("Stereo Preference is not traditional as OEM default")
+		cleanup
+	else
+		LogSuccess "Verify Stereo Preference is traditional"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put reason of exception
+	put global functions.error("Stereo Preference is not traditional as OEM default")
+	
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	//cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

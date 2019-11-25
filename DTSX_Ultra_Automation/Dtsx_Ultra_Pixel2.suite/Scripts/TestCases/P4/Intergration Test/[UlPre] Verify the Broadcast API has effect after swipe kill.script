@@ -1,0 +1,32 @@
+﻿//[Ul/Pre] Verify the Broadcast API has effect after swipe kill app
+
+//connect mobile and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//turn off hpx
+put global main.turn_off_hpx()
+//open to Integration test screen
+put global main.open_integration_screen()
+//swipe kill app and open
+put global functions.close_app()
+put global functions.open_app()
+//got to Integration test screen
+put global main.open_integration_screen()
+//check API toggle
+if global integration.check_API_OFF() is true then
+	LogSuccess "HPX and Broadcast API still displayed OFF after swipe kill app"
+	//clean up
+	cleanup
+else
+	put global functions.error("HPX and Broadcast API did not display OFF after swipe kill app")
+	//clean up
+	cleanup
+end if
+
+to cleanup
+	put global integration.turn_on_API()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

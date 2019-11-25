@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MPG-6318 Remove references to Eagle Version in the portal">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test verbose="2" name="Companies Tab">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>	
+		<groups>
+			<run>
+            	<include name = "MPG-6318" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany">
+<!-- 				<methods> -->
+<!-- 	        		<include name="TC070DbEC_17" /> -->
+<!-- 	        		<include name="TC070DbEC_18" /> -->
+<!-- 	        		<include name="TC070DbEC_19" /> -->
+<!-- 	      		</methods> -->
+			</class>
+		</classes>
+	</test>
+	<test verbose="2" name="Apps and Devices Tab">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>	
+		<groups>
+			<run>
+            	<include name = "MPG-6318" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.dts.adminportal.partner.test.PartnerAppsDevices650DDeviceEdit">
+<!-- 				<methods> -->
+<!-- 	        		<include name="TCPPU_12" /> -->
+<!-- 	      		</methods> -->
+			</class>
+		</classes>
+	</test>
+</suite>

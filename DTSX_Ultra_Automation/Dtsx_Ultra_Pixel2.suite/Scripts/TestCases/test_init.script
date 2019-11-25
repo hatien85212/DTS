@@ -1,0 +1,30 @@
+﻿#Test init
+put test_init()
+
+function test_init()
+	put "POM/screen_init".screen_init() into global screen_init
+	
+	put global screen_init.main into global main
+	put global screen_init.about into global about
+	put global screen_init.bthp into global bthp
+	put global screen_init.brandlist into global brandlist
+	put global screen_init.demo into global demo
+	put global screen_init.geq into global geq
+	put global screen_init.lp into global lp
+	put global screen_init.model into global model
+	put global screen_init.noti into global noti
+	put global screen_init.setting into global setting
+	put global screen_init.sp into global sp
+	put global screen_init.wiredhp into global wiredhp
+	put global screen_init.personalpref into global personalpref
+	put global screen_init.integration into global integration
+	put global screen_init.usbhp into global usbhp
+	put global screen_init.other into global other
+	put global screen_init.EULAAccept into global eulaaccept
+	put global screen_init.EULA into global eula
+	put global screen_init.noti into global noti
+	
+	put functions into global functions
+end test_init
+
+

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test verbose="2" name="Default test">
+		<classes>
+			<class name="com.dts.adminportal.dts.test.DTSUserHome020DDTSView">
+				<methods>
+					<include name="TC020DV_09" />
+					<include name="TC020DV_10" />
+					<include name="TC020DV_11" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserHome020DSkullCandyView">
+				<methods>
+					<include name="TC020DPSV_04" />
+					<include name="TC020DPSV_05" />
+					<include name="TC020DPSV_07" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCatalog030DAllActive">
+				<methods>
+					<include name="TC030DCAA_01" />
+					<include name="TC030DCAA_02" />
+					<include name="TC030DCAA_03" />
+					<include name="TC030DCAA_04" />
+					<include name="TC030DCAA_12" />
+					<include name="TC030DCAA_13" />
+					<include name="TC030DCAA_14" />
+					<include name="TC030DCAA_15" />
+					<include name="TC030DCAA_16" />
+					<include name="TC030DCAA_17" />
+					<include name="TC030DCAA_18" />
+					<include name="TC030DCAA_19" />
+					<include name="TC030DCAA_20" />
+					<include name="TC030DCAA_21" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCatalog051DAccessoryEdit">
+				<methods>
+					<include name="TC051DAE_03" />
+					<include name="TC051DAE_06" />
+					<include name="TC051DAE_10" />
+					<include name="TC051DAE_19" />
+					<include name="TC051DAE_22" />
+					<include name="TC051DAE_23" />
+					<include name="TC051DAE_24" />
+					<include name="TC051DAE_25" />
+					<include name="TC051DAE_36" />
+					<include name="TC051DAE_39" />
+					<include name="TC051DAE_41" />
+					<include name="TC051DAE_44" />
+					<include name="TC051DAE_46" />
+					<include name="TC051DAE_63" />
+					<include name="TC051DAE_66" />
+					<include name="TC051DAE_70" />
+					<include name="TC051DAE_71" />
+					<include name="TC051DAE_72" />
+					<include name="TC051DAE_73" />
+					<include name="TC051DAE_76" />
+					<include name="TC051DAE_77" />
+					<include name="TC051DAE_81" />
+					<include name="TC051DAE_88" />
+					<include name="TC051DAE_89" />
+					<include name="TC051DAE_95" />
+					<include name="TC051DAE_98" />
+					<include name="TC051DAE_99" />
+					<include name="TC051DAE_100" />					
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCatalog040DAccessoryDetail">
+				<methods>
+					<include name="TC040DAD_05" />
+					<include name="TC040DAD_07" />
+					<include name="TC040DAD_08" />
+					<include name="TC040DAD_09" />
+					<include name="TC040DAD_10" />
+					<include name="TC040DAD_12" />
+					<include name="TC040DAD_13" />
+					<include name="TC040DAD_14" />
+					<include name="TC040DAD_15" />				
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCatalog041DAccessoryVariantDetail">
+				<methods>
+					<include name="TC041DAVD_05" />
+					<include name="TC041DAVD_06" />
+					<include name="TC041DAVD_07" />
+					<include name="TC041DAVD_08" />
+					<include name="TC041DAVD_12" />
+					<include name="TC041DAVD_13" />
+					<include name="TC041DAVD_14" />
+					<include name="TC041DAVD_15" />
+					<include name="TC041DAVD_19" />
+					<include name="TC041DAVD_21" />			
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCatalog040DTuningState">
+				<methods>
+					<include name="TC040DTS_15" />
+					<include name="TC040DTS_18" />	
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCompanies060DCompaniesList">
+				<methods>
+					<include name="060DCL_01" />
+					<include name="060DCL_09" />
+					<include name="060DCL_10" />
+					<include name="060DCL_11" />
+					<include name="060DCL_12" />
+					<include name="060DCL_13" />						
+				</methods>
+			</class>
+			
+			<class name="com.dts.adminportal.dts.test.DTSUserCompanies061DaCompaniesInfo">
+				<methods>
+					<include name="TC061DaCI_04" />
+					<include name="TC061DaCI_05" />
+					<include name="TC061DaCI_06" />
+					<include name="TC061DaCI_07" />
+					<include name="TC061DaCI_08" />
+					<include name="TC061DaCI_09" />
+					<include name="TC061DaCI_10" />		
+					<include name="TC061DaCI_11" />
+					<include name="TC061DaCI_12" />	
+					<include name="TC061DaCI_13" />	
+					<include name="TC061DaCI_14" />	
+					<include name="TC061DaCI_15" />	
+					<include name="TC061DaCI_16" />	
+					<include name="TC061DaCI_17" />	
+					<include name="TC061DaCI_18" />	
+					<include name="TC061DaCI_19" />	
+					<include name="TC061DaCI_20" />
+					<include name="TC061DaCI_21" />	
+					<include name="TC061DaCI_22" />											
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCompanies061DaCompaniesInfo">
+				<methods>
+					<include name="TC061DaCI_04" />
+					<include name="TC061DaCI_05" />
+					<include name="TC061DaCI_06" />
+					<include name="TC061DaCI_07" />
+					<include name="TC061DaCI_08" />
+					<include name="TC061DaCI_09" />
+					<include name="TC061DaCI_10" />		
+					<include name="TC061DaCI_11" />
+					<include name="TC061DaCI_12" />	
+					<include name="TC061DaCI_13" />	
+					<include name="TC061DaCI_14" />	
+					<include name="TC061DaCI_15" />	
+					<include name="TC061DaCI_16" />	
+					<include name="TC061DaCI_17" />	
+					<include name="TC061DaCI_18" />	
+					<include name="TC061DaCI_19" />	
+					<include name="TC061DaCI_20" />
+					<include name="TC061DaCI_21" />	
+					<include name="TC061DaCI_22" />											
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCompanies063DBrandInfo">
+				<methods>
+					<include name="TC063DBI_05" />
+					<include name="TC063DBI_09" />
+					<include name="TC063DBI_10" />								
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserCompanies070DAEditCompany">
+				<methods>
+					<include name="TC070DAEC_03" />
+					<include name="TC070DAEC_05" />						
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser080DUserList">
+				<methods>
+					<include name="TC080DUL_01" />
+					<include name="TC080DUL_07" />
+					<include name="TC080DUL_08" />
+					<include name="TC080DUL_09" />
+					<include name="TC080DUL_10" />
+					<include name="TC080DUL_13" />						
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser090DUserInfo">
+				<methods>
+					<include name="TC090DUI_09" />
+					<include name="TC090DUI_12" />
+					<include name="TC080DUL_13" />			
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser092DaCreateUserBlank">
+				<methods>
+					<include name="TC092DaCUB_02" />
+					<include name="TC092DaCUB_03" />
+					<include name="TC092DaCUB_04" />
+					<include name="TC092DaCUB_05" />
+					<include name="TC092DaCUB_07" />
+					<include name="TC092DaCUB_08" />
+					<include name="TC092DaCUB_10" />			
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser092DbCreateUserNewCompany">
+				<methods>
+					<include name="TC092DbCUN_13" />
+					<include name="TC092DaCUB_14" />
+					<include name="TC092DaCUB_15" />
+					<include name="TC092DaCUB_16" />
+					<include name="TC092DaCUB_17" />
+					<include name="TC092DaCUB_20" />
+					<include name="TC092DaCUB_21" />
+					<include name="TC092DaCUB_22" />
+					<include name="TC092DaCUB_23" />
+					<include name="TC092DaCUB_24" />			
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserAppsDevices630DaDevicesList">
+				<methods>
+					<include name="TC630DaADL_02" />
+					<include name="TC630DaADL_03" />
+					<include name="TC630DaADL_06" />
+					<include name="TC630DaADL_07" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserAppsDevices640DDeviceDetail">
+				<methods>
+					<include name="TC640DADD_04" />
+					<include name="TC640DADD_05" />
+					<include name="TC640DADD_06" />
+					<include name="TC640DADD_07" />
+					<include name="TC640DADD_11" />
+					<include name="TC640DADD_14" />
+					<include name="TC640DADD_16" />
+					<include name="TC640DADD_17" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserAppsDevices650DaDeviceEditNew">
+				<methods>
+					<include name="TC650DaDEN_10" />
+					<include name="TC650DaDEN_21" />
+					<include name="TC650DaDEN_24" />
+					<include name="TC650DaDEN_28" />
+					<include name="TC650DaDEN_29" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserAppsDevices650DbDeviceEdit">
+				<methods>
+					<include name="TC650DbADE_20" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserPromotions660PromotionsList">
+				<methods>
+					<include name="TC660DPL_05" />
+					<include name="TC660DPL_06" />
+					<include name="TC660DPL_12" />
+					<include name="TC660DPL_13" />
+					<include name="TC660DPL_14" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserPromotions690DaPromotionsEdit">
+				<methods>
+					<include name="TC690DaPE_05" />
+					<include name="TC690DaPE_06" />
+				</methods>
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUserPromotions680DbPromotionsDetail">
+				<methods>
+					<include name="TC680DbPD_01" />
+					<include name="TC680DbPD_03" />
+					<include name="TC680DbPD_04" />
+					<include name="TC680DbPD_05" />
+					<include name="TC680DbPD_06" />
+				</methods>
+			</class>
+			<!-- <class name="com.dts.adminportal.dts.test.DTSUser092DbCreateUserNewCompany"> 
+				</class> <class name="com.dts.adminportal.partner.test.PartnerUser093PCreateUserSuccess"> 
+				</class> -->
+
+		</classes>
+
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->

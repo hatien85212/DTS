@@ -1,0 +1,43 @@
+﻿#[Ultra] Open "Listening Profile Tone" screen when user didn't set up yet
+
+//Turn on Bluetooth. This step is set base on the Schedules "None-reboot"
+//Turn off Bluetooth
+put global functions.change_state_deviceBT(ON)
+
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	wait 2
+	//check if app go to listening profile when no profile set up
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	wait 2
+	if global lp.check_layout("1") is false then
+		put global functions.error("App not go to listening profile screen 1 when user didn't set up yet")	
+	else
+		LogSuccess "App go to listening profile screen 1 when user didn't set up yet"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put exception 's error
+	cleanup
+End try
+
+to cleanup
+	//press back button to go to main screen
+	PressBackButton
+	wait 2
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 3
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

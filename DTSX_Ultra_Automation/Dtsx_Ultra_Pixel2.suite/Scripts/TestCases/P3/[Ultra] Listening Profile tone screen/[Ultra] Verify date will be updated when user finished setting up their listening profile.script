@@ -1,0 +1,57 @@
+﻿#[Ultra] Verify date will be updated when user finished setting up their listening profile
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	
+	//change value of listening profile
+	changesetting
+	
+	//scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check if date appear after setting up listening profile
+	if global main.check_lp_date_appear() is false then
+		put global functions.error("Date not appear after setting listening profile")
+		cleanup
+	else
+		LogSuccess "Date appear after setting listening profile"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put exception 's error
+	cleanup
+End try
+
+to cleanup
+	//open demo screen and reset listening profile
+	put global main.open_demo_screen()
+	put global demo.reset_listening_profile()
+	
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to changesetting
+	Repeat 4 times
+		wait 2
+		put global lp.change_value()
+		wait 2
+		put global lp.click_next()
+	End repeat
+	wait 3
+	put global lp.click_ok_success_dialog_appear()
+end changesetting

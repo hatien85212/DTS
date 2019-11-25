@@ -1,0 +1,111 @@
+﻿#[Ul/Pre]Verify_UI_when_user_tap_'Reset'_button_at_Personal_Audio_Preferences_screen
+
+try
+	#Connect device
+	put global functions.connect_mobile()
+	
+	#Open app
+	put global functions.open_app()
+	
+	#Open personal preference screen
+	put global main.open_PersonalPref_screen()
+	
+	#Change some configs
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	changeconfigs
+	#capture the image after changing GEQ. The rectangle can be checked with the image save in result folder.
+	put global functions.captureimage("GEQ_change") into GEQ_change
+	PressBackButton
+	
+	#Press reset button
+	put global personalpref.reset_setting()
+	
+	#check if content mode 0 is selected
+	if global personalpref.check_contentmode_state(0) is false then
+		put global functions.error("Content mode 0 is not selected as default")
+		cleanup
+	else
+		LogSuccess "Verify mode 0 is selected as default"
+	end if
+	
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#check default audio level group of mode 0
+	if global personalpref.check_default_audiolevel_group(0) is false then
+		put global functions.error("Default audio level group value of Content mode 0 is not correct")
+		cleanup
+	else
+		LogSuccess "Verify Audio levels group value of mode 0 done"
+	end if
+	
+	#check Stereo Preference is traditional as default
+	if global personalpref.check_state_stereopref("traditional") is false then
+		put global functions.error("Stereo preference of Content mode 0 is not traditional as default")
+		cleanup
+	else
+		LogSuccess "Verify stereo preference of mode 0 done"
+	end if
+	
+	#check geq bands
+	put global personalpref.open_geq()
+	if global geq.check_GEQ_screen_afterchangingbands(GEQ_change) is false then
+		put global functions.error("GEQ bands are not the same after reset settings. GEQ should stay remain after reset")
+		cleanup
+	else
+		LogSuccess "Verify GEQ bands remain"
+	end if
+	
+	PressBackButton
+	
+	#Clean up for next tcs
+	cleanup
+	catch exception
+	put exception 's reason
+	put global functions.error("Wrong_PersonalAudioPreference_screen")
+	cleanup
+end Try
+
+to changeconfigs
+	## Change value
+	#Change treble
+	if global personalpref.change_treble(300) is false  and global personalpref.change_DE(500) is false and global personalpref.change_bass(600) is false and global personalpref.turn_on_loudness() is false then
+		put global functions.error("Change audio level group fail")
+		cleanup
+	end if
+	
+	#change stereopref to infront
+	put global personalpref.open_StereoPref()
+	if  global sp.select_Infront() is false then
+		put global functions .error("Change stereo preference fail")
+		cleanup
+	end if
+	PressBackButton
+	
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#change geq
+	put global personalpref.open_GEQ()
+	if global geq.change_GEQ_band(3,200) is false and global geq.change_GEQ_band(9,-250) is false then
+		put global functions.error("Change GEQ fail")
+		cleanup 
+	end if
+end changeconfigs
+
+to cleanup
+	#back to main screen
+put global functions.close_app()
+	put global functions.open_app()
+	
+	#open setting screen to reset to OEM default
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

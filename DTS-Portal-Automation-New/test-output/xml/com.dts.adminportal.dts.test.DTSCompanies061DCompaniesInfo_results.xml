@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FireFoxTest"
+           tests="19"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="3776.119">
+  <properties />
+  
+  
+            <testcase name="TC061DaCI_12" time="227.332" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_21" time="282.514" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_20" time="132.187" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_15" time="258.516" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_22" time="104.543" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_11" time="380.229" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_05" time="181.969" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_10" time="152.372" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_01" time="35.961" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_14" time="240.417" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_13" time="298.873" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_19" time="193.893" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_17" time="168.598" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_06" time="157.770" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_09" time="234.005" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_16" time="260.742" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_18" time="106.160" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_08" time="148.465" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+                <testcase name="TC061DaCI_07" time="211.573" classname="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo" />
+      
+</testsuite>

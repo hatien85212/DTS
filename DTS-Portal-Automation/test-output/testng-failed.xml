@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.dts.adminportal.dts.test.DTSUser092DaCreateUserBlank">
+        <methods>
+          <include name="loginBeforeTest"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="setUp"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="afterTest"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSUser092DaCreateUserBlank -->
+      <class name="com.dts.adminportal.dts.test.DTSUser090DUserInfo">
+        <methods>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="setUp"/>
+          <include name="TC090DUI_13"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="TC090DUI_09"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="afterTest"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="loginBeforeTest"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSUser090DUserInfo -->
+      <class name="com.dts.adminportal.dts.test.DTSUserAppsDevices630DaDevicesList">
+        <methods>
+          <include name="TC630DaADL_04"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="TC630DaADL_03"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="setUp"/>
+          <include name="TC630DaADL_05"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="afterTest"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="beforeTest"/>
+          <include name="loginBeforeTest"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSUserAppsDevices630DaDevicesList -->
+      <class name="com.dts.adminportal.dts.test.DTSUser080DUserList">
+        <methods>
+          <include name="loginBeforeTest"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="beforeTest"/>
+          <include name="setUp"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="afterTest"/>
+          <include name="springTestContextAfterTestMethod"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSUser080DUserList -->
+      <class name="com.dts.adminportal.dts.test.DTSUser092DbCreateUserNewCompany">
+        <methods>
+          <include name="beforeTest"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="setUp"/>
+          <include name="loginBeforeTest"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="afterTest"/>
+          <include name="TC092DbCUN_01"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="TC092DbCUN_20"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSUser092DbCreateUserNewCompany -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

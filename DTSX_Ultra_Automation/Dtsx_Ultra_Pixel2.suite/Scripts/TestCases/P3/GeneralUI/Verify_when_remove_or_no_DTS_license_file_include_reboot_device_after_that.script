@@ -1,0 +1,45 @@
+﻿##Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that##
+try
+	#Connect mobile
+	(*put global functions.connect_mobile()*)
+	
+	#Delete persistent file and reboot device
+	put global functions.root()
+	put global functions.remove_licensefile()
+	Wait 3
+	disconnect
+	Wait 10
+	put global functions.Reboot()
+	
+	#Open app
+	put global functions.open_app()
+	
+	
+	#Check mainscreen
+	if global main.check_mainscreen_withNOlicense() is false then
+		put global functions.error("Main screen with no license fail")
+		cleanup
+	else
+		LogSuccess "Verify main screen with no license done"
+	end if
+	
+	#clean up for next tc
+	cleanup
+catch exception
+	put exception 's reason
+	put global functions.error("Main screen with no license fail")
+	cleanup
+end Try
+
+to cleanup
+	#push license again for next tc
+	put global functions.root()
+	put global functions.push_licensefile(global other.Other().eaglelicense_path)
+	Wait 3
+	disconnect
+	Wait 10
+	put global functions.Reboot()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+

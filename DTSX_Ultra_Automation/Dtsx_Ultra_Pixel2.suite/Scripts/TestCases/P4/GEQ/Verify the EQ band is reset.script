@@ -1,0 +1,41 @@
+﻿//Verify the EQ band is reset
+
+
+put global functions.connect_mobile()
+put global functions.open_app()
+//go to PersonalPrefScreen
+put global main.open_personalpref_screen()
+//turn on GEQ and go to GEQ screen
+Repeat 3 times
+	put global functions.swipeup()
+End repeat
+put global personalpref.turn_on_GEQ()
+put global personalpref.open_GEQ()
+//modify 3 GEQ band to 10
+put global geq.change_GEQ_band(0,-700)
+put global geq.change_GEQ_band(1,-700)
+put global geq.change_GEQ_band(2,-700)
+// Tap reset button
+put global geq.reset_geq()
+//Check reset function works correctly
+if global geq.check_default_layout(GetDeviceOrientation()) is true then
+	LogSuccess "The EQ band is reset to default"
+	//cleanup
+	cleanup
+else
+	put global functions.error("The EQ band is reset to NOT default")
+	//cleanup
+	cleanup
+end if
+
+to cleanup
+	PressBackButton
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_GEQ()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+

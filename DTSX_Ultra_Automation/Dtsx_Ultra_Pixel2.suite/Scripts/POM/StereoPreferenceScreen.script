@@ -1,0 +1,57 @@
+﻿
+function StereoPreferenceScreen()
+	return(\
+	sterepref_portrait_img:"StereoPref/StereoPref_portrait_layout",\
+			sterepref_landscape_img:"StereoPref/StereoPref_landscape_layout",\
+			wide: "Wide",\
+			front: "In-front",\
+			traditional: "Traditional",\
+			wide_selected_image: "StereoPref/Wide_selected_img",\ 
+			front_selected_image: "StereoPref/Front_selected_img",\ 
+			traditional_selected_image: "StereoPref/Traditional_selected_img",\ 
+			) 
+		end StereoPreferenceScreen
+
+#scr_rotate has 2 variable: portrait or landscape
+function check_default_layout(Scr_rotate)
+	//get properties
+	put StereoPreferenceScreen().sterepref_portrait_img into sterepref_portrait_img
+	put StereoPreferenceScreen().sterepref_landscape_img into sterepref_landscape_img
+	
+	//execute
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(sterepref_portrait_img) then
+		return true
+	else if Scr_rotate is "landscape" and if global functions.check_imagefound_image( sterepref_landscape_img)
+		return true
+	else
+		return false
+	End if
+end check_default_layout
+
+function select_wide()
+	If check_stereo_mode("wide") is false and If global functions.open_screen("text",StereoPreferenceScreen().wide) is false then
+		return false
+	End if
+end select_wide
+
+function select_Infront()
+	If check_stereo_mode("front") is false and if global functions.open_screen("text",StereoPreferenceScreen().front) is false then
+		return false
+	End if
+end select_Infront
+
+function select_traditional()
+	If check_stereo_mode("traditional") is false and If global functions.open_screen("text",StereoPreferenceScreen().traditional) is false then
+		return false
+	End if
+end select_traditional
+
+#return true if mode is selected, false if not
+#stereo_mode has 3 variable: front, wide, traditional
+function check_stereo_mode(stereo_mode)
+	If global functions.check_imagefound_image(StereoPreferenceScreen().(stereo_mode&"_selected_image")) then
+		return true
+	Else
+		return false
+	End if
+end check_stereo_mode

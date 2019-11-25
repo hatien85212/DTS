@@ -1,0 +1,7 @@
+﻿2018-12-20 18:03:15.519 +0700	START		Running TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script
+2018-12-20 18:03:37.839 +0700	connect		127.0.0.1:(null)	9	function_connect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:39.175 +0700	executeremotecommand		rm /vendor/etc/dts/dts-eagle.lic	3	function_remove_licensefile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:42.187 +0700	disconnect		127.0.0.1	10	on_testcases_p3_generalui_verify_when_remove_or_no_dts_license_file_include_reboot_device_after_that	TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script
+2018-12-20 18:05:29.620 +0700	LogError		Can't connect mobile again	4	function_connect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:05:29.659 +0700	EndTestCase		(Duration:"134.134", Errors:"1", Exceptions:"0", StartTime:"2018-12-20 18:03:15 +0700", Successes:"0", TestCase:"TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script", Warnings:"0")
+2018-12-20 18:05:29.755 +0700	FAILURE		Script Error Number of Errors logged: 1 -- Execution Time 0:02:14 TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script

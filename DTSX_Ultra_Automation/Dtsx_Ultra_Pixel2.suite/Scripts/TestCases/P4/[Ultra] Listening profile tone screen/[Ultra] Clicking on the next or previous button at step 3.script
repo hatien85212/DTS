@@ -1,0 +1,49 @@
+﻿//[Ultra] Clicking on the next or previous button at step 3
+
+
+//connect mobile and open Listening profile screen
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+//go to step 3 screen
+Repeat 2 times
+	put global lp.click_next()
+End repeat
+wait 2
+//click next button
+put global lp.click_next()
+///check if step4 screen same Ui with screen at step3
+if global lp.check_layout(4) is true then
+	LogSuccess "Next tuning screen is same UI"
+	//go back to step 3 screen
+	put global lp.click_previous()
+	wait 2
+	//click previous button
+	put global lp.click_previous()
+	//check if step 2 screen same Ui with screen at step 3
+	if global lp.check_layout(2) is true then
+		LogSuccess "Previous tuning screen is same UI"
+		cleanup
+	else
+		put global functions.error("Previous tuning screen is NOT same UI")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Next tuning screen is NOT same UI")
+	cleanup
+	return false
+end if	
+
+to cleanup
+	// have to use press back button and click EXIT and close app. If use close_app function--> HPX change state to OFF
+	PressBackButton
+	wait 3
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

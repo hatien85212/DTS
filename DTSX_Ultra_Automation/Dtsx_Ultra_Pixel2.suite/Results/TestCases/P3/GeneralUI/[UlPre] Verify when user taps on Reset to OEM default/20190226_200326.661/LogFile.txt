@@ -1,0 +1,61 @@
+﻿2019-02-26 20:03:26.834 +0700	START		Running TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:03:27.131 +0700	launchapp		com.dts.dtsxultra	3	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:29.134 +0700	setdeviceorientation		Portrait	5	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:32.640 +0700	waitfor	Main/setting	found at (1017, 149)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:34.319 +0700	click	Main/setting	at (1017, 149)	11	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:35.250 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:37.527 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:39.810 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:47.422 +0700	imagefound	(TEXT:"Reset to OEM default")	found at (265, 1647)	12	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:03:47.508 +0700	click		at (265, 1647)	13	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:03:51.073 +0700	waitfor	Setting/ResetOEM_dialog_img	found at (536, 932)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:03:53.587 +0700	click	(TEXT:"OK")	at (896, 991)	18	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:03:54.290 +0700	pressbackbutton			8	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:04:00.071 +0700	imagefound	(TEXT:"Wired headphones")	found at (387, 789)	3	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:02.377 +0700	click	(TEXT:"Wired headphones")	at (387, 789)	4	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:03.671 +0700	imagefound	(TEXT:"Over-Ear Headphones")	found at (428, 432)	2	function_select_standardhp_overear	POM/WiredheadphoneScreen.script
+2019-02-26 20:04:03.759 +0700	click		at (428, 432)	3	function_select_standardhp_overear	POM/WiredheadphoneScreen.script
+2019-02-26 20:04:04.461 +0700	pressbackbutton			13	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:04:06.273 +0700	imagefound	(TEXT:"Bluetooth headphones")	found at (424, 981)	3	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:08.104 +0700	click	(TEXT:"Bluetooth headphones")	at (424, 981)	4	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:09.341 +0700	imagefound	(TEXT:"Over-Ear Headphones")	found at (392, 843)	2	function_select_standardhp_overear	POM/BluetoothheadphoneScreen.script
+2019-02-26 20:04:09.427 +0700	click		at (392, 843)	3	function_select_standardhp_overear	POM/BluetoothheadphoneScreen.script
+2019-02-26 20:04:10.130 +0700	pressbackbutton			18	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:04:13.679 +0700	imagefound	(TEXT:"Digital headphones")	found at (392, 1173)	3	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:16.014 +0700	click	(TEXT:"Digital headphones")	at (392, 1173)	4	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:17.234 +0700	imagefound	(TEXT:"Over-Ear Headphones")	found at (428, 766)	2	function_select_standardhp_overear	POM/USBheadphoneScreen.script
+2019-02-26 20:04:17.323 +0700	click		at (428, 766)	3	function_select_standardhp_overear	POM/USBheadphoneScreen.script
+2019-02-26 20:04:18.025 +0700	pressbackbutton			23	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:04:21.598 +0700	imagefound	(TEXT:"Personal Audio Preferences")	found at (471, 1502)	3	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:23.943 +0700	click	(TEXT:"Personal Audio Preferences")	at (471, 1502)	4	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:24.876 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:27.156 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:29.434 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:34.356 +0700	imagefound	(TEXT:"Graphic Equalizer")	found at (459, 1467)	3	function_open_geq	POM/PersonalAudioPreference.script
+2019-02-26 20:04:34.444 +0700	click		at (459, 1467)	4	function_open_geq	POM/PersonalAudioPreference.script
+2019-02-26 20:04:36.205 +0700	waitfor	GEQscreen/band3	found at (359, 957)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:36.388 +0700	tap		at (359, 1157)	5	function_change_geq_band	POM/GeqScreen.script
+2019-02-26 20:04:37.551 +0700	waitfor	GEQscreen/band9	found at (913, 967)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:37.732 +0700	tap		at (913, 717)	5	function_change_geq_band	POM/GeqScreen.script
+2019-02-26 20:04:38.435 +0700	pressbackbutton			37	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:04:39.367 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:41.650 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:43.927 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:04:47.049 +0700	imagelocation	PersonalPrefScreen/GEQ_on_img	at (549, 1460)	3	function_turn_off_geq	POM/PersonalAudioPreference.script
+2019-02-26 20:04:47.133 +0700	click		at (949, 1460)	3	function_turn_off_geq	POM/PersonalAudioPreference.script
+2019-02-26 20:04:49.196 +0700	imagefound	(TEXT:"Stereo preference")	found at (464, 1630)	3	function_open_stereopref	POM/PersonalAudioPreference.script
+2019-02-26 20:04:49.284 +0700	click		at (464, 1630)	4	function_open_stereopref	POM/PersonalAudioPreference.script
+2019-02-26 20:05:31.674 +0700	waitfor	StereoPref/Front_selected_img	found at (539, 695)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:31.828 +0700	pressbackbutton			51	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:05:32.530 +0700	pressbackbutton			54	on_testcases_p3_generalui__ulpre__verify_when_user_taps_on_reset_to_oem_default	TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:05:33.432 +0700	waitfor	Main/setting	found at (1017, 149)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:34.753 +0700	click	Main/setting	at (1017, 149)	11	function_open_screen	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:35.686 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:37.959 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:40.236 +0700	swipeup		Swiped up from (972, 1536) to (972, 768)	3	function_swipeup	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:44.626 +0700	imagefound	(TEXT:"Reset to OEM default")	found at (265, 1647)	12	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:05:44.712 +0700	click		at (265, 1647)	13	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:05:48.046 +0700	waitfor	Setting/ResetOEM_dialog_img	found at (536, 932)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:05:50.022 +0700	click	(TEXT:"OK")	at (896, 991)	18	function_reset_oem_default	POM/SettingScreen.script
+2019-02-26 20:07:40.251 +0700	EndTestCase		(Duration:"253.409", Errors:"1", Exceptions:"0", StartTime:"2019-02-26 20:03:26 +0700", Successes:"0", TestCase:"TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script", Warnings:"0")
+2019-02-26 20:07:40.254 +0700	ABORTED		Execution Time 0:04:14 TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script

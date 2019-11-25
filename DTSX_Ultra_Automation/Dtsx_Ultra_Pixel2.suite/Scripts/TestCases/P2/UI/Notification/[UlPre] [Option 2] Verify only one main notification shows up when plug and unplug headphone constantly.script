@@ -1,0 +1,48 @@
+﻿//[Ul/Pre] [Option 2] Verify only one main notification shows up when plug and unplug headphone constantly
+
+//Precondition
+//Connect device and open app
+put global functions.root()
+wait 3
+put global functions.open_app()
+//open Setting Screen
+put global main.open_setting_screen()
+//Turn on Notification
+put global setting.change_state_Notification("ON")
+// Dismiss Main Notification on status bar
+put global noti.the_status_bar("Expand")
+wait 2
+put global noti.swipe_to_dismiss_main_notification_int_speaker_noti_expand()
+
+//Step
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+If check_noti_plug_unplug_BT_HP_3times() is true then
+	LogSuccess "Ony one notification is shown and it shows correctly"
+	cleanup
+else
+	put global functions.error("Notification is not shown correctly")
+	cleanup
+	return false
+End If
+
+To cleanup
+	put global noti.the_status_bar("Collapse")
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+End cleanup
+
+to check_noti_plug_unplug_BT_HP_3times
+	Repeat 3 times
+		//Connect BT headphone
+		put global functions.change_state_deviceBT("ON")
+		//Check if only one notification if BT route is shown
+		if global noti.BT_audio_connected() is true then
+			put global functions.change_state_deviceBT("OFF")
+		else
+			return false
+		end if
+		return true
+	End repeat
+end check_noti_plug_unplug_BT_HP_3times

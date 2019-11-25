@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+<listeners>
+	<listener class-name="org.uncommons.reportng.HTMLReporter" />
+	<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+</listeners>
+	<test verbose="2" name="Default test">
+		  <classes>
+     <class name="com.dts.adminportal.dts.test.DTSUser090DUserInfo">
+      <methods>
+        <include name="TC090DUI_09" />
+		<include name="TC090DUI_10" />
+		<include name="TC090DUI_11" />
+		<include name="TC090DUI_12" />
+		<include name="TC090DUI_13" />
+      </methods>
+    </class>
+  <!--    <class name="com.dts.adminportal.dts.test.DTSUser092DbCreateUserNewCompany"> </class>
+     <class name="com.dts.adminportal.partner.test.PartnerUser093PCreateUserSuccess"> </class> -->
+  
+  </classes>
+
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->

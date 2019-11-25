@@ -1,0 +1,72 @@
+﻿# [Ultra] Verify UI and SDK when ui_hide_bt_accessory_recommendation is set to True / False
+Try
+	//get root permission, connect device
+	put global functions.root()
+	
+	//pull customer.cfg to PC and change kvp from ui_bt_accessorry_recommendation=false to true and push back to device
+	put global functions.change_kvp(global other.Other().bt_hide_kvp_false, global other.Other().bt_hide_kvp_true, global other.Other().cfgfilepath)
+	put global functions.push_customercfg(global other.Other().cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	//open app
+	put global functions.open_app()
+	//Go to Setting Screen
+	put global main.open_setting_screen()
+	
+	//check if Bluetooth accessory notification menu and screen are hidden
+	if global setting.check_Bluetooth_accessory_recommandation_exist() is false then
+		LogSuccess "Bluetooth accessory notification menu and screen are hidden"
+	else
+		put global functions.error("Bluetooth auto tuning and Reset Bluetooth tuning still show")
+		//clean up
+		cleanup
+	end if
+	
+	//Verify UI when ui_hide_bt_accessory_recommendation= False
+	//push original customercfg
+	push_original_customercfg
+	
+	//open app and open personal audio pref screen
+	put global functions.open_app()
+	
+	// Go to setting screen, 
+	put global main.open_setting_screen()
+	
+	//check if Bluetooth accessory notification menu and screen appear
+	if global setting.check_Bluetooth_accessory_recommandation_exist() is true then
+		LogSuccess "Bluetooth accessory notification menu and screen appear"
+	else
+		put global functions.error("Bluetooth accessory notification menu and screen are hidden")
+		//clean up
+		cleanup
+	end if
+	
+	//clean up
+	cleanup
+Catch exception
+	put exception 's reason
+	//push original customercfg for cleaning up this cases
+	push_original_customercfg
+	//clean up
+	cleanup
+End try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to push_original_customercfg
+	//get root permission, connect device
+	put global functions.root()
+	
+	//push original customer.cfg file
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+end push_original_customercfg

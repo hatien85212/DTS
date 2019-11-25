@@ -1,0 +1,14 @@
+﻿2018-12-20 18:02:36.671 +0700	START		Running TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script
+2018-12-20 18:02:40.708 +0700	connect		127.0.0.1:(null)	9	function_connect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:02:41.960 +0700	launchapp		com.dts.dtsxultra	3	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:02:43.963 +0700	setdeviceorientation		Portrait	5	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:02:53.128 +0700	waitfor	Main/mainscreen_defaultlayout_portrait	found at (546, 913)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:02:53.227 +0700	LogSuccess		Verify portrait layout done	14	on_testcases_p3_generalui__ultra_verifylayoutofmainscreen	TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script
+2018-12-20 18:02:53.361 +0700	setdeviceorientation		LandscapeRight	18	on_testcases_p3_generalui__ultra_verifylayoutofmainscreen	TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script
+2018-12-20 18:03:00.335 +0700	waitfor	Main/mainscreen_defaultlayout_landscape	found at (1036, 571)	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:00.778 +0700	LogSuccess		Verify landscape layout done	23	on_testcases_p3_generalui__ultra_verifylayoutofmainscreen	TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script
+2018-12-20 18:03:02.870 +0700	setdeviceorientation		Portrait	4	function_close_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:04.873 +0700	killapp		com.dts.dtsxultra	6	function_close_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:09.916 +0700	disconnect		127.0.0.1	4	function_disconnect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2018-12-20 18:03:15.004 +0700	EndTestCase		(Duration:"38.315", Errors:"0", Exceptions:"0", StartTime:"2018-12-20 18:02:36 +0700", Successes:"2", TestCase:"TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script", Warnings:"0")
+2018-12-20 18:03:15.110 +0700	SUCCESS		Execution Time 0:00:38 TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script

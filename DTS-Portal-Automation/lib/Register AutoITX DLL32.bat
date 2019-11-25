@@ -1,0 +1,1 @@
+regsvr32 %~dp0\AutoItX3_x32.dll

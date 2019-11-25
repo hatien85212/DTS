@@ -1,0 +1,53 @@
+﻿#[Ultra] Verify listening screen when opening listening profile in multi-window
+#Make sure only DTSX Ultra app running. No other in background
+
+//enable Eggplant sensor before run tcs
+
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	wait 2
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	wait 2
+	//go to multi-windows mode
+	multi_windows()
+	wait 3
+	//check if ui works correctly with multi-windows mode
+	##need to capture image for multi-windows
+	if global lp.check_layout_multiwindows() is false then
+		put global functions.error("Listening profile layout is not ok with multi windows mode")
+		//cleanup
+		cleanup
+	else
+		LogSuccess "Listening profile layout is ok with multi windows mode"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put exception 's error
+	cleanup
+End try
+
+to cleanup
+	SetDeviceOrientation "Portrait"
+	put global functions.reboot()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+
+to multi_windows()
+	Press (833,1853)
+end multi_windows
+
+
+
+
+

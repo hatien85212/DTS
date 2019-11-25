@@ -1,0 +1,47 @@
+﻿#[Ultra] Verify when user swipe kill app while doing listening test and reopen app
+
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	//Connect Bluetooth device
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	
+	//After enter lp screen, swipe kill app then reopen app
+	put global functions.close_app()
+	wait 3
+	put global functions.open_app()
+	
+	//check if main screen 
+	if global main.check_default_layout(GetDeviceOrientation()) and if global main.check_lp_date_appear()  is true then
+		put global main.open_personalpref_screen()
+		if global personalpref.check_default_layout(GetDeviceOrientation()) is true then
+			LogSuccess "App work correctly"
+			cleanup
+		else
+			put global functions.error("App does NOt work correctly")
+			cleanup
+			return false
+		end if 
+	else
+		put global functions.error("App does NOt work correctly")
+		cleanup
+		return false
+	end if
+Catch exception
+	put exception 's error
+	cleanup
+End try
+
+to cleanup
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

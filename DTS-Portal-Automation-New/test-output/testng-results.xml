@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[Verify uploading single Car-Audio tuning successfully with valid format file]]>
+    </line>
+    <line>
+      <![CDATA[Enter username: dtsautosuper@mailinator.com</br>]]>
+    </line>
+    <line>
+      <![CDATA[Enter password: dts999</br>]]>
+    </line>
+    <line>
+      <![CDATA[Click login : //*[@id='frmlogin']/div[4]/div/button</br>]]>
+    </line>
+    <line>
+      <![CDATA[Wait for loading</br>]]>
+    </line>
+    <line>
+      <![CDATA[On Home page</br>]]>
+    </line>
+    <line>
+      <![CDATA[Click : //*[@id='nav_link_devices_dts']/a</br>]]>
+    </line>
+    <line>
+      <![CDATA[Click : //*[@id='create-device']</br>]]>
+    </line>
+    <line>
+      <![CDATA[click :Eagle 2.0</br>]]>
+    </line>
+    <line>
+      <![CDATA[click :DTS:X Ultra</br>]]>
+    </line>
+    <line>
+      <![CDATA[click :Car-Audio</br>]]>
+    </line>
+    <line>
+      <![CDATA[Upload file : D:\SVN\Automation\DTS-Portal-Automation-New\asset\standard_accessories_tuning_combined_lineout_bt_usb_ver2.dtscs</br>]]>
+    </line>
+    <line>
+      <![CDATA[Text : Car-Audio</br>]]>
+    </line>
+    <line>
+      <![CDATA[PASSED]]>
+    </line>
+    <line>
+      <![CDATA[===========================================================================]]>
+    </line>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="47445" started-at="2017-11-06T10:32:33Z" finished-at="2017-11-06T10:33:20Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="47445" started-at="2017-11-06T10:32:33Z" finished-at="2017-11-06T10:33:20Z">
+      <class name="com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit">
+        <test-method status="PASS" signature="getTCnameBefore(java.lang.reflect.Method)[pri:0, instance:com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit@210366b4]" name="getTCnameBefore" is-config="true" duration-ms="6" started-at="2017-11-06T17:32:33Z" finished-at="2017-11-06T17:32:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit.TC650DaDEN_148()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTCnameBefore -->
+        <test-method status="PASS" signature="initializeDriver(java.lang.String, java.lang.String)[pri:0, instance:com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit@210366b4]" name="initializeDriver" is-config="true" duration-ms="11301" started-at="2017-11-06T17:32:33Z" finished-at="2017-11-06T17:32:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[https://devportal.dts.com/saap]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeDriver -->
+        <test-method status="PASS" signature="TC650DaDEN_148()[pri:0, instance:com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit@210366b4]" name="TC650DaDEN_148" duration-ms="36100" started-at="2017-11-06T17:32:44Z" finished-at="2017-11-06T17:33:20Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Verify uploading single Car-Audio tuning successfully with valid format file]]>
+            </line>
+            <line>
+              <![CDATA[Enter username: dtsautosuper@mailinator.com</br>]]>
+            </line>
+            <line>
+              <![CDATA[Enter password: dts999</br>]]>
+            </line>
+            <line>
+              <![CDATA[Click login : //*[@id='frmlogin']/div[4]/div/button</br>]]>
+            </line>
+            <line>
+              <![CDATA[Wait for loading</br>]]>
+            </line>
+            <line>
+              <![CDATA[On Home page</br>]]>
+            </line>
+            <line>
+              <![CDATA[Click : //*[@id='nav_link_devices_dts']/a</br>]]>
+            </line>
+            <line>
+              <![CDATA[Click : //*[@id='create-device']</br>]]>
+            </line>
+            <line>
+              <![CDATA[click :Eagle 2.0</br>]]>
+            </line>
+            <line>
+              <![CDATA[click :DTS:X Ultra</br>]]>
+            </line>
+            <line>
+              <![CDATA[click :Car-Audio</br>]]>
+            </line>
+            <line>
+              <![CDATA[Upload file : D:\SVN\Automation\DTS-Portal-Automation-New\asset\standard_accessories_tuning_combined_lineout_bt_usb_ver2.dtscs</br>]]>
+            </line>
+            <line>
+              <![CDATA[Text : Car-Audio</br>]]>
+            </line>
+            <line>
+              <![CDATA[PASSED]]>
+            </line>
+            <line>
+              <![CDATA[===========================================================================]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- TC650DaDEN_148 -->
+        <test-method status="PASS" signature="afterTest(org.testng.ITestResult)[pri:0, instance:com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit@210366b4]" name="afterTest" is-config="true" duration-ms="23" started-at="2017-11-06T17:33:20Z" finished-at="2017-11-06T17:33:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC650DaDEN_148 status=SUCCESS method=DTSAppsDevices650DDeviceEdit.TC650DaDEN_148()[pri:0, instance:com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit@210366b4] output=Verify uploading single Car-Audio tuning successfully with valid format file]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

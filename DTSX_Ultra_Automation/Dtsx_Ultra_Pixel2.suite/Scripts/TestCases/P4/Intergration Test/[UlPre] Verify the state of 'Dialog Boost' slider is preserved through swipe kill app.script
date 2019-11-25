@@ -1,0 +1,49 @@
+﻿//[Ul/Pre] Verify the state of 'Dialog Boost' slider is preserved through swipe kill app
+
+//open app and connect device
+put global functions.connect_mobile()
+put global functions.open_app()
+//open Integration Test screen
+put global main.open_integration_screen()
+wait 5 //keep screen stable to swipe exactly
+
+///swipe up
+Repeat 4 times
+	put global functions.swipeup()
+End repeat
+//slide DE
+put global personalpref.change_DE(600)
+wait 5
+put global functions.captureimage(current_value_of_DE) into current_value_of_DE
+
+//close and open app
+put global functions.close_app()
+put global functions.open_app()
+
+//open Integration Test screen
+put global main.open_integration_screen()
+wait 5 // keep screen stable to swipe exactly
+
+///swipe up
+Repeat 4 times
+	put global functions.swipeup()
+End repeat
+
+if global functions.check_imagefound_image(current_value_of_DE) is true then 
+	LogSuccess "The state of 'Dialog Boost' slider is preserved"
+	//cleap up
+	cleanup
+else
+	put global functions.error("the state of 'Dialog Boost' slider is not preserved ")
+	//clean up
+	cleanup
+end if
+
+to cleanup
+	PressBackButton
+	put global main.open_PersonalPref_screen()
+	put global personalpref.reset_setting()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

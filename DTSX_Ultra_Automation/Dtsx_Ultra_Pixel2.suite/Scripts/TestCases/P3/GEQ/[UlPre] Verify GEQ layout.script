@@ -1,0 +1,85 @@
+﻿//[Ul/Pre] Verify GEQ layout
+
+
+put global functions.root()
+//Treble boost is enable
+put global functions.open_app()
+put global main.open_PersonalPref_screen()
+Repeat 2 times
+	put global functions.swipeup()
+End repeat
+//turn on GEQ and go to GEQ screen
+put global personalpref.turn_on_geq()
+put global personalpref.open_GEQ()
+
+//check if GEQ screen is shown correctly when Treble boost is enabled
+SetDeviceOrientation Portrait
+if global geq.check_default_layout(Portrait) is true then
+	SetDeviceOrientation LandscapeRight
+	if global geq.check_default_layout(Landscape) is true then
+		//push customer.cfg contains "disable_treble_level=false" (Treble boost is disable) 
+		put global functions.change_kvp(global other.Other().treble_disable_kvp_false,global other.Other().treble_disable_kvp_true,global other.Other().cfgfilepath)
+		put global functions.push_customercfg(global other.other().cfgfilepath)
+		put global functions.reboot()
+		
+		put global functions.open_app()
+		put global main.open_PersonalPref_screen()
+		Repeat 2 times
+			put global functions.swipeup()
+		End repeat
+		put global personalpref.open_GEQ()
+		//check if GEQ screen is shown correctly when Treble boost is disabled
+		SetDeviceOrientation Portrait
+		if global geq.check_Geq_12db(Portrait) is true then
+			SetDeviceOrientation LandscapeRight
+			if global geq.check_Geq_12db(Landscape) is true then
+				LogSuccess "GEQ screen is shown correctly"
+				SetDeviceOrientation Portrait
+				push_original_customercfg
+				cleanup
+			else
+				put global functions.error("GEQ screen is NOT shown correctly")
+				push_original_customercfg
+				cleanup
+				return false
+			end if
+		else
+			put global functions.error("GEQ screen is NOT shown correctly")
+			push_original_customercfg
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("GEQ screen is NOT shown correctly")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("GEQ screen is NOT shown correctly")
+	cleanup
+	return false
+end if 
+
+
+to cleanup
+
+	SetDeviceOrientation Portrait
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	Repeat 2 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup	
+
+
+to push_original_customercfg
+	put global functions.root()
+	put global functions.push_customercfg(global other.other().full_kvp_cfgfilepath)
+	put global functions.reboot()
+end push_original_customercfg
+
+
+

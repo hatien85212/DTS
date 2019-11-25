@@ -1,0 +1,11 @@
+﻿##Everything relate to BrandsListScreen
+
+function BrandsListScreen()
+	put(\
+	brands_list:"BrandsListPage/brands_list",\
+			first_brand:"BrandsListPage/first_brand",\
+			brands_list_wired:"BrandsListPage/brands_list_wired",\
+			brands_list_bluetooth:"BrandsListPage/brands_list_bluetooth",\
+			) into BrandsListScreen
+			return BrandsListScreen
+end BrandsListScreen

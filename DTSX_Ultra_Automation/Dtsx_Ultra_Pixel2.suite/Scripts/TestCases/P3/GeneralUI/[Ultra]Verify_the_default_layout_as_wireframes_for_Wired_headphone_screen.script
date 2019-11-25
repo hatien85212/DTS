@@ -1,0 +1,42 @@
+﻿##[Ultra]Verify_the_default_layout_as_wireframes_for_Wired_headphone_screen##
+
+try
+	
+	#Connect device
+	put global functions.connect_mobile()
+	#Open app
+	put global functions.open_app()
+	
+	#Open wired headphone screen
+	put global main.open_wiredHPscreen()
+	
+	#Check default layout in portrait
+	if global wiredhp.check_default_layout("portrait") is false then
+		put global functions.error("Verify portrait layout fail")
+		cleanup
+	else
+		LogSuccess "Verify portrait layout done"
+	end if
+	
+	#Check default layout in landscape
+	SetDeviceOrientation LandscapeRight
+	if global wiredhp.check_default_layout("landscape") is false then
+		put global functions.error("Verify landscape layout fail")
+		cleanup
+	else
+		LogSuccess "Verify landscape layout done"
+	end if
+	
+	#Close app
+	cleanup
+catch exception
+	put exception 's reason
+	put global functions.error("Wrong_wiredhp_screen")
+	cleanup
+end Try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

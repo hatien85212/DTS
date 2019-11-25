@@ -1,0 +1,25 @@
+﻿//[Ultra] Display "Model List screen" when tap on brand
+
+//connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+//Go to Brand list screen
+put global bthp.open_Brand_list_screen()
+
+//Check if "Model List screen" is displayed when tap on Brand
+if global bthp.Model_list_screen_of_Brand("Asus") is true then 
+	LogSuccess "Model List screen is displayed"
+	cleanup
+else
+	put global functions.error("Model List screen is NOT displayed")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

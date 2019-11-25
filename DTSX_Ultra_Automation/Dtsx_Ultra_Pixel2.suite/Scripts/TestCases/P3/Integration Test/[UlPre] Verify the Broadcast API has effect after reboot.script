@@ -1,0 +1,32 @@
+﻿//[Ul/Pre] Verify the Broadcast API has effect after reboot
+
+//connect mobile and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//turn off hpx
+put global main.turn_off_hpx()
+//open to Integration test screen
+put global main.open_integration_screen()
+//reboot device and open app
+put global functions.reboot()
+put global functions.open_app()
+//got to Integration test screen
+put global main.open_integration_screen()
+//check API toggle
+if global integration.check_API_OFF() is true then
+	LogSuccess "HPX and Broadcast API still displayed OFF after reboot"
+	//clean up
+	cleanup
+else
+	put global functions.error("HPX and Broadcast API did not display OFF after reboot")
+	//clean up
+	cleanup
+end if
+
+to cleanup
+	put global integration.turn_on_API()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

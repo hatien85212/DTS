@@ -1,0 +1,30 @@
+﻿//[Ul/Pre] [Option 2] Verify layout of dummy notification 
+????????????
+
+//Connect device and open app
+put global functions.root()
+put global functions.open_app()
+//open Setting Screen
+put global main.open_setting_screen()
+
+//Turn On Notification
+put global setting.change_state_Notification("ON")
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+
+//Check if Dummy appear
+if global noti.check_dummy_appear() is true then
+	LogSuccess "Dummy notification appears"
+	cleanup
+else
+	put global functions.error("Dummy notification does NOT appear")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global noti.the_status_bar("Collapse")
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

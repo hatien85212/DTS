@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<testsuites>
+ <testsuite name="TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script" package="Dtsx_Ultra_Pixel2.suite" timestamp="2018-12-20 18:03:15.217 +0700"
+ tests="1" successes="0" errors="1" time="134.440000">
+  <properties>
+   <property name="RunDate" value="2018-12-20 18:03:15.217 +0700"/>
+   <property name="Status" value="Failure"/>
+  </properties>
+  <testcase name="TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that.script" assertions="1" successes="0" errors="1" time="134.134">
+    <failure type="LogError">Can't connect mobile again</failure>
+  </testcase>
+ </testsuite>
+</testsuites>

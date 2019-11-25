@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Default test"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="224.424">
+  <properties />
+  
+  
+            <testcase name="TC063DBI_01" time="49.012" classname="com.dts.adminportal.dts.test.DTSCompanies063DBrandInfo" />
+                <testcase name="TC063DBI_10" time="106.175" classname="com.dts.adminportal.dts.test.DTSCompanies063DBrandInfo" />
+                <testcase name="TC063DBI_06" time="69.237" classname="com.dts.adminportal.dts.test.DTSCompanies063DBrandInfo" />
+      
+</testsuite>

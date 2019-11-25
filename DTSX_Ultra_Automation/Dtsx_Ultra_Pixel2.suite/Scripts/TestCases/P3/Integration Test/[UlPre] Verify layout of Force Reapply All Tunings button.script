@@ -1,0 +1,25 @@
+﻿//[Ul/Pre] Verify layout of "Force Reapply All Tunings" button
+
+
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_integration_screen()
+
+Repeat 4 times
+	put global functions.swipeup()
+End repeat
+
+if global integration. check_Force_reapply_appear() is true then
+	LogSuccess "Force Reapply All Tunings button is shown"
+	cleanup
+else
+	put global functions.error("Force Reapply All Tunings button is NOT shown")
+	cleanup
+	return false
+end if
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

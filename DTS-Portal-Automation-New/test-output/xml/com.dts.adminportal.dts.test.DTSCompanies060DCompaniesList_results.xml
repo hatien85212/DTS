@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Default test"
+           tests="12"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1816.415">
+  <properties />
+  
+  
+            <testcase name="TC060DCL_14" time="121.037" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_05" time="26.731" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_10" time="617.241" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_13" time="52.060" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_11" time="336.945" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_09" time="358.873" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_06" time="28.295" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_12" time="173.468" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_07" time="26.603" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_01" time="21.522" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_04" time="26.493" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+                <testcase name="TC060DCL_08" time="27.147" classname="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList" />
+      
+</testsuite>

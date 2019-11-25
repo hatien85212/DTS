@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FireFoxTest"
+           tests="16"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="2542.170">
+  <properties />
+  
+  
+            <testcase name="TC092DbCUN_01" time="144.512" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_23" time="209.984" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_16" time="163.145" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_04" time="38.957" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_11" time="328.891" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_25" time="196.977" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_21" time="213.569" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_13" time="139.723" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_19" time="31.384" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_01" time="53.725" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_24" time="211.455" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_20" time="193.875" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_06" time="42.817" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_22" time="180.977" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DaCUB_10" time="44.967" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+                <testcase name="TC092DbCUN_18" time="347.212" classname="com.dts.adminportal.dts.test.DTSUser092DCreateUser" />
+      
+</testsuite>

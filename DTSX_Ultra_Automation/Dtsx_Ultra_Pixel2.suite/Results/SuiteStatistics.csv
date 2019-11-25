@@ -1,0 +1,4 @@
+﻿Script,Last Status,Runs,Fails,First Run,Last Run,Avg Time(Success)
+TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that,Failure,1,1,2018-12-20 18:03:15 +0700,2018-12-20 18:03:15 +0700,0:00:00
+TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen,Success,1,0,2018-12-20 18:02:36 +0700,2018-12-20 18:02:36 +0700,0:00:38
+TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available,Failure,1,1,2019-02-26 18:20:10 +0700,2019-02-26 18:20:10 +0700,0:00:00

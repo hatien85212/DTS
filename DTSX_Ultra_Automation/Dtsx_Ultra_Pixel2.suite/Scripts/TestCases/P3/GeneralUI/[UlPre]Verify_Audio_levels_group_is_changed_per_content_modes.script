@@ -1,0 +1,76 @@
+﻿#[UlPre]Verify_Audio_levels_group_is_changed_per_content_modes
+
+#Connect mobile
+put global functions.connect_mobile()
+
+try
+	#Open app
+	put global functions.open_app()
+	
+	#go to personal audio preference screen
+	put global main.open_PersonalPref_screen()
+	
+	#reset all setting
+	put global personalpref.reset_setting()
+	
+	#change mode 2
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	
+	#check audio level group for mode 2
+	if global personalpref.check_default_audiolevel_group(2) is false then
+		put global functions.error("default audio level group setting of mode 2 is not correct")
+		cleanup
+	end if
+	
+	#scroll up 3 times
+	Repeat 3 times
+		put global functions.swipedown()
+	End repeat
+	
+	#change mode 6
+	if global personalpref.select_mode(6) is false then
+		put global functions.error("Can't select mode 6")
+		cleanup
+	end if
+	
+	#scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#check audio level group for mode 6 (should not be the same as mode 2)
+	if global personalpref.check_default_audiolevel_group(6) is false then
+		put global functions.error("default audio level group setting of mode 6 is not correct")
+		cleanup
+	else
+		LogSuccess "Default audio level group is changed per content modes"
+	end if
+	
+	#clean up for next tc
+	cleanup
+	
+Catch exception
+	put exception 's reason
+	put global functions.error("Default audio level group setting of mode 6 is the same as mode 2")
+	cleanup
+end Try
+
+to cleanup
+	#reset setting, then reset to oem default
+	put global personalpref.reset_setting()
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

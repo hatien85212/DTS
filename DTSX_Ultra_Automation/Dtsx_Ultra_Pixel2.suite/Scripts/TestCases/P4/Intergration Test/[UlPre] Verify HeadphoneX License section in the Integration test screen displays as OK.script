@@ -1,0 +1,46 @@
+﻿//[Ul/Pre] Verify Headphone:X License section in the Integration test screen displays as OK 
+
+//Precondition
+
+//root
+put global functions.root()
+//remove dts-eagle.lic disconnect and reboot
+put global functions.remove_licensefile()
+put global functions.disconnect_mobile()
+put global functions.reboot()
+
+
+
+//Step
+//push dts-eagle.lic and reboot
+put global functions.root()
+put global functions. push_licensefile(global other.other().eaglelicense_path)
+put global functions.disconnect_mobile()
+put global functions.reboot()
+
+
+//open app and go to Integration test screen
+put global functions.open_app()
+put global main.open_integration_screen()
+
+// Check Headphone:X License section
+Try
+	if global integration.Check_license_OK() is true then
+		LogSuccess "DTS:X Ultra license displayed OK"
+		cleanup
+	else
+		put global functions.error("DTS:X Ultra license did not display OK")
+		cleanup
+	end if
+catch exception
+	put exception 's reason
+	cleanup
+end try
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+

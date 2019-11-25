@@ -1,0 +1,59 @@
+﻿//Verify the EQ band is preserved after Swipe kill app 
+
+//connect mobile and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//go to PersonalPrefScreen
+put global main.open_personalpref_screen()
+
+//turn on GEQ and go to GEQ screen
+Repeat 3 times
+	put global functions.swipeup()
+End repeat
+put global personalpref.turn_on_GEQ()
+put global personalpref.open_GEQ()
+
+//modify all GEQ band to 10
+put global geq.change_GEQ_band(0,-700)
+put global geq.change_GEQ_band(1,-700)
+put global geq.change_GEQ_band(2,-700)
+
+//CaptureScreen
+put global functions.captureimage(band0_10) into band0_10
+
+//close  and open app
+put global functions.close_app()
+put global functions.open_app()
+
+//Go to GEQ screen
+put global main.open_personalpref_screen()
+Repeat 3 times
+	put global functions.swipeup()
+End repeat
+put global personalpref.open_GEQ()
+
+//check if The value of EQ band should be preserved
+if global functions.check_imagefound_image(band0_10) is true then
+	LogSuccess "The value of EQ band should be preserved"
+	//clean up
+	cleanup
+else
+	put global functions.error("The value of EQ band should be preserved")
+	//clean up
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global geq.reset_geq()
+	PressBackButton
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_GEQ()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+

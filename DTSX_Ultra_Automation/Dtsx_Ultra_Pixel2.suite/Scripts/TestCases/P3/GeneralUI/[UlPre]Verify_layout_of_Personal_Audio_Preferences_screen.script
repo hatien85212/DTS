@@ -1,0 +1,46 @@
+﻿#[Ul/Pre]Verify_layout_of_Personal_Audio_Preferences_screen
+
+try
+	#Connect device
+	put global functions.connect_mobile()
+	
+	#Open app
+	put global functions.open_app()
+	
+	#Open wired headphone screen
+	put global main.open_PersonalPref_screen()
+	put global personalpref.reset_setting()
+	
+	#Check default layout in portrait
+	If  global personalpref.check_default_layout(Portrait) is false then
+		put global functions.error("Wrong_PersonalAudioPreference_screen")
+		cleanup
+	else
+		LogSuccess "Verify portrait layout done"
+	End if
+	
+	
+	#Check default layout in landscape
+	SetDeviceOrientation LandscapeRight
+	if global personalpref.check_default_layout(Landscape) is false then
+		put global functions.error("Wrong_PersonalAudioPreference_screen")
+		cleanup
+	else
+		LogSuccess "Verify landscape layout done"
+	end if
+	
+	#cleanup
+	cleanup
+	
+catch exception
+	put exception 's reason
+	put global functions.error("Wrong_PersonalAudioPreference_screen")
+	cleanup
+end Try
+
+to cleanup
+	SetDeviceOrientation Portrait
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

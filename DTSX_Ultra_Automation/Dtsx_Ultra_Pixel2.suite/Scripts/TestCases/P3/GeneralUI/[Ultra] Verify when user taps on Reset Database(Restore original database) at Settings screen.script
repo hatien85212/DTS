@@ -1,0 +1,128 @@
+﻿#[Ultra] Verify when user taps on Reset Database(Restore original database) at Settings screen
+Try
+	//connect device, open app,  go to setting screen and reset to oem default
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	PressBackButton
+	
+	//Change Wiredhp to Over-ear
+	put global main.open_wiredHPscreen()
+	put global wiredhp.select_standardHP_OverEar()
+	PressBackButton
+	
+	//Change BThp to Over-ear
+	put global main.open_BTHPscreen()
+	put global bthp.select_standardHP_OverEar()
+	PressBackButton
+	
+	//Change Digital hp to Over-ear
+	put global main.open_USBHPscreen()
+	put global usbhp.select_standardHP_OverEar()
+	PressBackButton
+	
+	//Go to Personal Audio Preferences and scroll down 3 times
+	put global main.open_PersonalPref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//Go to GEQ, change some bands and back to Personal Audio Pref screen
+	put global personalpref.open_GEQ()
+	if global geq.change_GEQ_band(3,200) is false and global geq.change_GEQ_band(9,-250) is false then
+		put global functions.error("Change GEQ fail")
+		cleanup 
+	end if
+	PressBackButton
+	
+	//Scroll down 3 times and Turn off GEQ
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	
+	//Change Stereo Preference to Infront and back to personal audio pref screen
+	put global personalpref.open_StereoPref()
+	if  global sp.select_Infront() is false then
+		put global functions .error("Change stereo preference fail")
+		cleanup
+	end if
+	PressBackButton
+	
+	//Back to main screen and go to setting screen
+	PressBackButton
+	put global main.open_setting_screen()
+	
+	//Reset db
+	if global setting.check_resetdb_toast() is false then
+		put global functions.error("Reset db fail")
+		cleanup
+	end if
+	PressBackButton
+	
+	// Expectation:
+	//Wired/BT/Digital headphone: Earbuds at main screen
+	//Content mode 0 is selected at Personal Audio Pref screen
+	//GEQ bands all 0 and GEQ is on
+	
+	//check main screen for all headphone selection
+	if global main.check_Audio_section_afterResetOEM() is false then
+		put global functions.error("Headphone selection does not restore to default")
+		cleanup
+	else
+		LogSuccess "Verify headphone selection is earbuds"
+	end if
+	
+	//go to personal audio pref screen for checking GEQ and Stereo Pref
+	put global main.open_PersonalPref_screen()
+	
+	//check content mode 0 is selected
+	if global personalpref.check_contentmode_state(0) is false then
+		put global functions.error("Content mode 0 is not selected")
+		cleanup
+	else
+		LogSuccess "Verify content mode 0 is selected"	
+	end if
+	
+	//scroll down 3 times
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//Check Stereo preference is traditional
+	if global personalpref.check_state_stereopref("traditional") is false then
+		put global functions.error("Stereo Preference is not traditional as OEM default")
+		cleanup
+	end if
+	
+	//Check GEQ on
+	if global personalpref.check_state_geq() is false then
+		put global functions.error("GEQ is not ON as OEM default")
+		cleanup
+	else
+		LogSuccess "Verify GEQ is on as default"
+	end if
+	
+	//open GEQ and check GEQ bands
+	put global  personalpref.open_GEQ()
+	if global geq.check_default_GEQ_bands() is false then
+		put global functions.error("GEQ bands are not flat as OEM default")
+		cleanup
+	else
+		LogSuccess "Verify GEQ bands are flat"
+	end if
+	
+	//cleanup
+	cleanup
+	Catch exception
+	put reason of exception
+	cleanup
+End try
+
+to cleanup
+	//clean up
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

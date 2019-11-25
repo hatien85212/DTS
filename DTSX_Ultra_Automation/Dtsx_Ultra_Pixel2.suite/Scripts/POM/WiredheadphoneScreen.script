@@ -1,0 +1,36 @@
+﻿##Everything relate to WiredheadphoneScreen
+
+function WiredheadphoneScreen()
+	return(\
+	wiredhp_screen_portrait_img:"WiredHP/WiredHP_defaultlayout_portrait",\ 
+			wiredhp_screen_landscape_img:"WiredHP/WiredHP_defaultlayout_landscape",\ 
+			OverEarHP_text: "Over-Ear Headphones",\
+			Earbuds_text: "Earbuds",\
+			Earpiece_text: "Earpiece",\
+			ExSpeaker_text: "External Speaker",\
+			Car_text: "Car Audio",\
+			)
+			
+end WiredheadphoneScreen
+
+function check_default_layout(Scr_rotate)
+	Wait 5
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image( WiredheadphoneScreen().wiredhp_screen_portrait_img) then
+		return true
+	else if Scr_rotate is "landscape" and if global functions.check_imagefound_image(WiredheadphoneScreen().wiredhp_screen_landscape_img)
+		return true
+	else
+		return false
+	End if
+	
+end check_default_layout
+
+#select standard OE headphone
+function select_standardHP_OverEar()
+	if ImageFound(2, (text:WiredheadphoneScreen().OverEarHP_text)) then
+		click FoundImageLocation()
+		return true
+	else
+		return false
+	end if
+end select_standardHP_OverEar

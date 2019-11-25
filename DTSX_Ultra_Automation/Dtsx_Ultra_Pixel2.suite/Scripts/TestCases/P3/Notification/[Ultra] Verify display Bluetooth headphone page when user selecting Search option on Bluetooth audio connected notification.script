@@ -1,0 +1,73 @@
+﻿//[Ultra] Verify display Bluetooth headphone page when user selecting "Search" option on Bluetooth audio connected notification
+
+//Precondition
+//Root and connect device
+put global functions.root()
+//Turn on Notification
+Turn_Toggle_Notification("ON")
+
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Check if Bluetooth Head Phone connected.
+if global functions.BT_audio_connected() is true then
+	put global noti.Tap_name_button("Search")
+	wait 2
+	//Check if BT headphone screen is shown
+	if global bthp.check_default_layout(GetDeviceOrientation()) is true then
+		//Disconnect BT headphone
+		put global functions.change_state_deviceBT("OFF")
+		//Expand the status bar
+		put global noti.the_status_bar("Expand")
+		//Connect BT headphone
+		put global functions.change_state_deviceBT("ON")
+		put global functions.captureimage(BT) into BT
+		put global noti.Tap_name_button("Dismiss")
+		if global functions.check_imagefound_image(BT) is false then
+			LogSuccess "Notification behavior of BT headphone work correctly"
+			cleanup
+		else
+			put global functions.error("Notification behavior of BT headphone work incorrectly")
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("Notification behavior of BT headphone work incorrectly")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Notification behavior of BT headphone work incorrectly")
+	cleanup
+	return false
+end if
+
+
+To cleanup
+	put global noti.the_status_bar("Collapse")
+	put global functions.close_app()
+	put global noti.Turn_Toggle_Noti("OFF")
+	put global functions.disconnect_mobile()
+End cleanup
+
+
+To Turn_Toggle_Notification ON, OFF
+	put global functions.open_app()
+	//open Setting Screen
+	put global main.open_setting_screen()
+	If ON is "ON" then
+		//Turn on Notification
+		put global setting.change_state_Notification("ON")
+		//Close app
+		put global functions.close_app()
+		wait 3
+	else
+		//Turn on Notification
+		put global setting.change_state_Notification("OFF")
+		//Close app
+		put global functions.close_app()
+		wait 3
+	end if
+End Turn_Toggle_Notification
+

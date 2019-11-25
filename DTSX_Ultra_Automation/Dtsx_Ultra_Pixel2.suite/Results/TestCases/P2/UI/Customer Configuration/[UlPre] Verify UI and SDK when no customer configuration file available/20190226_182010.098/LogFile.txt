@@ -1,0 +1,6 @@
+﻿2019-02-26 18:20:10.908 +0700	START		Running TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available.script
+2019-02-26 18:20:27.321 +0700	executeremotecommand		rm /vendor/etc/dts/customer.cfg	5	function_remove_customercfg	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 18:20:32.385 +0700	disconnect		127.0.0.1	4	function_disconnect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 18:22:21.011 +0700	LogError		Can't connect mobile again	4	function_connect_mobile	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 18:22:21.311 +0700	EndTestCase		(Duration:"130.326", Errors:"1", Exceptions:"0", StartTime:"2019-02-26 18:20:10 +0700", Successes:"0", TestCase:"TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available.script", Warnings:"0")
+2019-02-26 18:22:21.424 +0700	FAILURE		Script Error Number of Errors logged: 1 -- Execution Time 0:02:11 TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available.script

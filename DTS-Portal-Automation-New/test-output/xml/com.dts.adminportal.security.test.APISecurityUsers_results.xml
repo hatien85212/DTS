@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Default test"
+           tests="4"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="684.714">
+  <properties />
+  
+  
+            <testcase name="APIU_24" time="457.733" classname="com.dts.adminportal.security.test.APISecurityUsers" />
+                <testcase name="APIU_26" time="82.462" classname="com.dts.adminportal.security.test.APISecurityUsers" />
+                <testcase name="APIU_25" time="71.817" classname="com.dts.adminportal.security.test.APISecurityUsers" />
+                <testcase name="APIU_27" time="72.702" classname="com.dts.adminportal.security.test.APISecurityUsers" />
+      
+</testsuite>

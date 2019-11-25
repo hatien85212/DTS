@@ -1,0 +1,56 @@
+﻿##[Ultra]Verify_Demo_screen_is_enabled_by_default##
+
+
+try
+	#Connect device
+	put global functions.connect_mobile()
+	
+	#push full kvp customer.cfg to device
+	set full_cfgfile to global functions.var().full_kvp_cfgfilepath
+	disconnect
+	wait 5
+	put global functions.root()
+	put global functions.push_customercfg(full_cfgfile)
+	
+	#uninstall and install app again
+	put global functions.uninstall_app()
+	Wait 10
+	put global functions.install_app(global other.Other().apk_location)
+	Wait 10
+	
+	#reboot device
+	disconnect
+	wait 5
+	put global functions.Reboot()
+	
+	#Open app and go to main screen
+	put global functions.open_app()
+	put global eulaaccept.open_mainscreen()
+	
+	#Check for demo screen at main screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	if global main.check_demo_screen_appear() is false then
+		put global functions.error("Demo screen not appear")
+		cleanup
+	else
+		LogSuccess "Verify demo screen appear"
+	end if
+	
+	#Cleanup
+	cleanup
+	
+catch exception
+	put exception 's reason
+	put global functions.error("No_demo_screen")
+	cleanup
+end Try
+
+to cleanup
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

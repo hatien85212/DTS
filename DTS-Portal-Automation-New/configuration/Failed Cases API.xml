@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test verbose="2" name="Default test">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>	
+		<classes>
+			<class name="com.dts.adminportal.security.test.APISecurityCompanies">
+			<methods>
+      				<include name="TCAPIC_03()"></include>
+      				<include name="TCAPIC_13()"></include>
+      				<include name="TCAPIC_14()"></include>
+      			</methods>
+			</class>
+			<class name="com.dts.adminportal.security.test.APISecurityUsers">
+			<methods>
+      				<include name="APIU_01()"></include>
+      				<include name="APIU_02()"></include>
+      				<include name="APIU_14()"></include>
+      				<include name="APIU_16()"></include>
+      				<include name="APIU_17()"></include>
+      				<include name="APIU_22()"></include>
+      			</methods>
+			</class>
+			<class name="com.dts.adminportal.security.test.APISecurityProducts">
+			<methods>
+      				<include name="APIPV_59()"></include>
+      				<include name="APIPV_60()"></include>
+      				<include name="APIPV_62()"></include>
+      				<include name="APIPV_64()"></include>  
+      				<include name="APIPV_65()"></include>
+      				<include name="APIPV_66()"></include>
+      				<include name="APIPV_67()"></include>     	
+      				<include name="APIPV_68()"></include>
+      				<include name="APIPV_69()"></include>
+      				<include name="APIPV_70()"></include>
+      				<include name="APIPV_71()"></include>
+      				<include name="APIPV_72()"></include>
+      				<include name="APIPV_73()"></include>
+      				<include name="APIPV_74()"></include>
+      				<include name="APIPV_75()"></include>
+      				<include name="APIPV_76()"></include>
+      				<include name="APIPV_77()"></include>
+      				<include name="APIPV_78()"></include>
+      				<include name="APIPV_79()"></include>
+      				<include name="APIPV_80()"></include>
+      				<include name="APIPV_81()"></include>
+      				<include name="APIPV_82()"></include>
+      				<include name="APIPV_83()"></include>
+      				<include name="APIPV_84()"></include>
+      			</methods>
+      			</class>
+		</classes>
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->

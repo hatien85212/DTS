@@ -1,0 +1,76 @@
+﻿//[Ultra] Clicking on the next or previous button at step 4
+
+
+//connect mobile and open Listening profile screen
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+//go to step 4 screen
+Repeat 3 times
+	wait 2
+	put global lp.click_next()
+End repeat
+wait 2
+//click previous button
+put global lp.click_previous()
+///check if step4 screen same Ui with screen at step4
+if global lp.check_layout(3) is true then
+	LogSuccess "Next tuning screen is same UI"
+	//Go to step 4 screen
+	put global lp.click_next()
+	wait 3
+	//click next button
+	put global lp.click_next()
+	//check if dialog box should appear with an Ok button
+	if global functions.check_imagefound_image(global lp.ListeningProfileScreen().success_dialog) is true then
+		LogSuccess "Confirmation dialog is displayed with an OK button"
+		cleanup1
+	else
+		put global functions.error("Confirmation dialog is NOT displayed")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Next tuning screen is NOT same UI")
+	cleanup
+	return false
+end if	
+
+
+
+to cleanup
+	// have to use press back button and click EXIT and close app. If use close_app function--> HPX change state to OFF
+	PressBackButton
+	wait 2
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+to cleanup1
+	//click OK button and go back to Main screen
+	put global lp.click_ok_success_dialog_appear()
+	wait 5
+	//go to demo screen
+	put global main.open_demo_screen()
+	//reset listening profile
+	put global demo.reset_listening_profile()
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup1
+
+
+
+
+
+
+
+
+
+

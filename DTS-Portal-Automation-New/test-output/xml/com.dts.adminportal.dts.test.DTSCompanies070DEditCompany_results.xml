@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Default test"
+           tests="22"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1109.061">
+  <properties />
+  
+  
+            <testcase name="TC070DBEC_01" time="43.161" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_09" time="22.259" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_06" time="23.217" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_13" time="152.667" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_08" time="22.381" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_16" time="37.593" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_11" time="28.323" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_02" time="64.153" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_07" time="105.993" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_05" time="43.229" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_17" time="76.952" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_18" time="142.502" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_19" time="30.314" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_04" time="50.954" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DAEC_01" time="43.940" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_14" time="41.120" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_15" time="41.604" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_12" time="22.441" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_02" time="42.212" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_10" time="24.094" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_05" time="27.773" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+                <testcase name="TC070DBEC_07" time="22.179" classname="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany" />
+      
+</testsuite>

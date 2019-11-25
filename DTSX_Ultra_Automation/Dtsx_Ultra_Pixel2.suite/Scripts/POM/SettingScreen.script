@@ -1,0 +1,324 @@
+﻿#Everything relate to SettingScreen
+
+function SettingScreen()
+	return(\
+	settingscreen_portrait_img1:"Setting/Settings_portrait_default_layout1",\ 
+			settingscreen_portrait_img2:"Setting/Settings_portrait_default_layout2",\
+			settingscreen_landscape_img1: "Setting/Settings_landscape_default_layout1",\
+			settingscreen_landscape_img2: "Setting/Settings_landscape_default_layout2",\
+			resetoem_text:"Reset to OEM default",\
+			resetoem_ok_text:"OK",\
+			resetlp_text:"Reset Listening profile",\
+			resetlp_ok_text:"OK",\
+			resetdb_text:"Restore original database",\
+			resetdb_ok_text:"OK",\
+			LPreset_toast_img: "Setting/Listeningprofilereset_toast_img",\
+			resetLP_dialog_img: "Setting/ResetLP_dialog_img",\
+			resetoem_dialog_img: "Setting/ResetOEM_dialog_img",\
+			oemreset_toast_img: "Setting/OEMreset_toast_img",\
+			resetdb_dialog_img: "Setting/Resetdb_dialog_img",\
+			dbreset_toast_img: "Setting/dbreset_toast_img",\
+			notification_text: "Notifications",\
+			USB_auto_tuning_img:"Setting/USB_auto_tuning",\
+			Reset_USB_tunings_img:"Setting/Reset_USB_tunings",\
+			BT_auto_tuning_img:"Setting/Bluetooth_auto_tuning",\
+			Reset_BT_tunings_img:"Setting/Reset_Bluetooth_tunings",\
+			notification_on_img:"Setting/Notifications_on",\
+			notification_off_img:"Setting/Notifications_off",\
+			BT_auto_tuning_off_img:"Setting/Bluetooth_auto_tuning_off",\
+			BT_auto_tuning_on_img:"Setting/Bluetooth_auto_tuning_on",\
+			USB_auto_tuning_off_img:"Setting/USB_auto_tuning_off",\
+			USB_auto_tuning_on_img:"Setting/USB_auto_tuning_on",\
+			)
+		end SettingScreen
+
+function check_default_layout(scr_rotate)
+	If scr_rotate is "portrait" then
+		if global functions.check_imagefound_image(SettingScreen().settingscreen_portrait_img1) then
+			Repeat 3 times
+				put global functions.swipeup()
+			End repeat
+			if global functions.check_imagefound_image(SettingScreen().settingscreen_portrait_img2) then
+				Repeat 3 times
+					put global functions.swipedown()	
+				End repeat
+				return true
+			else
+				return false
+			end if
+		else
+			return false
+		end if
+	else if scr_rotate is "landscape" then
+		if global functions.check_imagefound_image(SettingScreen().settingscreen_landscape_img1) then
+			Repeat 15 times
+				put global functions.swipeup()
+			End repeat
+			if global functions.check_imagefound_image(SettingScreen().settingscreen_landscape_img2) then
+			(*Repeat 3 times
+					put global functions.swipedown()				
+				End repeat*)
+				return true
+			else
+				return false
+			End if
+		else
+			return false
+		end if
+	end if
+end check_default_layout
+
+#use this function to reset OEM without checking reset OEM toast
+function reset_OEM_default()
+	//get property
+	put SettingScreen().resetoem_text into resetoem_text
+	put SettingScreen().resetoem_dialog_img into resetoem_dialog_img
+	put SettingScreen().resetoem_ok_text into resetoem_ok_text
+	
+	//execute
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	if ImageFound(2, text: resetoem_text) then
+		Click FoundImageLocation()
+		wait 2
+		
+		//check if reset oem dialog appear
+		if global functions.check_imagefound_image(resetoem_dialog_img) then
+			Click (text:resetoem_ok_text)
+			return true
+		else
+			return false
+		end if
+	else
+		return false
+	end if
+end reset_OEM_default
+
+#use this function for checking resetOEM toast, including reset_OEM_default() functions
+#why do we have this function. The toast appear in around less than 2 sec and can easily fail to detect the image. So it is neccessary to have this function to check only for Reset OEM function
+function check_resetOEM_toast()
+	//get property
+	put SettingScreen().oemreset_toast_img into oemreset_toast_img
+	
+	//execute
+	if reset_OEM_default() then
+	(*if global functions.check_imagefound_image(oemreset_toast_img) is false then
+			return false
+		end if
+		return true*)
+		Try
+			WaitFor 5, oemreset_toast_img
+			return true
+		Catch exception
+			return false
+		End try
+	else
+		return false
+	end if
+	
+end check_resetOEM_toast
+
+#use this function to reset lp without checking lp toast
+function reset_listening_profile()
+	if ImageFound(2, text: SettingScreen().resetLP_text) then
+		Click FoundImageLocation()
+		wait 2
+		
+		//check if reset listening profile dialog appear
+		if global functions.check_imagefound_image(SettingScreen().resetLP_dialog_img) then
+			Click (text:SettingScreen().resetlp_ok_text)
+			return true
+		else
+			return false
+		end if	
+	else 
+		return false
+	end if
+end reset_listening_profile
+
+#use this function for checking reset lp toast, including reset_listening_profile() functions
+#why do we have this function. The toast appear in around less than 2 sec and can easily fail to detect the image. So it is neccessary to have this function to check only for Reset lp function
+function check_reset_listening_profile_toast()
+	//get property
+	put SettingScreen().LPreset_toast_img into LPreset_toast_img
+	
+	//execute
+	if reset_listening_profile() then
+		Try
+			WaitFor 5, LPreset_toast_img
+			return true
+		Catch exception
+			return false
+		End try
+	else
+		return false
+	end if
+end check_reset_listening_profile_toast
+
+
+function reset_db()
+	//get property
+	put SettingScreen().resetdb_text into resetdb_text
+	put SettingScreen().resetdb_ok_text into resetdb_ok_text
+	put SettingScreen().resetdb_dialog_img into resetdb_dialog_img
+	
+	//execute
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	if ImageFound(2, text: resetdb_text) then
+		Click FoundImageLocation()
+		wait 2
+		
+		//check if reset db dialog appear
+		if global functions.check_imagefound_image(resetdb_dialog_img) then
+			Click (text:resetdb_ok_text)
+			return true
+		else
+			return false
+		end if
+	else
+		return false
+	end if
+end reset_db
+
+
+#use this function for checking reset database toast
+function check_resetdb_toast()
+	//get property
+	put SettingScreen().dbreset_toast_img into dbreset_toast_img
+	
+	//execute
+	if reset_db() then
+		Try
+			WaitFor 5, dbreset_toast_img
+			return true
+		Catch exception
+			return false
+		End try
+	else
+		return false
+	end if
+end check_resetdb_toast
+
+//return true if notification appear and false if not
+function check_notification_appear()
+	//get property
+	put SettingScreen().notification_text into notification_text
+	
+	//execute
+	if ImageFound(5, (text:notification_text)) is false then
+		return false
+	else
+		return true
+	end if
+end check_notification_appear
+
+
+
+#use this function for checking USB accessory
+function check_USB_accessory_recommandation_exist()
+	if global functions.check_imagefound_image(SettingScreen().USB_auto_tuning_img) is true and if global functions.check_imagefound_image(SettingScreen().Reset_USB_tunings_img) is true then
+		return true
+	else
+		return false
+	end if
+End check_USB_accessory_recommandation_exist
+
+#use this function for checking BT accessory
+function check_Bluetooth_accessory_recommandation_exist() 
+	if global functions.check_imagefound_image(SettingScreen().BT_auto_tuning_img) is true and if global functions.check_imagefound_image(SettingScreen().Reset_BT_tunings_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_Bluetooth_accessory_recommandation_exist
+
+
+function change_state_Notification( ON, OFF)
+	If On is "ON" then
+		Click settingscreen().notification_off_img
+	else
+		Click settingscreen().notification_on_img
+	End If
+end change_state_Notification
+
+
+function change_state_BT_auto_tuning( ON, OFF)
+	If On is "ON" then
+		Click settingscreen().BT_auto_tuning_off_img
+	else
+		Click settingscreen().BT_auto_tuning_on_img
+	End If
+end change_state_BT_auto_tuning
+
+function change_state_USB_auto_tuning( ON, OFF)
+	If On is "ON" then
+		Click settingscreen().USB_auto_tuning_off_img
+	else
+		Click settingscreen().USB_auto_tuning_on_img
+	End If
+end change_state_USB_auto_tuning
+
+function Check_state_BT_auto_tuning ON, OFF
+	If ON is "ON" then
+		if global functions.check_imagefound_image(SettingScreen().BT_auto_tuning_on_img) is true then 
+			return true
+		else
+			return false
+		end if
+	else
+		if global functions.check_imagefound_image(SettingScreen().BT_auto_tuning_off_img) is true then 
+			return true
+		else
+			return false
+		end if
+	end if
+end Check_state_BT_auto_tuning
+
+//Reset USB/Bluetooth tunings
+function Reset_tunings_of (USB, Bluetooth)
+	if USB is "USB" then
+		put global functions.open_screen("image",SettingScreen().Reset_USB_tunings_img)
+	else
+		put global functions.open_screen("image",SettingScreen().Reset_BT_tunings_img)
+	end if
+end Reset_tunings_of
+
+
+function check_toast_of_Tuning_auto_set_to (Name)
+	put ReadText((228,1648), (853,1692)) into A
+	put A
+	if A is "Tuning automatically set to "&Name then
+		return true
+	else
+		return false
+	end if
+end check_toast_of_Tuning_auto_set_to
+
+
+function check_toast_USB_accessory_set_to (Name)
+	put ReadText((228,1648), (853,1692)) into A
+	put A
+	if A is "USB accessory set to "&Name then
+		return true
+	else
+		return false
+	end if
+end check_toast_USB_accessory_set_to
+
+
+function check_toast_BT_accessory_set_to (Name)
+	put ReadText((228,1648), (853,1692)) into A
+	put A
+	if A is "Bluetooth accessory set to "&Name then
+		return true
+	else
+		return false
+	end if
+end check_toast_USB_accessory_set_to
+
+

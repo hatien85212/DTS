@@ -1,0 +1,106 @@
+﻿##Everything relate to About Screen
+
+function AboutScreen() 
+	return (\
+	toast_2stepsaway: "AboutScreen/2stepaway_disabled_toast",\
+			toast_1stepaway: "AboutScreen/1stepaway_disabled_toast",\ 
+			toast_disabled_demo: "AboutScreen/demo_disabled_toast",\ 
+			aboutscreen_portrait_img:"AboutScreen/About_portrait_layout",\ 
+			aboutscreen_landscape_img1:"AboutScreen/About_landscape_layout1",\ 
+			aboutscreen_landscape_img2:"AboutScreen/About_landscape_layout2",\ 
+			DTSweb_badge_text:"www.dts.com",\
+			fb_badge_text:"Like us on Facebook",\
+			twitter_badge_text:"Follow us on Twitter",\
+			DTSweb_link:"https://dts.com/",\
+			fb_link:"facebook.com/DTS.Inc",\ 
+			twitter_link:"https://mobile.twitter.com/dts_inc",\
+			DTSX_logo: "AboutScreen/DTSXLogo",\
+			) 
+		end AboutScreen
+
+function check_default_layout(scr_rotate)
+	If scr_rotate is "portrait" and if global functions.check_imagefound_image( AboutScreen().aboutscreen_portrait_img) then
+		return true
+	else if scr_rotate is "landscape" then
+		if global functions.check_imagefound_image(AboutScreen().aboutscreen_landscape_img1) then
+			Repeat 10 times
+				put global functions.swipeup()
+			End repeat
+			if global functions.check_imagefound_image(AboutScreen().aboutscreen_landscape_img2) then
+				return true
+			else
+				return false
+			end if
+		end if
+	else
+		return false
+	End if
+end check_default_layout
+
+function click_dts_logo()
+	If global functions.check_imagefound_image(AboutScreen().DTSX_logo) then
+		Click AboutScreen().DTSX_logo
+	else
+		return false
+	End if
+end click_dts_logo
+
+function check_2stepsaway_disabled_demo()
+	If global functions.check_imagefound_image(AboutScreen().toast_2stepsaway) is false then
+		return false
+	End if
+end check_2stepsaway_disabled_demo
+
+function check_1stepaway_disabled_demo()
+	If global functions.check_imagefound_image(AboutScreen().toast_1stepaway) is false then
+		return false
+	End if
+end check_1stepaway_disabled_demo
+
+function check_disabled_demo()
+	If global functions.check_imagefound_image(AboutScreen().toast_disabled_demo) is false then
+		return false
+	End if
+end check_disabled_demo
+
+function open_dtsweb()
+	If global functions.open_screen("text", AboutScreen().DTSweb_badge_text) is false then
+		put global functions.error("No_WebsiteBadge_appear")
+	End if
+end open_dtsweb
+
+function open_fb()
+	If global functions.open_screen("text", AboutScreen().fb_badge_text) is false then
+		put global functions.error("No_FBBadge_appear")
+	End if
+end open_fb
+
+function open_twitter()
+	If global functions.open_screen("text", AboutScreen().twitter_badge_text) is false then
+		put global functions.error("No_TwitterBadge_appear")
+	End if
+end open_twitter
+
+function check_dtsweb_link()
+	if ImageFound(10, (text: AboutScreen().DTSweb_link)) is false then
+		return false
+	end if
+end check_dtsweb_link
+
+function check_fb_link()
+	if ImageFound(10, (text: AboutScreen().fb_link,Discrepancy:2%)) is false then
+		return false
+	end if
+end check_fb_link
+
+function check_twitter_link()
+	if ImageFound(10, (text: AboutScreen().twitter_link)) is false then
+		return false
+	end if
+end check_twitter_link
+
+
+
+
+
+

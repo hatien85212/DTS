@@ -1,0 +1,65 @@
+﻿//[UlPre] Verify Bass Boost, Dialog enhancement, Treble Boost control are disabled by default
+
+//root and connect mobile
+put global functions.root()
+//remove customer.cfg
+put global functions.remove_customercfg()
+//reboot
+put global functions.reboot()
+//open app
+put global functions.open_app()
+//Go to Personal Audio Preference
+put global main.open_PersonalPref_screen()
+//swipe up 2 times
+Repeat 2 times
+	put global functions.swipeup()
+End repeat
+wait 5
+Try
+	//check if Boost sliders,Dialog enhancement, Treble sliders are hidden
+	if global personalpref.check_default_layout(GetDeviceOrientation()) is false then
+		LogSuccess "Bass Boost, Dialog enhancement and Treble sliders are hidden"
+	else
+		put global functions.error("Bass Boost, Dialog enhancement and Treble sliders still appear")
+		//celan up
+		cleanup
+	end if
+	put  global personalpref.turn_on_geq()
+	put global personalpref.open_GEQ()
+	// need to capture image of GEQ screen when no cusomer.cfg file in two direction Portrait and Lanscape
+	if global geq.check_geq_12db(GetDeviceOrientation()) is true then
+		LogSuccess "GEQ bands are in -12dB to +12dB range"
+		//clean up
+		cleanup
+	else
+		put global functions.error("GEQ bands are not in -12dB to +12dB range")
+		cleanup
+	end if
+catch exception
+	put exception 's reason
+	cleanup
+	return false
+end try
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	Repeat 2 times
+		put global functions.swipeup()
+	End repeat
+	put  global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.push_customercfg(global other.other().full_kvp_cfgfilepath)
+	put global functions.reboot()
+	put global functions.disconnect_mobile()
+end cleanup	
+
+
+
+
+
+
+
+

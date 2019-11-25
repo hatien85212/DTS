@@ -1,0 +1,62 @@
+﻿//[Ul/Pre] Verify HPX is ON on main screen when turning ON The "Broadcast API - DTS Headphone:X" on Integration screen.
+
+//Root and connect device
+put global functions.root()
+//Uninstall release apk version.
+put global functions.uninstall_app()
+
+//Install debug apk version to check log.
+put global functions. install_app(global other.Other().debug_apk_location)
+
+//Open app and go to main screen after acept eula 
+put global functions.open_app()
+put global eulaaccept.open_mainscreen()
+
+//Turn HPX OFF
+put global main.turn_off_hpx()
+
+//clear logcat
+put global functions.clear_logcat()
+
+//start logcat
+put global main.open_integration_screen()
+wait 5
+// Turn on API 
+put global integration.turn_on_API()
+wait 5
+PressBackButton
+
+//get logcat
+wait 5
+put global functions.get_logcat(global other.other().logcat_path)
+
+//Check if DTS state is ON
+if global main.check_DTSX_toggle_default_on() is true then
+	LogSuccess "DTS is ON"
+	if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: dts.dtssdk.intent.status.DTS_STATE_CHANGED | dtsState: true") and if  global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: dts.dtssdk.intent.status.SET_DTS_RESULT") and if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: resultCode: OK") and if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: Setting DTS state using broadcast API was successful") is true then
+		LogSuccess "The Broadcast API is automatically changed from Off to On status. Logcat should indicate Broadcast API On"
+		//clean up
+		cleanup
+	else
+		put global functions.error("the Broadcast API is NOT changed from OFF to ON on the integration test screen when HPX is ON")
+		//clean up
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("the Broadcast API is NOT changed from OFF to ON on the integration test screen when HPX is ON")
+	cleanup
+	return false
+end if	
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.uninstall_app()
+	put global functions. install_app(global other.Other().apk_location)
+	put global functions.open_app()
+	put global eulaaccept.open_mainscreen()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+

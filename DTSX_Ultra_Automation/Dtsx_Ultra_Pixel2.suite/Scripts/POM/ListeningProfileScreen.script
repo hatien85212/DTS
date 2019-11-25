@@ -1,0 +1,195 @@
+﻿##Everything relate to ListeningProfileScreen
+
+function ListeningProfileScreen()
+	put(\
+	success_dialog:"ListeningProfile/success_dialog",\
+			success_toast:"ListeningProfile/success_toast",\
+			next_button: "ListeningProfile/Next_btn",\
+			previous_button: "ListeningProfile/Previous_btn",\
+			LPSetup_BT_dialog_img: "ListeningProfile/LPSetup_BT_dialog",\
+			screen1_portrait_layout:"ListeningProfile/screen1_portrait_layout",\
+			screen2_portrait_layout:"ListeningProfile/screen2_portrait_layout",\
+			screen3_portrait_layout:"ListeningProfile/screen3_portrait_layout",\
+			screen4_portrait_layout:"ListeningProfile/screen4_portrait_layout",\
+			Exit_comfirmation_dialog:"ListeningProfile/Exit_comfirmation_dialog",\
+			CANCLE_button:"ListeningProfile/CANCEL_button",\
+			EXIT_button:"ListeningProfile/EXIT_button",\
+			CONTINUE_button:"ListeningProfile/CONTINUE_button",\
+			reset_lp_dialog:"ListeningProfile/reset_lp_dialog",\
+			Current_value_1db:"ListeningProfile/Current_value_-1dB",\
+			max_value_img:"ListeningProfile/max_value",\
+			min_value_img:"ListeningProfile/min_value",\
+			default_value_img:"ListeningProfile/default_value",\
+			connectHp_dialog_img:"ListeningProfile/ConnectHP_dialog",\
+			portrait_layout_multiwindows_img:"ListeningProfile/portrait_layout_multiwindows",\
+			landscape_layout_multiwindows_img:"ListeningProfile/landscape_layout_multiwindows",\
+			) into ListeningProfileScreen
+			return ListeningProfileScreen
+end ListeningProfileScreen
+
+//when go to lp screen with BT route, this dialog will appear
+//if appear, click OK. If not, do nothing
+function click_ok_lpsetup_bt_dialog_appear()
+	if global functions.check_imagefound_image(ListeningProfileScreen().LPSetup_BT_dialog_img) then
+		Try
+			Click (Text:"OK")
+		End try
+	end if
+end click_ok_lpsetup_bt_dialog_appear
+
+function click_ok_success_dialog_appear()
+	if global functions.check_imagefound_image(ListeningProfileScreen().success_dialog) then
+		Try
+			Click (Text:"OK")
+		End try
+	end if
+end click_ok_success_dialog_appear
+
+//change value of listening profile from position (529,673) to (721,753)
+function change_value()
+	Try
+		DragandDrop (529,673),(721,753)
+	End try
+end change_value
+
+//click next button
+function click_next()
+	if global functions.check_imagefound_image(ListeningProfileScreen().next_button) then
+		click FoundImageLocation()
+	end if
+end click_next
+
+//click previous button
+function click_previous()
+	if global functions.check_imagefound_image(ListeningProfileScreen().previous_button) then
+		click FoundImageLocation()
+	end if
+end click_previous
+
+
+//return true if appear, false if not
+function check_layout(screennum)
+	put ListeningProfileScreen().("screen"&screennum&"_portrait_layout") into screen_layout
+	
+	if global functions.check_imagefound_image(screen_layout) is false then
+		return false
+	else
+		return true
+	end if
+end check_layout
+
+//check both landscape and portrait of listening profile in multi-windows mode
+//return true if ok, false if not
+function check_layout_multiwindows()
+	put ListeningProfileScreen().portrait_layout_multiwindows_img into portrait_layout_multiwindows
+	put ListeningProfileScreen().landscape_layout_multiwindows_img into landscape_layout_multiwindows
+	
+	SetDeviceOrientation "Portrait"
+	if global functions.check_imagefound_image(portrait_layout_multiwindows) is false then
+		return false
+	else 
+		SetDeviceOrientation "LandscapeRight"
+		if global functions.check_imagefound_image(landscape_layout_multiwindows) is false then
+			return false
+		else
+			return true
+		end if
+	end if
+end check_layout_multiwindows
+
+function click_confirmation_dialog_exit(command)
+	if global functions.check_imagefound_image(ListeningProfileScreen().Exit_comfirmation_dialog) then
+		if command is "CANCEL" then 
+			Click (ListeningProfileScreen().CANCLE_button)
+		else 
+			if command is "EXIT" then
+				Click (ListeningProfileScreen().EXIT_button) 
+			end if
+		end if
+	end if
+end click_confirmation_dialog_exit
+
+//Confirm Reset listening profile dialog
+function confirm_reset_lp(command)
+	if global functions.check_imagefound_image(ListeningProfileScreen().reset_lp_dialog) then
+		if command is "CANCEL" then 
+			Click (ListeningProfileScreen().CANCLE_button)
+		else 
+			if command is "CONTINUE" then
+				Click (ListeningProfileScreen().CONTINUE_button) 
+			end if
+		end if
+	end if
+end confirm_reset_lp
+
+
+function rotate_the_scroll(direction)
+	if direction is "Right" then
+		Try
+			wait 2
+			DragandDrop (529,673),(721,753)
+		End try
+	else
+		if direction is "Left" then
+			Try
+				wait 2
+				DragandDrop (529,673),(290,759)
+			End try
+		end if
+	end if
+end rotate_the_scroll
+
+function check_previous_button()
+	if global functions.check_imagefound_image(ListeningProfileScreen().previous_button) then
+		return true
+	else
+		return false
+	end if
+end check_previous_button
+
+function check_next_button()
+	if global functions.check_imagefound_image(ListeningProfileScreen().next_button) then
+		return true
+	else
+		return false
+	end if
+end check_next_button
+
+// Set max value(Move the rotary knob to the right)
+function Slide_max () 
+	Repeat 2 times
+		wait 2
+		DragandDrop (500,643),(800,810)
+	End repeat
+end Slide_max
+
+//Set min value(Move the rotary knob to the left)
+function Slide_min () 
+	Repeat 4 times
+		wait 2
+		DragandDrop (500,643),(183,1157)
+	End repeat
+end Slide_min
+
+//
+function check_lp_reset_dialog_appear ()
+	if global functions.check_imagefound_image(Listeningprofilescreen().reset_lp_dialog) is true then
+		return true
+	else
+		return false
+	end if
+end check_lp_reset_dialog_appear
+
+
+//
+function check_connectHp_dialog_appear ()
+	if global functions.check_imagefound_image(Listeningprofilescreen().ConnectHP_dialog_img) is true then
+		return true
+	else
+		return true
+	end if
+end check_connectHp_dialog_appear
+
+
+
+

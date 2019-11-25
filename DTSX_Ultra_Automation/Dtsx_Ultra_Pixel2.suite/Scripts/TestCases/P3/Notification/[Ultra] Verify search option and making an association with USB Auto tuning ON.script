@@ -1,0 +1,74 @@
+﻿//[Ultra] Verify "search" option and making an association with USB Auto tuning ON
+
+//Preconditions
+//Root device and connect mobile
+put global functions.root()
+//Open app
+put global functions.open_app()
+//Go to Setting screen
+put global main.setting_screen()
+// Turn on Notification
+put global setting.change_state_Notification("ON")
+//Turn on USB auto tuning
+put global setting.change_state_USB_auto_tuning("ON")
+// Reset USB tunings
+put global setting.Reset_tunings_of("USB")
+wait 3
+put global functions.close_app()
+//Need connecting USB head phone
+
+//Step
+
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Tap "Search" button
+put global noti.Tap_name_button("Search")
+wait 2
+if global usbhp.check_deault_layout(GetDeviceOrientation()) is true then
+	//Select "Over-Ear Headphones"
+	put global usbhp.select_name_Headphones ("Over-Ear Headphones")
+	PressBackButton
+	//open app
+	put global functions.open_app()
+	//Open USB Headphone screen
+	put global main.open_USBHPscreen()
+	wait 2
+	//Select "Car Audio"
+	put global usbhp.select_name_Headphones ("Car Audio")
+	
+	//Need reconnecting USb Headphone
+	
+	//After connecting, wait 3s
+	Wait 3
+	if global setting.check_toast_of_Tuning_auto_set_to("Car Audio") is true then
+		LogSuccess "Search option and making an association with USB Auto tuning ON"
+		cleanup
+	else
+		put global functions.error("Search option works incorrectly")
+		cleanup
+		return false		
+	end if
+else
+	put global functions.error("Search option works incorrectly")
+	cleanup
+	return false		
+end if
+
+
+To cleanup
+	put global usbhp.select_name_Headphones ("Earbuds")
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.change_state_Notification("OFF")
+	put global setting.change_state_USB_auto_tuning("ON")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+End cleanup
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+﻿###Everything relate to EULA screen is here#
+function EULAScreen()
+	return (\
+	EULA_portrait_img1: "EULAScreen/EULA_portrait_layout1",\ 
+			EULA_portrait_img2: "EULAScreen/EULA_portrait_layout2",\
+			EULA_landscape_img1: "EULAScreen/EULA_landscape_layout1",\
+			EULA_landscape_img2: "EULAScreen/EULA_landscape_layout2",\ 
+			)
+		end EULAScreen
+
+function check_default_layout(Scr_rotate)
+	#check if the screen is portrait or landscape, and first image is exist, if not report error
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(EULAScreen().EULA_portrait_img1) then
+		#scroll up 17 times to reach the end of the screen
+		repeat with count = 17 down to 0
+			put global functions.swipeup()
+		end repeat
+		
+		#check image at the end of the screen, if exist return true, else report error
+		if global functions.check_imagefound_image(EULAScreen().EULA_portrait_img2) then
+			#scroll down 17 times to reach the end of the screen
+			repeat with count = 17 down to 0
+				put global functions.swipedown()
+			end repeat
+			return true
+		else
+			return false
+		end if
+	else if Scr_rotate is "landscape" and if global functions.check_imagefound_image( EULAScreen().EULA_landscape_img1)
+		
+		#scroll up 30 times to reach the end of the screen
+		repeat with count = 30 down to 0
+			put global functions.swipeup()
+		end repeat
+		if global functions.check_imagefound_image(EULAScreen().EULA_landscape_img2) then
+			return true
+		else
+			return false
+		end if
+	else
+		return false
+	End if
+end check_default_layout

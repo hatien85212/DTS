@@ -1,0 +1,36 @@
+﻿//[Ul/Pre] Verify layout for Boost sliders
+Try
+	//root
+	put global functions.root()
+	//push customer.cfg with full kvp and Boost sliders is not disabled in customer.cfg
+	put global functions.push_customercfg(global other.other().full_kvp_cfgfilepath)
+	put global functions.reboot()
+	//open app and go to Personal Auido Preference
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	//check Boost sliders
+	SetDeviceOrientation Portrait
+	if global personalpref.check_default_layout(Portrait) is true then
+		SetDeviceOrientation LandscapeRight
+		if global personalpref.check_default_layout(Landscape) is true then
+			LogSuccess "Boost sliders is shown with: Bass Boost, Dialog enhancement,Treble Boost"
+			cleanup
+		else
+			put global functions.error("Boost sliders is not shown")
+			cleanup
+		end if
+	else
+		put global functions.error("Boost sliders is not shown")
+		cleanup
+	end if	
+catch exception
+	put exception 's reason
+	cleanup
+	return false
+End try
+
+to cleanup
+	SetDeviceOrientation Portrait
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

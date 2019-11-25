@@ -1,0 +1,63 @@
+﻿//[Ultra] Verify message when user completed their listening profile
+
+
+//Root device and connect.
+put global functions.root()
+// Connect BT
+put global functions.change_state_deviceBT("ON")
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+wait 2
+//press next button 4 times
+Repeat 4 times
+	put global lp.click_next()
+End repeat
+//check success dailog appear
+if global functions.check_imagefound_image(global lp.ListeningProfileScreen().success_dialog) is true then
+	LogSuccess "Confirmation dialog is displayed"
+	put global lp.click_ok_success_dialog_appear()
+	//check Snackbar: Your DTS Headphone:X Listening Profile has been updated is displayed at the bottom
+	if global functions.check_imagefound_image(global lp.ListeningProfileScreen().success_toast) is true then
+		LogSuccess "Snackbar: Your DTS Headphone:X Listening Profile has been updated is displayed at the bottom"
+		//check update date
+		if global main.check_lp_date_appear() is true then
+			LogSuccess "Date at Listening Profile item at Home screen is updated with format mm dd,yy"
+			cleanup
+		else
+			put global functions.error("Date at Listening Profile item at Home screen is NOT updated with format mm dd,yy")
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("Snackbar: Your DTS Headphone:X Listening Profile has NOT been updated is displayed at the bottom")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("Confirmation dialog is NOT displayed")
+	cleanup
+	return false
+end if
+
+to cleanup
+	//go to demo screen
+	put global main.open_demo_screen()
+	//reset listening profile
+	put global demo.reset_listening_profile()
+	//close app and disconnect
+	put global functions.close_app()
+	// Disconnect BT
+	put global functions.change_state_deviceBT("OFF")
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+
+
+
+

@@ -1,0 +1,39 @@
+﻿##[Ul/Pre] Verify EULA Acceptance screen appear when first time open app##
+
+#Connect mobile
+put global functions.connect_mobile()
+
+#Delete persistent file and reboot device
+put global functions.uninstall_app()
+Wait 10
+put global functions.install_app(global other.Other().apk_location)
+Wait 10
+put global functions.Reboot()
+
+try
+	#Open app
+	put global functions.open_app()
+	
+	#Check default layout of eula acceptance screen in portrail
+	put global eulaaccept.check_default_layout("portrail")
+	
+	#Check default layout of eula acceptance screen in landscape
+	SetDeviceOrientation LandscapeRight
+	put global eulaaccept.check_default_layout("landscape")
+	
+	#clean up for next tc
+	cleanup
+catch exception
+	put exception 's reason
+	cleanup
+	put global functions.error("EULA Acceptance screen incorrect")
+end Try
+
+to cleanup
+	#Reset OEM for next tc
+	put global eulaaccept.open_mainscreen()
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

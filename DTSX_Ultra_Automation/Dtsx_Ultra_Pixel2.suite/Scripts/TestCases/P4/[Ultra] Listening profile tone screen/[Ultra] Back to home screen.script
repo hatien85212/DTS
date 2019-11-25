@@ -1,0 +1,36 @@
+﻿//Back to home screen
+
+//connect device
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+PressBackButton
+put global lp.click_confirmation_dialog_exit(CANCEL)
+if global lp.check_layout(1) is true then
+	PressBackButton
+	put global lp.click_confirmation_dialog_exit(EXIT)
+	wait 5
+	put global main.open_demo_screen()
+	if global demo.check_current_value_after_resetLP() is true then
+		LogSuccess "The value of listening profile are -1db in Demo Screen"
+		cleanup
+	else
+		put global functions.error("The value of listening profile are NOT -1")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("NOT show the screen of this step")
+	cleanup
+	return false
+end if	
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+

@@ -1,0 +1,61 @@
+﻿//[Ultra] Select a headphone in model list
+
+//Preconditions
+// Connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+//Go to Brand list screen
+put global bthp.open_Brand_list_screen()
+
+//Select AE2w model Headphone of Bose Brand and check if the Toast show correctly "Headphone selected : %brand %name"
+if global bthp.select_modelHP_of_brand("Bose","AE2w") is true and if global main.check_toast_HP_selected_of("Bose","AE2w") is true then
+	LogSuccess "The information of selected Headphone is NOT displayed correctly in the toast"
+	
+	//Check if Home screen display
+	if global main.display_main_screen() is true then
+		LogSuccess "Home Screen is displayed"
+		
+		//Go to BT headphone screen
+		put global main.open_BTHPscreen()
+		put global functions.swipeup()
+		//Check if only one branded HP is displayed
+		if global bthp.Display_1_branded_HP() is true then
+			LogSuccess "Only one branded Headphone is displayed"
+			cleanup
+		else
+			put global functions.error("Branded Headphones list is displayed wrong")
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("Home Screen is NOT displayed")
+		cleanup
+		return false
+	end if	
+else
+	put global functions.error("The information of selected Headphone is NOT displayed correctly in the toast")
+	cleanup
+	return false
+end if
+
+To cleanup
+	put global functions.close_app()
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	PressBackButton
+	put global main.open_personalpref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+End cleanup
+
+
+
+

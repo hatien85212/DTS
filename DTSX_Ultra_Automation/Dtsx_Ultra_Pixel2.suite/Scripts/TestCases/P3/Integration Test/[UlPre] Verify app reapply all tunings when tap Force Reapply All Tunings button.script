@@ -1,0 +1,60 @@
+﻿//[Ul/Pre] Verify app reapply all tunings when tap "Force Reapply All Tunings" button
+
+//Root and connect device
+put global functions.root()
+//Uninstall release apk version.
+put global functions.uninstall_app()
+//Install debug apk version to check logcat fully.
+put global functions. install_app(global other.Other().debug_apk_location)
+//clear logcat
+put global functions.clear_logcat()
+//open app and go to main screen after acept eula 
+put global functions.open_app()
+put global eulaaccept.open_mainscreen()
+// Go ti integration test screen
+put global main.open_integration_screen()
+Repeat 4 times
+	put global functions.swipeup()
+End repeat
+Tap global integration.integration().Force_reapply_img
+//check if All tunings reapplied" toast appear on UI
+if global integration.check_toast_alltunings_appear() is true then
+	LogSuccess "All tunings reapplied toast appear on UI"
+	//get logcat
+	put global functions.get_logcat(global other.other().logcat_path)
+	//check logcat
+	if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: Force reapplying all tunings") and if global functions.read_logcat(global other.other().logcat_path,"IntegrationTestFragment: Force reapply API finished successfully") is true then
+		LogSuccess "Logcat indicated all tuning reapplied"
+		cleanup
+	else
+		put global functions.error("Logcat did NOT indicate all tuning reapplied")
+		cleanup
+		return false
+	end if
+else	
+	put global functions.error("All tunings reapplied toast NOT appear on UI")
+	cleanup
+	return false
+	
+end if
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.uninstall_app()
+	put global functions. install_app(global other.Other().apk_location)
+	put global functions.open_app()
+	put global eulaaccept.open_mainscreen()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+
+
+
+
+
+
+
+
+

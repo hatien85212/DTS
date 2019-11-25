@@ -1,0 +1,112 @@
+﻿// Verify range value of Listening profile
+
+//Root device, connect mobile and open app and go to Listening profile screen
+put global functions.root()
+// Connect BT
+put global functions.change_state_deviceBT("ON")
+put global functions.open_app()
+
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+
+// Set max value(Move the rotary knob to the right) for 4 step
+Repeat 4 times
+	put global lp.Slide_max()
+	put global lp.click_next()
+End repeat
+// click OK button to apply new value
+put global lp.click_ok_success_dialog_appear()
+wait 5
+// Go to API test in Integration Test screen
+API_test
+//Check max value of getListeningTest
+if global functions.check_imagefound_image(global lp.ListeningProfilescreen().max_value_img) is true then
+	LogSuccess "The value of getListeningTest is set max"
+	//Go to step 1 in Listening profile screen
+	step1_screen
+	
+	// Set min value(Move the rotary knob to the left) for 4 step
+	Repeat 4 times
+		put global lp.Slide_min()
+		put global lp.click_next()
+	End repeat
+	// click OK button to apply new value
+	put global lp.click_ok_success_dialog_appear()
+	wait 5
+	// Go to API test in Integration Test screen
+	API_test
+	//Check min value of getListeningTest
+	if global functions.check_imagefound_image(global lp.ListeningProfilescreen().min_value_img) is true then
+		LogSuccess "The value of getListeningTest is set min"
+		//Go to step 1 in Listening profile screen
+		step1_screen
+		
+		//Leave 4 steps as default value
+		Repeat 4 times
+			put global lp.click_next()
+		End repeat
+		// click OK button to apply new value
+		put global lp.click_ok_success_dialog_appear()
+		wait 5
+		// Go to API test in Integration Test screen
+		API_test
+		//Check default value of getListeningTest
+		if global functions.check_imagefound_image(global lp.ListeningProfilescreen().default_value_img) is true then
+			LogSuccess "The value of getListeningTest is default value"
+			cleanup
+		else
+			put global functions.error("The value of getListeningTest is NOT set max")
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("The value of getListeningTest is NOT set max")
+		cleanup
+		return false
+	end if
+	else
+	put global functions.error("The value of getListeningTest is NOT set max")
+	cleanup
+	return false
+end if
+
+
+//Go to step 1 in Listening profile screen after exit Integration test screen
+to step1_screen
+	PressBackButton
+	wait 3
+	put global main.open_LP_screen()
+	//click CONTINUE on Reset Listenning Profile Dialog
+	put global lp.confirm_reset_lp("CONTINUE")
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+end step1_screen
+
+// Go to API test in Integration Test screen
+to API_test
+	wait 3
+	//go to Integration Test screen
+	put global main.open_integration_screen()
+	//Check max value of getListeningTest
+	Repeat 11 times
+		put global functions.swipeup()
+	End repeat
+end API_test
+
+
+to cleanup
+	PressBackButton
+	wait 5
+	//go to demo screen
+	put global main.open_demo_screen()
+	//reset listening profile
+	put global demo.reset_listening_profile()
+	//close app and disconnect
+	put global functions.change_state_deviceBT("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

@@ -1,0 +1,45 @@
+﻿// [Ultra] Verify audio dial
+
+//connect mobile and open Listening profile screen
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+wait 3
+if global lp.check_layout(1) is true then
+	put global lp.rotate_the_scroll("Right")
+	wait 5
+	//
+	default_scroll_position_step1
+	wait 3
+	put global lp.rotate_the_scroll("Left")
+	wait 5
+	LogSuccess "The volume increase or decrease depends on adjusting from user"
+	cleanup
+else
+	put global functions.error("The volume increase or decrease depends on adjusting from user")
+	cleanup
+	return false
+end if
+
+
+to default_scroll_position_step1
+	PressBackButton
+	wait 3
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 5
+	put global main.open_LP_screen()
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+end default_scroll_position_step1
+
+to cleanup
+	// have to use press back button and click EXIT and close app. If use close_app function--> HPX change state to OFF
+	PressBackButton
+	wait 3
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

@@ -1,0 +1,39 @@
+﻿//[Ul/Pre] [Option 2] Verify notifications remain after swipe kill DTS app
+
+
+//Precondition
+//Connect device and open app
+put global functions.root()
+wait 3
+put global functions.open_app()
+//open Setting Screen
+put global main.open_setting_screen()
+//Turn on Notification
+put global setting.change_state_Notification("ON")
+
+//Step
+//Close app
+put global functions.close_app()
+wait 2
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+if global noti.check_int_speaker_noti_expand() and if global noti.Check_dummy_appear() is true then
+	LogSuccess "Main and dummy notification remains"
+	cleanup
+else
+	put global functions.error("Main and dummy notification does NOT remain")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global noti.the_status_bar("Collapse")
+	put global functions.open_app()
+	//open Setting Screen
+	put global main.open_setting_screen()
+	//Turn on Notification
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

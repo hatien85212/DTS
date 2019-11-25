@@ -1,0 +1,205 @@
+﻿#Everything relate to integration screen is here#
+
+function integration()
+	return (\
+	integration_default_portrait_layout1: "Integration/default_portrait_layout1",\
+			integration_default_portrait_layout2: "Integration/default_portrait_layout2",\
+			integration_default_portrait_layout3: "Integration/default_portrait_layout3",\
+			integration_default_portrait_layout4: "Integration/default_portrait_layout4",\
+			integration_default_portrait_layout5: "Integration/default_portrait_layout5",\
+			integration_default_portrait_layout6: "Integration/default_portrait_layout6",\
+			integration_default_landscape_layout: "",\
+			getlisteningtestAPI_minus1_img: "Integration/getListeningTestAPI_minus1_img",\
+			check_M6M8_OK:"Integration/M6M8License_OK",\
+			export_button:"Integration/EXPORT",\
+			check_license_OK:"Integration/DTSXUltraLicenseExists",\
+			API_toggle_off_img:"Integration/API_OFF",\
+			API_toggle_on_img:"Integration/API_ON",\
+			Force_reapply_img:"Integration/ForceReapplyAllTunings",\
+			Force_reapply_toast_img:"Integration/Force_reapply_toast",\
+			Export_finish_toast_img:"Integration/Export_finish_toast",\
+			) 
+		end integration
+
+#check default layout
+#src_rotate include "landscape" or "portrait"
+function check_default_layout(src_rotate)
+	Try
+		if src_rotate is "portrait" then
+			#check portrait including 6 images
+			Repeat with count from 1 to 6
+				if global functions.check_imagefound_image(integration().("integration_default_portrait_layout"&count)) is false then
+					return false
+				end if
+				#scroll down the screen 3 times for next image
+				Repeat 3 times
+					put global functions.swipeup()
+				End repeat
+			End repeat
+			return true
+			(*#scroll up the screen 18 times, back to top of screen
+			Repeat 18 times
+				put global functions.swipedown()
+				wait 2
+			End repeat*)
+		else if src_rotate is "landscape" then
+			#Not implement yet
+		else
+			return false
+		end if
+	Catch exception
+		put exception 's reason
+		return false
+	End try
+end check_default_layout
+
+function check_getlisteningtestAPI_minus1()
+	if global functions.check_imagefound_image(integration().getlisteningtestAPI_minus1_img) then
+		return true
+	else
+		return false
+	end if
+end check_getlisteningtestAPI_minus1
+
+//Check M6 M8 License exists OK
+function Check_M6M8_Ok ()
+	Try
+		if global functions.check_imagefound_image(integration().check_M6M8_OK) is true then
+			return true
+		end if
+	catch exception
+		put exception 's reason
+		put global functions.error("M6 M8 license is Fail")
+	end try	
+end Check_M6M8_Ok
+
+//Export
+function Export()
+	try
+		Tap integration().export_button
+		return true
+	catch exception
+		return false
+	end try	
+end Export
+
+//Check Headphone:X License section
+function Check_license_OK ()
+	if global functions.check_imagefound_image(integration().check_license_OK) is true then
+		return true
+	else
+		return false
+	end if
+End Check_license_OK
+
+// Turn On the Broadcast API toggle
+function turn_on_API()
+	try
+		click ImageLocation(Integration().API_toggle_off_img)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_on_API
+
+//Turn Off the Broadcast API toggle
+function turn_off_API()
+	try
+		click ImageLocation(Integration().API_toggle_on_img)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_off_API
+
+//check the Broadcast API toggle ON
+function check_API_ON () 
+	if global functions.check_imagefound_image(integration().API_toggle_on_img)
+		return true
+	else
+		return false
+	end if
+end check_API_ON
+
+//check the Broadcast API toggle OFF
+function check_API_OFF()
+	if global functions.check_imagefound_image(integration().API_toggle_off_img)
+		return true
+	else
+		return false
+	end if
+end check_API_OFF
+
+//capture Audio levels and return an image, after swipe up 4 times 
+function capture_Audio_levels (img)
+	wait 3
+	CaptureScreen (Name: img, Rectangle: (20,370,1050,880))
+	return the result
+end capture_Audio_levels
+
+//check Force reapply all tunnings toast
+function check_toast_alltunings_appear ()
+	if global functions.check_imagefound_image(integration().Force_reapply_toast_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_toast_alltunings_appear
+
+
+// Check Export finish toast appear
+function export_finish_toast_appear() 
+	if global functions.check_imagefound_image(integration().Export_finish_toast_img) is true then
+		return true
+	else
+		return false
+	end if
+end export_finish_toast_appear
+
+
+function read_export_file(exportfile, keyword)
+	Try
+		open file exportfile
+		Repeat with each line of file exportfile 
+			if it contains keyword Then
+				return true
+			End if
+		End repeat
+		return false
+	Catch
+		put exception 's reason
+		return false
+	End try
+end read_export_file
+
+//Pull export file from device.
+function get_export_file (efile)
+	Try
+		Delete file efile
+	Catch exception
+		put exception 's reason
+		#Do nothing
+	End try
+	put ReadText((370,1650), (900,1700)) into name
+	put "DtsSystemStatusChecker-"&long international date&"_"&name into fullname
+	ADBCall("pull /data/user/0/com.dts.dtsxultra/integrationtest/"&fullname&" "&ResourcePath())
+	rename file ResourcePath(fullname) as efile
+	try
+		Delete file fullname
+	end try
+end get_export_file
+
+
+function check_Force_reapply_appear ()
+	if global functions.check_imagefound_image(integration().Force_reapply_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_Force_reapply_appear
+
+
+
+
+
+

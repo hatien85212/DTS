@@ -1,0 +1,58 @@
+﻿##[Ultra]Verify_Demo_screen_is_disabled_by_tap_the_logo_image_5_times_on_about_screen##
+try
+	#Connect device
+	put global functions.connect_mobile()
+	
+	#Check if ui_hide_demo_screen=false appear in customer.cfg
+	set old_kvp=global other.Other().demo_hide_kvp_true
+	set kvp=global other.Other().demo_hide_kvp_false
+	set cfgfilepath=global other.Other().cfgfilepath
+	If global functions.check_kvp(kvp,cfgfilepath) is false then
+		put global functions.change_kvp(old_kvp,kvp,cfgfilepath)
+		put global functions.root()
+		put global functions.push_customercfg(cfgfilepath)
+		put global functions.Reboot()
+	End if
+	
+	#Open app
+	put global functions.open_app()
+	
+	#Go to about screen
+	put global main.open_about_screen()
+	
+	#Tap 3 times on logo at about screen and check toast "you are 2 steps away to disabling demo mode"
+	Repeat 3 times
+		put global about.click_dts_logo()
+		wait 1
+	End repeat
+	put global about.check_2stepsaway_disabled_demo()
+	
+	#Continue to tap 1 more time on logo at about screen and check toast "you are 1 steps away to disabling demo mode"
+	put global about.click_dts_logo()
+	put global about.check_1stepaway_disabled_demo()
+	
+	#Continue to tap 1 more time on logo at about screen and check toast "Demo mode disabled"
+	put global about.click_dts_logo()
+	put global about.check_disabled_demo()
+	
+	##Back to main screen and check for demo screen##
+	PressBackButton 
+	put global main.check_demo_screen_disappear()
+	
+	##Turn on demo mode for default state
+	put global main.open_about_screen()
+	Repeat 6 times
+		put global about.click_dts_logo()
+		wait 1
+	End repeat
+	
+	#Close app
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	
+catch exception
+	put exception 's reason
+	put global functions.error("No_demo_screen")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end Try

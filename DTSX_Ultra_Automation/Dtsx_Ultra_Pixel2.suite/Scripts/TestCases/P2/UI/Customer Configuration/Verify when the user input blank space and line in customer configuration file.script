@@ -1,0 +1,98 @@
+﻿# Verify when the user input blank space and line in customer configuration file.
+Try
+	//get root permission, connect device
+	put global functions.root()
+	//pull customer_blank.cfg into device 
+	put global functions.push_customercfg(global other.Other().cfgfilepath_blank_space_and_line)
+	
+	//disconnect device, reboot and open app
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+	put global functions.open_app()
+	
+	// check Main Screen, Setting screen, Personal Audio PrefScreen
+	if global main.check_default_layout(GetDeviceOrientation()) is true then
+		put global main.open_setting_screen()
+		if global setting.check_default_layout(GetDeviceOrientation()) is true then
+			PressBackButton
+			put global main.open_PersonalPref_screen()
+			if global personalpref.check_default_layout(GetDeviceOrientation()) is true then
+				LogSuccess "App works correctly"
+			else
+				put global functions.error("Personal Audio Preference screen displays wrong")
+				//push original customercfg for cleaning up this cases
+				push_original_customercfg
+				//clean up
+				cleanup
+			end if
+		else
+			put global functions.error("Setting sreen displays wrong")
+			//push original customercfg for cleaning up this cases
+			push_original_customercfg
+			//clean up
+			cleanup
+		end if
+	else
+		put global functions.error("Main screen displays wrong")
+		//push original customercfg for cleaning up this cases
+		push_original_customercfg
+		//clean up
+		cleanup
+	end if
+	
+	//push original customercfg
+	push_original_customercfg
+	
+	//open app
+	put global functions.open_app()
+	
+	// check main screen, setting screen, personal PrefScreen
+	if global main.check_default_layout(GetDeviceOrientation()) is true then
+		put global main.open_setting_screen()
+		if global setting.check_default_layout(GetDeviceOrientation()) is true then
+			PressBackButton
+			put global main.open_PersonalPref_screen()
+			if global personalpref.check_default_layout(GetDeviceOrientation()) is true then
+				LogSuccess "App works correctly"
+			else
+				put global functions.error("Personal Audio Preference screen displays wrong")
+				//clean up
+				cleanup
+			end if
+		else
+			put global functions.error("Setting sreen displays wrong")
+			//clean up
+			cleanup
+		end if
+	else
+		put global functions.error("Main screen displays wrong")
+		// clean up
+		cleanup
+	end if
+	// clean up
+	cleanup
+Catch exception
+	put exception 's reason
+	//push original customercfg for cleaning up this cases
+	push_original_customercfg
+	//clean up
+	cleanup
+End try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to push_original_customercfg
+	//get root permission, connect device
+	put global functions.root()
+	
+	//push original customer.cfg file
+	put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+	
+	//disconnect device and reboot
+	put global functions.disconnect_mobile()
+	put global functions.reboot()
+end push_original_customercfg

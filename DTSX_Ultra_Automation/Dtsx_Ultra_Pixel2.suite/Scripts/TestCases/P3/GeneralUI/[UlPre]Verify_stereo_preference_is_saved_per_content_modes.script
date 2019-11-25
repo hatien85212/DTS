@@ -1,0 +1,92 @@
+﻿#[UlPre]Verify_stereo_preference_is_saved_per_content_modes
+
+#Connect mobile
+put global functions.connect_mobile()
+
+Try
+	#Open app
+	put global functions.open_app()
+	
+	#go to personal audio preference screen
+	put global main.open_PersonalPref_screen()
+	
+	#reset all setting to default
+	put global personalpref.reset_setting()
+	
+	#change mode 2
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#scroll down 3 times to show stereo preference
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	
+	#go to stereo preference and select wide mode
+	if global personalpref.open_StereoPref() is false and global sp.select_wide() is false then
+		put global functions.error("Can't select Wide")
+		cleanup
+	end if
+	PressBackButton
+	
+	#change mode 6
+	#scroll up 3 times to show the content mode
+	Repeat 3 times
+		put global functions.swipedown()
+	End repeat
+	
+	if global personalpref.select_mode(6) is false then
+		put global functions.error("Can't select mode 6")
+		cleanup
+	end if
+	
+	#change back to mode 2
+	wait 3
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	#check if the stereo preference preserved
+	#scroll down 3 times to show stereo preference
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	#open stereo preference screen
+	if global personalpref.open_StereoPref() is false then
+		put global functions.error("Can't select open stereo preference")
+		cleanup
+	end if
+	
+	#check stereo preference for mode 2 (should be wide)
+	If global sp.check_stereo_mode("wide") is false then
+		put global functions.error("stereo preference of mode 2 is not saved")
+		cleanup
+	else
+		LogSuccess "Verify Stereo Preference is preserved done"
+	End if
+	
+	#clean up for next tc
+	cleanup
+	Catch exception
+	put exception 's reason
+	put global functions.error("stereo preference of mode 2 is not saved")
+	cleanup
+End try
+
+
+to cleanup
+	#reset setting, then reset to oem default
+	PressBackButton
+	put global personalpref.reset_setting()
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

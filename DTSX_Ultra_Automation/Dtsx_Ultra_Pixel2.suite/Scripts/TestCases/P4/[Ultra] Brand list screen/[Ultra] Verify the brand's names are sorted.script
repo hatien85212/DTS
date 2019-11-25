@@ -1,0 +1,41 @@
+﻿//[Ultra] Verify the brand's names are sorted
+
+//connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+//Go to Brand list screen
+put global bthp.open_Brand_list_screen()
+
+//Check if the title is "Brands"
+if check_sorted_brands_by_alphabetically() is true then
+	LogSuccess "The Brand's names are sorted as alpha-numeric"
+	cleanup
+else
+	put global functions.error("The Brand's names are NOT sorted as alpha-numeric")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+
+
+to check_sorted_brands_by_alphabetically
+	Repeat 4 times
+		if global bthp.check_sorted_alphabetically() is true then
+			Repeat 2 times
+				put global functions.swipeup()
+			End repeat
+		else
+			return false
+		end if
+	End repeat
+	return true
+end check_sorted_brands_by_alphabetically
+
+

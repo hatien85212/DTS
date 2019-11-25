@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test verbose="2" name="Default test">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>	
+		<classes>
+			<class name="com.dts.adminportal.dts.test.DTSProducts040DTuningState">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies060DCompaniesList">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies061DCompaniesInfo">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies063DBrandInfo">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies070DEditCompany">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSCompanies072DEditBrandInfoNew">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser080DUserList">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser090DUserInfo">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSUser092DCreateUser">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSAppsDevices630DDevicesList">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSAppsDevices640DDeviceDetail">
+			</class>
+	        <class name="com.dts.adminportal.dts.test.DTSAppsDevices650DDeviceEdit">
+			</class>
+			<class name="com.dts.adminportal.security.test.APISecurityUsers">
+			<methods>
+			<include name="APIU_24"></include>
+			<include name="APIU_25"></include>
+			<include name="APIU_26"></include>
+			<include name="APIU_27"></include>
+			</methods>
+			</class>
+			<class name="com.dts.adminportal.security.test.APISecurityProducts">
+			</class>
+ 
+		</classes>
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->

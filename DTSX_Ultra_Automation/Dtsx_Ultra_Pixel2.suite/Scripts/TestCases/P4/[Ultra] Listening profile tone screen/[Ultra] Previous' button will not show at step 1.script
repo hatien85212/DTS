@@ -1,0 +1,25 @@
+﻿//[Ultra] Previous' button will not show at step 1
+
+
+//connect device
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+
+if global functions.check_imagefound_image(global lp.ListeningProfileScreen().previous_button) is false then
+	LogSuccess "Previous button isn't shown at step 1 of listening profile progress"
+	//cleanup
+else
+	put global functions.error("Previous button is shown at step 1 of listening profile progress")
+	//cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

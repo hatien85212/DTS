@@ -1,0 +1,249 @@
+﻿#Everything relate to main screen is here#
+function Mainscreen()
+	return (\
+	wiredHP_text:"Wired headphones",\
+			btHP_text:"Bluetooth headphones",\
+			usbHP_text:"Digital headphones",\
+			personalpref_text:"Personal Audio Preferences",\
+			lp_text:"Listening profile",\
+			integration_text:"Integration test",\
+			demo_text:"Demo screen",\
+			setting_image:"Main/setting",\ 
+			mainscreen_portrait_img:"Main/mainscreen_defaultlayout_portrait",\ 
+			mainscreen_landscape_img:"Main/mainscreen_defaultlayout_landscape",\
+			DTSX_img:"Main/DTSX_Ultra_logo",\
+			DTSX_toggle_on_img: "Main/DTS_toggle_on",\ 
+			DTSX_toggle_off_img: "Main/DTS_toggle_off",\
+			mainscreen_nolicense_img:"Main/nolicense_screen_img",\
+			lp_nodate_img: "Main/listeningprofile_nodate_img",\
+			earbuds_wired_bt_usb_img: "Main/Earbuds_wired_BT_usb_img",\
+			mainscreen_noenablebutton_img: "Main/mainscreen_defaultlayout_portrait_no_enable_button",\
+			lp_reset_dialog_img: "",\
+			lp_reset_dialog_continue_btn: "Continue",\
+			Hp_selected_toast_img:"Main/Headphone_selected_toast",\
+			)
+		end Mainscreen
+
+function check_default_layout(Scr_rotate)
+	Wait 5
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(Mainscreen().mainscreen_portrait_img) then
+		return true
+	else if Scr_rotate is "landscape" and if global functions.check_imagefound_image( Mainscreen().mainscreen_landscape_img)
+	return true
+	else
+	return false
+End if
+end check_default_layout
+
+function open_wiredHPscreen()
+	If global functions.open_screen("text",Mainscreen().wiredHP_text) is false then
+		put global functions.error("No_wiredHP")
+	End if
+end open_wiredHPscreen
+
+function open_BTHPscreen()
+	If global functions.open_screen("text",Mainscreen().btHP_text) is false then
+		put global functions.error("No_BTHP")
+	End if
+end open_BTHPscreen
+
+function open_USBHPscreen()
+	If global functions.open_screen("text",Mainscreen().usbHP_text) is false then
+		put global functions.error("No_USBHP")
+	End if
+end open_USBHPscreen
+
+function open_PersonalPref_screen()
+	If global functions.open_screen("text",Mainscreen().personalpref_text) is false then
+		put global functions.error("No_Personal_audio_pref")
+	End if
+end open_PersonalPref_screen
+
+function open_LP_screen()
+	If global functions.open_screen("text",Mainscreen().lp_text) is false then
+		put global functions.error("No_LP")
+	End if
+end open_LP_screen
+
+put open_LP_screen()
+
+function open_integration_screen()
+	put global functions.swipeup()
+	If global functions.open_screen("text",Mainscreen().integration_text) is false then
+		put global functions.error("No_integration")
+		
+	End if
+end open_integration_screen
+
+function open_demo_screen()
+	put global functions.swipeup()
+	If global functions.open_screen("text",Mainscreen().demo_text) is false then
+		put global functions.error("No_demo")
+	End if
+end open_demo_screen
+
+##return true if appear, false if not
+function check_demo_screen_appear()
+	//get properties
+	put Mainscreen().demo_text into demo_text
+	
+	//execute
+	if ImageFound(text:demo_text,  WaitFor:5) is false then
+		return false
+	else
+		return true
+	end if
+end check_demo_screen_appear
+
+##return true if appear, false if not
+function check_integration_screen_appear()
+	//get properties
+	put Mainscreen().integration_text into integration_text
+	
+	//execute
+	if ImageFound(text:integration_text,  WaitFor:5) is false then
+		return false
+	else
+		return true
+	end if
+end check_integration_screen_appear
+
+(*function check_demo_screen_disappear()
+	(*put global functions.ScrollUntilFound("text",Mainscreen().demo_text,"Up", "Demo screen appear")*)
+	if ImageFound(text:Mainscreen().demo_text, WaitFor:5) then
+		return false
+	end if
+end check_demo_screen_disappear*)
+
+function open_setting_screen()
+	If global functions.open_screen("image",Mainscreen().setting_image) is false then
+		return false
+	End if
+end open_setting_screen
+
+function open_about_screen()
+	If global functions.open_screen("image",Mainscreen().DTSX_img) is false then
+		put global functions.error("No_about_screen")
+	End if
+end open_about_screen
+
+function check_DTSX_toggle_default_on()
+	if global functions.check_imagefound_image(Mainscreen().DTSX_toggle_on_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_DTSX_toggle_default_on
+
+function check_mainscreen_withNOlicense()
+	if global functions.check_imagefound_image(Mainscreen().mainscreen_nolicense_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_mainscreen_withNOlicense
+
+function check_mainscreen_withNO_enablebutton()
+	put Mainscreen().mainscreen_noenablebutton_img into mainscreen_noenablebutton_img
+	
+	if global functions.check_imagefound_image(mainscreen_noenablebutton_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_mainscreen_withNO_enablebutton
+
+//return true if image found, false if not
+function check_listening_profile_with_nodate()
+	if global functions.check_imagefound_image(Mainscreen().lp_nodate_img) then
+		return true
+	else
+		return false
+	end if
+end check_listening_profile_with_nodate
+
+function check_Audio_section_afterResetOEM()
+	if global functions.check_imagefound_image(Mainscreen().earbuds_wired_bt_usb_img) then
+		return true
+	else
+		return false
+	end if
+end check_Audio_section_afterResetOEM
+
+function turn_on_hpx()
+	try
+		click ImageLocation(Mainscreen().DTSX_toggle_off_img)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_on_hpx
+
+
+function turn_off_hpx()
+	try
+		click ImageLocation(Mainscreen().DTSX_toggle_on_img)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_off_hpx
+
+//check lp date appear. Return true if appear, false if not
+function check_lp_date_appear()
+	//follow the http://docs.testplant.com/ePF/SenseTalk/stk-date-time-values.htm for the date format
+	put the basic date into date_value
+	
+	if ImageFound(3, (text:date_value)) is false then
+		return false
+	else
+		return true
+	end if
+end check_lp_date_appear
+
+
+//check lp reset dialog appear. Return true if appear, false if not
+function check_lp_reset_dialog_appear()
+	put Mainscreen().lp_reset_dialog_img into lp_reset_dialog_img
+	
+	if global functions.check_imagefound_image(lp_reset_dialog_img) is false then
+		return false
+	else
+		return true
+	end if
+end check_lp_reset_dialog_appear
+
+//click continue button in lp_reset_dialog
+function click_continue_with_lp_reset_dialog()
+	if check_lp_reset_dialog_appear() is false then
+		return false
+	else
+		click Mainscreen().lp_reset_dialog_continue_btn
+		return true
+	end if
+end click_continue_with_lp_reset_dialog
+
+
+function check_toast_HP_selected_of (Brand_name, Model_name)
+	if global functions.check_imagefound_image(Mainscreen().Hp_selected_toast_img) is true then
+		if ReadText((415,1706), (888,1761)) is Brand_name&" "&Model_name then
+			return true
+		else
+			return false
+		end if
+	else
+		return false
+	end if	
+end check_toast_HP_selected_of
+
+
+function display_main_screen() 
+	if global functions.check_imagefound_image(mainscreen().DTSX_img) is true then
+		return true
+	else
+		return false
+	end if
+end display_main_screen
+
+
+

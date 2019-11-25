@@ -1,0 +1,63 @@
+﻿//[Ul/Pre] Verify no notification appear when App notification system is disabled 
+
+//Go to setting screen
+Go_to_setting_screen
+
+//Turn On
+put global setting.change_state_Notification("ON")
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+//capture image to compare
+wait 5
+put global functions.captureimage(Notification_On_BT) into Notification_On_BT
+//Disconnect BT
+put global functions.change_state_deviceBT("OFF")
+
+//Collapse the status bar and turn off Notification
+put global noti.the_status_bar("Collapse")
+put global setting.change_state_Notification("OFF")
+
+//Close app
+put global functions.close_app()
+
+//Go to setting screen
+put global functions.open_app()
+//open Setting Screen
+put global main.open_setting_screen()
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+wait 5
+//check if Notification does NOT appear when App notification system is disabled 
+if global functions.check_imagefound_image(Notification_On_BT) is false then
+	LogSuccess "Notification does NOT appear"
+	cleanup
+else
+	put global functions.error("Notification does NOT appear")
+	cleanup
+	return false
+end if
+
+
+to Go_to_Setting_screen
+	//Connect device and open app
+	put global functions.root()
+	put global functions.open_app()
+	//open Setting Screen
+	put global main.open_setting_screen()
+end Go_to_Setting_screen
+
+to cleanup
+	put global noti.the_status_bar("Collapse")
+	put global setting.change_state_Notification("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+
+
+

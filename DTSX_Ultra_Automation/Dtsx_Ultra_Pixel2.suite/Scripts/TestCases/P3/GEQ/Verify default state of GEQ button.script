@@ -1,0 +1,67 @@
+﻿//Verify default state of GEQ button
+
+//root and open app
+put global functions.root()
+// Go to bottom PersonalPrefScreen
+bottom_personalpref_screen
+//check if GEQ off
+if global personalpref.check_state_geq() is false then
+	LogSuccess "GEQ is OFF"
+	Try
+		put global personalpref.turn_on_geq()
+		//change kvp and push it into device
+		put global functions.change_kvp(global other.Other().geq_disable_kvp_false, global other.Other().geq_disable_kvp_true, global other.Other().cfgfilepath)
+		put global functions.push_customercfg(global other.Other().cfgfilepath)
+		// reboot device
+		put global functions.reboot()
+		// Go to bottom PersonalPrefScreen
+		bottom_personalpref_screen
+		//check if GEQ screen is hidden on UI
+		if global personalpref.check_geq_appear() is false then
+			LogSuccess "GEQ screen is hidden on UI"
+		else
+			put global functions.error("GEQ screen is NOT hidden on UI")
+			//push customer_full.cfg
+			push_original_customercfg
+			//clean up
+			cleanup
+		end if
+		// push customerfull with geq_disabled=false and reboot device
+		put global functions.root()
+		put global functions.push_customercfg(global other.Other().full_kvp_cfgfilepath)
+		put global functions.reboot()
+		// Go to bottom PersonalPrefScreen
+		bottom_personalpref_screen
+		//check if GEQ screen is shown on UI
+		if global personalpref.check_geq_appear() is true then
+			LogSuccess "GEQ screen is shown on UI"
+			if global personalpref.check_state_geq() is false then
+				LogSuccess "GEQ is OFF"
+				cleanup
+			end if
+		else
+			put global functions.error("GEQ screen is NOT shown on UI")
+			//clean up
+			cleanup
+		end if	
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end if
+
+to bottom_personalpref_screen
+	put global functions.open_app()
+	//go to PersonalPrefScreen
+	put global main.open_personalpref_screen()
+	//turn on GEQ and go to GEQ screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+end bottom_personalpref_screen	
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
+

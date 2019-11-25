@@ -1,0 +1,103 @@
+﻿##[UlPre] Verify service support APIs for get Treble, Bass, Dialog, Stereo Preference, Loudness leveling when reset Personal Audio Preference
+
+Try
+	//connect device, open app and go to personal preference screen
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	
+	//reset all settings, after reset setting, content mode will be mode 0
+	put global personalpref.reset_setting()
+	
+	//scroll down 3 times to show audio level group, stereo preference
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//clear logcat
+	put global functions.clear_logcat()
+	
+	//change audio level group
+	put global personalpref.change_treble(600)
+	put global personalpref.change_bass(500)
+	put global personalpref.change_DE(200)
+	If global personalpref.check_state_loudness() then
+		put global personalpref.turn_off_loudness()
+		Else
+		put global personalpref.turn_on_loudness()
+	End if
+	
+	//go to stereo preference and select wide mode, then back to personal preference screen
+	if global personalpref.open_StereoPref() is false and global sp.select_wide() is false then
+		put global functions.error("Can't select Wide")
+		cleanup
+	end if
+	PressBackButton
+	
+	(*//scroll up 3 times to show content mode
+	Repeat 3 times
+		put global functions.swipedown()
+	End repeat*)
+	
+	//reset setting
+	put global personalpref.reset_setting()
+	
+	//get logcat
+	put global functions.get_logcat(global other.Other().logcat_path)
+	
+	//CHECK LOGCAT for the result
+	//Loudness API
+	if global functions.read_logcat(global other.Other().logcat_path, "getLoudnessLevelingControlEnabled") is false then
+		put global functions.error("No APIs for loudness appear")
+		cleanup
+	else
+		LogSuccess "Verify loudness control APIs appear in logcat"
+	end if
+	
+	//Bass API
+	if global functions.read_logcat(global other.Other().logcat_path, "getBassLevel") is false then
+		put global functions.error("No APIs for Bass appear")
+		cleanup
+	else
+		LogSuccess "Verify Bass APIs appear in logcat"
+	end if
+	
+	//Treble API
+	if global functions.read_logcat(global other.Other().logcat_path, "getTrebleLevel") is false then
+		put global functions.error("No APIs for Treble appear")
+		cleanup
+	else
+		LogSuccess "Verify Treble APIs appear in logcat"
+	end if
+	
+	
+	//DE API
+	if global functions.read_logcat(global other.Other().logcat_path, "getDialogLevel") is false then
+		put global functions.error("No APIs for DE appear")
+		cleanup
+	else
+		LogSuccess "Verify DE APIs appear in logcat"
+	end if
+	
+	//Stereo Preference API
+	if global functions.read_logcat(global other.Other().logcat_path, "getStereoPreference") is false then
+		put global functions.error("No APIs for stereo preference appear")
+		cleanup
+	else
+		LogSuccess "Verify stereo preference APIs appear in logcat"
+	end if
+	
+	//clean up
+	cleanup
+	Catch exception
+	put exception 's reason
+	put global functions.error("No APIs supported")
+	cleanup
+End try
+
+to cleanup
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

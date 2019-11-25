@@ -1,0 +1,37 @@
+to adb 
+   Params command 
+
+        -- SDK Path and device serial number are passed to every command; 
+        -- this step was suggested by Testplant support. 
+        -- (getConnectionInfo() is a simple function that extracts the device serial number.) 
+
+   put "D:\vish\adt-bundle\sdk\platform-tools" into sdkPath 
+   put getConnectionInfo() into deviceSerialNo 
+    
+        -- Delete any old outputs 
+
+   if (file "adbOutput.txt" exists)  then 
+      log "deleting old adb log" 
+      wait 5 
+      delete file "adbOutput.txt" 
+   end if 
+
+        -- Construct Command 
+
+   set cmd to sdkPath && "/c" && <<adb>> && " & echo Done > adbOutput.txt" 
+
+        -- Execute! 
+   log "Executing command: " & cmd 
+   shell "C:\Windows\System32\cmd.exe", cmd    
+
+        -- Wait until adbOutput contains any data 
+   put the seconds into startTime 
+   repeat until ((the size of file "adbOutput.txt" > 0) or ((the seconds) - startTime > 30)) 
+      wait 5    
+   end repeat 
+    
+        -- return result 
+   put the result 
+   put file "adbOutput.txt" into retVal 
+   return retVal 
+end adb 

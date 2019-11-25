@@ -1,0 +1,24 @@
+﻿//[Ultra] Verify USB-C tuning recommendation should be disable by default 
+
+//Connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+
+//open Setting Screen
+put global main.open_setting_screen()
+
+//Check if the toggle of USB auto tuning is OFF
+if global setting.check_default_layout(GetDeviceOrientation()) is true then
+	LogSuccess "The toggle of USB auto tuning is OFF"
+	cleanup
+else
+	put global functions.error("The toggle of USB auto tuning is NOT OFF")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

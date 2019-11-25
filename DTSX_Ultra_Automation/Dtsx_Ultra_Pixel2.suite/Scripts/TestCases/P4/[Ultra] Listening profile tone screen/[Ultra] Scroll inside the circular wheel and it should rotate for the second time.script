@@ -1,0 +1,58 @@
+﻿//[Ultra] Scroll inside the circular wheel and it should rotate for the second time
+
+//connect mobile and open Listening profile screen
+put global functions.connect_mobile()
+put global functions.open_app()
+put global main.open_LP_screen()
+wait 2
+//if connect with BT route, listening profile setup dialog will appear
+//if connect with USB, then nothing happen
+put global lp.click_ok_lpsetup_bt_dialog_appear()
+wait 2
+//go to step 2 screen
+put global lp.click_next()
+
+//Hold the scroll inside the wheel and rotate it inside the circular wheel towards right
+put global lp.rotate_the_scroll("Right")
+//check if the NExt button is enabled
+if global lp.check_next_button() and if global lp.check_previous_button() is true then
+	default_scroll_position_step2
+	//Hold the scroll inside the wheel and rotate it inside the circular wheel towards left
+	put global lp.rotate_the_scroll("Left")
+	//check if the NExt button is enabled
+	if global lp.check_next_button() and if global lp.check_previous_button() is true then
+		LogSuccess "Next button is enabled"
+		cleanup
+	else
+		put global functions.error("Next button is NOT enabled")
+		cleanup
+		return false
+	end if 
+else
+	put global functions.error("Next button is NOT enabled")
+	cleanup
+	return false
+end if
+
+
+to default_scroll_position_step2
+	PressBackButton
+	wait 2
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 5
+	put global main.open_LP_screen()
+	wait 2
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	wait 2
+	put global lp.click_next()
+end default_scroll_position_step2
+
+to cleanup
+	// have to use press back button and click EXIT and close app. If use close_app function--> HPX change state to OFF
+	PressBackButton
+	wait 3
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 3
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

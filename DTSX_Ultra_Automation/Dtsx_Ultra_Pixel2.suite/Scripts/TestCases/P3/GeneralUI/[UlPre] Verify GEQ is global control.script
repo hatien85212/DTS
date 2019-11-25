@@ -1,0 +1,90 @@
+﻿# [Ul/Pre] Verify GEQ is global control
+Try
+	//connect mobile and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//go to setting screen, reset oem default and back to main screen again
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	PressBackButton
+	
+	//go to personal preference screen and reset all setting
+	put global main.open_PersonalPref_screen()
+	put global personalpref.reset_setting()
+	
+	//select mode 2
+	if global personalpref.select_mode(2) is false then
+		put global functions.error("Can't select mode 2")
+		cleanup
+	end if
+	
+	//scroll down 3 times to show geq
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//turn on GEQ, go to GEQ screen, changes some content, capture the screen and back to personal preference screen
+	put global personalpref.turn_on_geq() //this will return false if geq is on
+	put global personalpref.open_GEQ()
+	if global geq.change_GEQ_band(3,200) is false and global geq.change_GEQ_band(9,-250) is false then
+		put global functions.error("Change GEQ fail")
+		cleanup 
+	end if
+	//capture the image after changing GEQ. The rectangle can be checked with the image save in result folder.
+	put global functions.captureimage("GEQ_change") into GEQ_change
+	PressBackButton
+	
+	//scroll up 3 times to show content mode
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//select mode 6
+	if global personalpref.select_mode(6) is false then
+		put global functions.error("Can't select mode 6")
+		cleanup
+	end if
+	
+	//scroll down 3 times to show geq
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check GEQ on, go to GEQ screen, check geq is persist after switch mode
+	if global personalpref.check_state_geq() is false then
+		put global functions.error("GEQ state is not correct, should be on")
+		cleanup
+	else
+		LogSuccess "Verify GEQ state remain"
+	end if
+	put global personalpref.open_GEQ()
+	if global geq.check_GEQ_screen_afterchangingbands(GEQ_change) is false then
+		put global functions.error("GEQ bands are not the same after switch mode. GEQ should stay remain after switch mode")
+		PressBackButton
+		cleanup
+	else
+		LogSuccess "Verify GEQ bands remain"
+	end if
+	
+	//Back to Stereo preference screen
+	PressBackButton
+	
+	//clean up
+	cleanup
+	Catch exception
+	//get exception error
+	put exception 's reason
+	
+	//cleanup after catch exception
+	cleanup
+End try
+
+to cleanup
+	//reset all settings
+	put global personalpref.reset_setting()
+	
+	//close app and disconnect server
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

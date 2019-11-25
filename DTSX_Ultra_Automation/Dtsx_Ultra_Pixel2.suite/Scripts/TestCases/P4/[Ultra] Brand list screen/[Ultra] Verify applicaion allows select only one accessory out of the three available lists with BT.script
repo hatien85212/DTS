@@ -1,0 +1,81 @@
+﻿//[Ultra] Verify applicaion allows select only one accessory out of the three available lists with BT
+
+//Precondition
+
+//Root and connect device and open app
+put global functions.root()
+put global functions.open_app()
+
+//Connect BT headphone. Need to set up connect BT HP before
+put global functions.change_state_deviceBT("ON")
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+put global bthp.open_Brand_list_screen()
+
+//Choose a first model Headphone of Bose Brand
+put global bthp.select_modelHP_of_brand("Bose","AE2w")
+
+
+//Go to BT headphone screen
+put global main.open_BTHPscreen()
+
+//Step
+//Choose CushBlu accessory in Feartured Headphone list
+put global bthp.select_name_Headphones("CushBlu")
+put global functions.captureimage(Feartured_Hp) into Feartured_Hp
+put global functions.Swipeup()
+
+//Choose AE2w accessory in Branded Headphone list.
+put global bthp.select_name_Headphones("AE2w")
+wait 2
+//Check if Cushblue is NOT chosen
+if global functions.check_imagefound_image(Feartured_Hp) is false then
+	put global functions.captureimage(Branded_Hp) into  Branded_Hp
+	//Choose Earbuds accessory
+	put global bthp.select_name_Headphones("Earbuds")
+	wait 2
+	//Check if AE2w is NOT chosen
+	if global functions.check_imagefound_image(Branded_Hp) is false then
+		put global functions.captureimage(Earbuds) into Earbuds
+		//Choose CushBlu accessory in Feartured Headphone list
+		put global bthp.select_name_Headphones("CushBlu")
+		//Check if Earbuds is NOT chosen
+		if global functions.check_imagefound_image(Earbuds) is false then
+			LogSuccess "App allows select only one accessory out of the three available lists with BT"
+			cleanup
+		else
+			put global functions.error("App allows select only one accessory out of the three available lists with BT")
+			cleanup
+			return false
+		end if
+	else
+		put global functions.error("App allows select only one accessory out of the three available lists with BT")
+		cleanup
+		return false
+	end if
+else
+	put global functions.error("App allows select only one accessory out of the three available lists with BT")
+	cleanup
+	return false
+end if
+
+To cleanup
+	put global functions.change_state_deviceBT("OFF")
+	put global functions.close_app()
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	PressBackButton
+	put global main.open_personalpref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+End cleanup
+
+
+
+

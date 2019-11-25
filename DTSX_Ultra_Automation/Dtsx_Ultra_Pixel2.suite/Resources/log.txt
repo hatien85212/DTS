@@ -1,0 +1,353 @@
+--------- beginning of main
+08-13 14:06:11.890  3225  3232 I zygote64: Compiler allocated 6MB to compile void android.view.ViewRootImpl.performTraversals()
+08-13 14:06:13.454   708   708 D audio_hw_primary: disable_audio_route: usecase(1) reset and update mixer path: low-latency-playback speaker
+08-13 14:06:13.454   708   708 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+08-13 14:06:19.188  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.188   793  1117 V AudioUtil: nothing to update to route node
+08-13 14:06:19.189  3225  3623 I DtsTimeoutEnforcer: Calling getSpeakerModeOn
+08-13 14:06:19.190  3225  3623 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | result: 0
+08-13 14:06:19.190   708  3425 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+08-13 14:06:19.190  3225  3623 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuidLen: 36
+08-13 14:06:19.190  1986  1990 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [2, 0]
+08-13 14:06:19.190   708  3425 D audio_route: Apply path: speaker
+08-13 14:06:19.190  3225  3623 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuid : f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:19.190  3225  3623 I DtsTimeoutEnforcer: getSpeakerModeOn from IPC returned result: OK enabled: f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:19.190  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.190  3225  3408 D AccessoryDatastoreScheduler: Executing QuerySpeakerModeTask
+08-13 14:06:19.191   708  3425 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 15, path = 0, app id = 0x11130, sample rate = 48000
+08-13 14:06:19.191   708  3425 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 0
+08-13 14:06:19.191   708  3425 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 15, Topology Id 112fc
+08-13 14:06:19.191   708  3425 D         : Failed to fetch the lookup information of the device 0000000F 
+08-13 14:06:19.191   708  3425 D ACDB-LOADER: Error: ACDB AFE returned = -19
+08-13 14:06:19.191   708  3425 D audio_hw_primary: enable_audio_route: usecase(1) apply and update mixer path: low-latency-playback speaker
+08-13 14:06:19.191   708  3425 D audio_route: Apply path: low-latency-playback speaker
+08-13 14:06:19.196  3225  3408 D AccessoryDatabaseHelper: Query for speaker modes returning 1 entr(ies)
+08-13 14:06:19.196  3225  3408 D AccessoryDatastoreScheduler: SpeakerMode query took 6ms
+08-13 14:06:19.197  3225  3225 D IntegrationTestFragment: onCreateView()
+08-13 14:06:19.221   708  3425 D audio_hw_primary: out_write: retry previous failed cal level set
+08-13 14:06:19.316  3225  3232 I zygote64: Do full code cache collection, code=250KB, data=178KB
+08-13 14:06:19.317  3225  3232 I zygote64: After code cache collection, code=247KB, data=145KB
+08-13 14:06:19.338  3225  3225 D IntegrationTestFragment: onStart()
+08-13 14:06:19.341  3225  3225 D AudioRouteObserver: Reading value for device: 2
+08-13 14:06:19.341  3225  3225 D AudioRouteObserver: Reading value for all_devices: 4194307
+08-13 14:06:19.341  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.341  3225  3629 I DtsTimeoutEnforcer: Calling getDtsEnabled
+08-13 14:06:19.343  3225  3629 I DtsTimeoutEnforcer: getDtsEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.343  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.344  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.344  3225  3630 I DtsTimeoutEnforcer: Calling getDtsLicenseExists
+08-13 14:06:19.346   793  1117 I hash_map_utils: key: 'EagleLicense' value: ''
+08-13 14:06:19.346  3225  3630 D DtsComm : getDtsLicenseExists() | license : 0
+08-13 14:06:19.346  3225  3630 I DtsTimeoutEnforcer: getDtsLicenseExists from IPC returned result: OK value: 0
+08-13 14:06:19.346  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.347  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.348  3225  3631 I DtsTimeoutEnforcer: Calling getM6M8LicenseExists
+08-13 14:06:19.350  3225  3631 D DtsComm : getM6M8LicenseExists() | license : 1
+08-13 14:06:19.350  3225  3631 I DtsTimeoutEnforcer: getM6M8LicenseExists from IPC returned result: OK value: 1
+08-13 14:06:19.350  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 3.0ms
+08-13 14:06:19.353  3225  3408 D AccessoryDatastoreScheduler: Executing DatabaseHealthCheckTask
+08-13 14:06:19.357  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.358  3225  3408 I AccessoryDatabaseIntegrityChecker: Initiating database check for any errors
+08-13 14:06:19.358  3225  3632 I DtsTimeoutEnforcer: Calling getDtsEnabled
+08-13 14:06:19.359  3225  3632 I DtsTimeoutEnforcer: getDtsEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.359  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.359  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.360  3225  3633 I DtsTimeoutEnforcer: Calling getDtsLicenseExists
+08-13 14:06:19.361   793  1117 I hash_map_utils: key: 'EagleLicense' value: ''
+08-13 14:06:19.361  3225  3633 D DtsComm : getDtsLicenseExists() | license : 0
+08-13 14:06:19.361  3225  3633 I DtsTimeoutEnforcer: getDtsLicenseExists from IPC returned result: OK value: 0
+08-13 14:06:19.362  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.364   793   793 I hash_map_utils: key: 'DTS_EAGLE_PLATFORM_SUPPORT' value: ''
+08-13 14:06:19.364  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.365  3225  3634 I DtsTimeoutEnforcer: Calling getDtsEnabled
+08-13 14:06:19.367  3225  3634 I DtsTimeoutEnforcer: getDtsEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.367  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 3.0ms
+08-13 14:06:19.367  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.368  3225  3635 I DtsTimeoutEnforcer: Calling getStereoPreference
+08-13 14:06:19.369  3225  3635 I DtsTimeoutEnforcer: getStereoPreference from IPC returned result: OK stereoPreference: 3
+08-13 14:06:19.369  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.369  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.370  3225  3636 I DtsTimeoutEnforcer: Calling getGEQEnabled
+08-13 14:06:19.370  3225  3636 I DtsTimeoutEnforcer: getGEQEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.370  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.371  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.372  3225  3637 I DtsTimeoutEnforcer: Calling getGEQGain band: 0
+08-13 14:06:19.373  3225  3637 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.373  3225  3637 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.373  3225  3637 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.373  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.374  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.375  3225  3638 I DtsTimeoutEnforcer: Calling getGEQGain band: 1
+08-13 14:06:19.377  3225  3638 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.377  3225  3638 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.377  3225  3638 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.377  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 3.0ms
+08-13 14:06:19.377  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.378  3225  3640 I DtsTimeoutEnforcer: Calling getGEQGain band: 2
+08-13 14:06:19.379  3225  3640 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.379  3225  3640 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.379  3225  3640 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.379  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.380  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.380  3225  3641 I DtsTimeoutEnforcer: Calling getGEQGain band: 3
+08-13 14:06:19.381  3225  3641 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.382  3225  3641 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.382  3225  3641 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.382  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.382  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.383  3225  3642 I DtsTimeoutEnforcer: Calling getGEQGain band: 4
+08-13 14:06:19.384  3225  3642 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.384  3225  3642 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.385  3225  3642 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.385  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 3.0ms
+08-13 14:06:19.385  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.385  3225  3643 I DtsTimeoutEnforcer: Calling getGEQGain band: 5
+08-13 14:06:19.386  3225  3643 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.386  3225  3643 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.386  3225  3643 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.386  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.386  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.387  3225  3644 I DtsTimeoutEnforcer: Calling getGEQGain band: 6
+08-13 14:06:19.387  3225  3644 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.387  3225  3644 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.387  3225  3644 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.387  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.388  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.388  3225  3645 I DtsTimeoutEnforcer: Calling getGEQGain band: 7
+08-13 14:06:19.388  3225  3645 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.388  3225  3645 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.388  3225  3645 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.388  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 0.0ms
+08-13 14:06:19.389  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.395  3225  3646 I DtsTimeoutEnforcer: Calling getGEQGain band: 8
+08-13 14:06:19.396  3225  3646 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.396  3225  3646 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.396  3225  3646 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.396  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 7.0ms
+08-13 14:06:19.397  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.397  3225  3647 I DtsTimeoutEnforcer: Calling getGEQGain band: 9
+08-13 14:06:19.397  3225  3647 D DtsComm : getGEQGain() | result: 0
+08-13 14:06:19.397  3225  3647 D DtsComm : getGEQGain() | gain: 4096
+08-13 14:06:19.397  3225  3647 I DtsTimeoutEnforcer: getGEQGain from IPC returned result: OK value: 4096
+08-13 14:06:19.398  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.398  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.399  3225  3232 I zygote64: Do partial code cache collection, code=250KB, data=153KB
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: Calling getGEQGainAll
+08-13 14:06:19.400  3225  3232 I zygote64: After code cache collection, code=250KB, data=153KB
+08-13 14:06:19.400  3225  3232 I zygote64: Increasing code cache capacity to 1024KB
+08-13 14:06:19.400  3225  3648 D DtsComm : getGEQGainAll() | result: 0
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getAllGEQGains from IPC returned result: OK
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [0]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [1]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [2]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [3]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [4]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [5]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [6]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [7]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [8]: 4096
+08-13 14:06:19.400  3225  3648 I DtsTimeoutEnforcer: getGEQGainAll value [9]: 4096
+08-13 14:06:19.401  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.401  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: Calling getListeningTest:
+08-13 14:06:19.402  3225  3649 D DtsComm : getListeningTest | -1.0,-1.0,-1.0,-1.0
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: getListeningTest from IPC returned result: OK
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: getListeningTest from IPC [0]: -1.0
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: getListeningTest from IPC [1]: -1.0
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: getListeningTest from IPC [2]: -1.0
+08-13 14:06:19.402  3225  3649 I DtsTimeoutEnforcer: getListeningTest from IPC [3]: -1.0
+08-13 14:06:19.402  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.403  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.403  3225  3650 I DtsTimeoutEnforcer: Calling getSpeakerModeOn
+08-13 14:06:19.404  3225  3650 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | result: 0
+08-13 14:06:19.404  3225  3650 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuidLen: 36
+08-13 14:06:19.404  3225  3650 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuid : f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:19.404  3225  3650 I DtsTimeoutEnforcer: getSpeakerModeOn from IPC returned result: OK enabled: f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:19.404  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.404  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.404  3225  3651 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 3
+08-13 14:06:19.404  3225  3651 D DtsComm : getUUId for 1
+08-13 14:06:19.405  3225  3651 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:19.405  3225  3651 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:19.405  3225  3651 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.405  3225  3651 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.405  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.405  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.406  3225  3652 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 2
+08-13 14:06:19.406  3225  3652 D DtsComm : getUUId for 1
+08-13 14:06:19.406  3225  3652 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:19.406  3225  3652 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:19.406  3225  3652 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.406  3225  3652 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.406  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.406  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.407  3225  3653 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 1
+08-13 14:06:19.407  3225  3653 D DtsComm : getUUId for 1
+08-13 14:06:19.407  3225  3653 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:19.407  3225  3653 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:19.407  3225  3653 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.407  3225  3653 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:19.407  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 0.0ms
+08-13 14:06:19.408  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.408  3225  3654 I DtsTimeoutEnforcer: Calling getDbLevels
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels from IPC returned result: OK
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [0]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [1]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [2]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [3]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [4]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [5]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [6]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [7]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [8]: -80000
+08-13 14:06:19.409  3225  3654 I DtsTimeoutEnforcer: getDbLevels value [9]: -80000
+08-13 14:06:19.409  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.519  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.520  3225  3658 I DtsTimeoutEnforcer: Calling getDialogLevel()
+08-13 14:06:19.521  3225  3658 D DtsComm : getDialogLevel() | result: 0
+08-13 14:06:19.521  3225  3658 D DtsComm : getDialogLevel() | level: 39
+08-13 14:06:19.521  3225  3658 I DtsTimeoutEnforcer: getDialogLevel from IPC returned result: OK dialogLevel: 39
+08-13 14:06:19.521  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.521  3225  3225 D DtsCore : [Timer] getDialogLevel() to Service and back took 2.0ms
+08-13 14:06:19.521  3225  3225 D DtsCore : getDialogLevel from Service - result: 0
+08-13 14:06:19.521  3225  3225 D DtsCore : getDialogLevel from Service - level: 39
+08-13 14:06:19.521  3225  3225 D DtsCore : Returning dialog level of 39
+08-13 14:06:19.522  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.523  3225  3659 I DtsTimeoutEnforcer: Calling getTrebleLevel()
+08-13 14:06:19.523  3225  3659 D DtsComm : getTrebleLevel() | result: 0
+08-13 14:06:19.524  3225  3659 D DtsComm : getTrebleLevel() | level: 0
+08-13 14:06:19.524  3225  3659 I DtsTimeoutEnforcer: getTrebleLevel from IPC returned result: OK trebleLevel: 0
+08-13 14:06:19.524  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.524  3225  3225 D DtsCore : [Timer] getTrebleLevel() to Service and back took 2.0ms
+08-13 14:06:19.524  3225  3225 D DtsCore : getTrebleLevel from Service - result: 0
+08-13 14:06:19.524  3225  3225 D DtsCore : getTrebleLevel from Service - level: 0
+08-13 14:06:19.524  3225  3225 D DtsCore : Returning treble level of 0
+08-13 14:06:19.524  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.525  3225  3660 I DtsTimeoutEnforcer: Calling getBassLevel()
+08-13 14:06:19.525  3225  3660 D DtsComm : getBassLevel() | result: 0
+08-13 14:06:19.525  3225  3660 D DtsComm : getBassLevel() | level: 38
+08-13 14:06:19.525  3225  3660 I DtsTimeoutEnforcer: getBassLevel from IPC returned result: OK bassLevel: 38
+08-13 14:06:19.525  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 1.0ms
+08-13 14:06:19.526  3225  3225 D DtsCore : [Timer] getBassLevel() to Service and back took 2.0ms
+08-13 14:06:19.526  3225  3225 D DtsCore : getBassLevel from Service - result: 0
+08-13 14:06:19.526  3225  3225 D DtsCore : getBassLevel from Service - level: 38
+08-13 14:06:19.526  3225  3225 D DtsCore : Returning bass level of 38
+08-13 14:06:19.527  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.527  3225  3661 I DtsTimeoutEnforcer: Calling getLoudnessLevelingEnabled
+08-13 14:06:19.528  3225  3661 I DtsTimeoutEnforcer: getLoudnessLevelingControlEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.529  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:19.531  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.531  3225  3663 I DtsTimeoutEnforcer: Calling getDtsEnabled
+08-13 14:06:19.533  3225  3663 I DtsTimeoutEnforcer: getDtsEnabled from IPC returned result: OK enabled: false
+08-13 14:06:19.533  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+--------- beginning of system
+08-13 14:06:19.534  1074  1554 W BroadcastQueue: Background execution not allowed: receiving Intent { act=dts.dtssdk.intent.action.GET_DTS_STATE flg=0x30 (has extras) } to com.dts.dtsxultra/com.dts.dtssdk.DtsBroadcastManager
+08-13 14:06:19.548  3225  3225 D IntegrationTestFragment: dts.dtssdk.intent.status.GET_DTS_RESULT | requestId: BroadcastTest-1
+08-13 14:06:19.548  3225  3225 D IntegrationTestFragment: resultCode: OK
+08-13 14:06:19.548  3225  3225 D IntegrationTestFragment: dtsState: false
+08-13 14:06:19.548  3225  3225 D IntegrationTestFragment: Getting DTS state using broadcast API was successful. DTS enabled: false
+08-13 14:06:19.906  3225  3408 D AccessoryDatabaseIntegrityChecker: Database error check finished without any errors. No errors found
+08-13 14:06:19.906  3225  3408 D AccessoryDatabaseHelper: Database error check completed in 553ms
+08-13 14:06:19.907  3225  3408 D AccessoryDatastoreScheduler: No catastrophic error found. Will not be resetting database
+08-13 14:06:19.907  3225  3408 D AccessoryDatastoreScheduler: Executing DeviceInfoTask
+08-13 14:06:19.926  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:19.927  3225  3673 I DtsTimeoutEnforcer: Calling getVersions
+08-13 14:06:19.928   793   793 I hash_map_utils: key: 'EagleVersion' value: ''
+08-13 14:06:19.928   793   793 I hash_map_utils: key: 'EagleDescription' value: ''
+08-13 14:06:19.929   793   793 I hash_map_utils: key: 'EaglePlatformVersion' value: ''
+08-13 14:06:19.929  3225  3673 I DtsTimeoutEnforcer: getVersions from IPC returned byte size: 923
+08-13 14:06:19.929  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:22.408   708  1281 D audio_hw_primary: disable_audio_route: usecase(1) reset and update mixer path: low-latency-playback speaker
+08-13 14:06:22.409   708  1281 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+08-13 14:06:26.063   793   793 V AudioUtil: nothing to update to route node
+08-13 14:06:26.064   708  3425 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+08-13 14:06:26.064  1986  1990 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [2, 0]
+08-13 14:06:26.064   708  3425 D audio_route: Apply path: speaker
+08-13 14:06:26.065   708  3425 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 15, path = 0, app id = 0x11130, sample rate = 48000
+08-13 14:06:26.065   708  3425 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 0
+08-13 14:06:26.065   708  3425 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 15, Topology Id 112fc
+08-13 14:06:26.065   708  3425 D         : Failed to fetch the lookup information of the device 0000000F 
+08-13 14:06:26.065   708  3425 D ACDB-LOADER: Error: ACDB AFE returned = -19
+08-13 14:06:26.065   708  3425 D audio_hw_primary: enable_audio_route: usecase(1) apply and update mixer path: low-latency-playback speaker
+08-13 14:06:26.065   708  3425 D audio_route: Apply path: low-latency-playback speaker
+08-13 14:06:26.076  3225  3225 D EventReceiver:  Received INTENT_API_SET_DTS_ENABLED
+08-13 14:06:26.077  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:26.077  3225  3789 I DtsTimeoutEnforcer: Calling setDtsEnabled enabled:1
+08-13 14:06:26.096   708  3425 D audio_hw_primary: out_write: retry previous failed cal level set
+08-13 14:06:26.097  3225  3789 I DtsTimeoutEnforcer: setDtsEnabled from IPC returned result: OK
+08-13 14:06:26.097  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 20.0ms
+08-13 14:06:26.101  1074  1553 W BroadcastQueue: Background execution not allowed: receiving Intent { act=dts.dtssdk.intent.action.SET_DTS_ENABLED flg=0x30 (has extras) } to com.dts.dtsxultra/.receivers.EventReceiver
+08-13 14:06:26.101  1074  1099 W BroadcastQueue: Background execution not allowed: receiving Intent { act=dts.dtssdk.intent.action.SET_DTS_ENABLED flg=0x30 (has extras) } to com.dts.dtsxultra/com.dts.dtssdk.DtsBroadcastManager
+08-13 14:06:26.104  3225  3225 D IntegrationTestFragment: dts.dtssdk.intent.status.DTS_STATE_CHANGED | dtsState: true
+08-13 14:06:26.104  3225  3225 D IntegrationTestFragment: dts.dtssdk.intent.status.SET_DTS_RESULT | requestId: BroadcastTest-2
+08-13 14:06:26.104  3225  3225 D IntegrationTestFragment: resultCode: OK
+08-13 14:06:26.104  3225  3225 D IntegrationTestFragment: Setting DTS state using broadcast API was successful
+08-13 14:06:29.297   708  1110 D audio_hw_primary: disable_audio_route: usecase(1) reset and update mixer path: low-latency-playback speaker
+08-13 14:06:29.299   708  1110 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+08-13 14:06:31.369  3889  3889 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+08-13 14:06:31.438  3889  3889 I app_process: The ClassLoaderContext is a special shared library.
+08-13 14:06:31.461  3889  3889 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+08-13 14:06:31.461  3889  3889 I Input   : injectKeyEvent: KeyEvent { action=ACTION_DOWN, keyCode=KEYCODE_BACK, scanCode=0, metaState=0, flags=0x0, repeatCount=0, eventTime=95819, downTime=95819, deviceId=-1, source=0x101 }
+08-13 14:06:31.466  3889  3889 I Input   : injectKeyEvent: KeyEvent { action=ACTION_UP, keyCode=KEYCODE_BACK, scanCode=0, metaState=0, flags=0x0, repeatCount=0, eventTime=95819, downTime=95819, deviceId=-1, source=0x101 }
+08-13 14:06:31.466  1074  1101 D AutofillManagerService: onBackKeyPressed()
+08-13 14:06:31.468  3889  3889 D AndroidRuntime: Shutting down VM
+08-13 14:06:31.493  3225  3225 D MainFragment: onCreateView()
+08-13 14:06:31.557  3225  3225 D MainFragment: onStart()
+08-13 14:06:31.565  3225  3225 D MainFragment: onResume()
+08-13 14:06:31.568  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.568  3225  3907 I DtsTimeoutEnforcer: Calling getDtsLicenseExists
+08-13 14:06:31.571   793   793 I hash_map_utils: key: 'EagleLicense' value: ''
+08-13 14:06:31.573  3225  3907 D DtsComm : getDtsLicenseExists() | license : 0
+08-13 14:06:31.573  3225  3907 I DtsTimeoutEnforcer: getDtsLicenseExists from IPC returned result: OK value: 0
+08-13 14:06:31.573  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 5.0ms
+08-13 14:06:31.573  3225  3225 D MainFragment: License check passed. Valid license found on device
+08-13 14:06:31.574  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.575  3225  3909 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 1
+08-13 14:06:31.575  3225  3909 D DtsComm : getUUId for 1
+08-13 14:06:31.576  3225  3909 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:31.576  3225  3909 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:31.576  3225  3909 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.576  3225  3909 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.577  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:31.577  3225  3408 D AccessoryDatastoreScheduler: Executing QueryAccessoryTask
+08-13 14:06:31.577  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.577  3225  3910 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 2
+08-13 14:06:31.578  3225  3910 D DtsComm : getUUId for 1
+08-13 14:06:31.578  3225  3910 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:31.578  3225  3910 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:31.578  3225  3910 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.579  3225  3910 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.579  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:31.579  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.580  3225  3911 I DtsTimeoutEnforcer: Calling getAccessoryUuid audioRoute: 3
+08-13 14:06:31.580  3225  3911 D DtsComm : getUUId for 1
+08-13 14:06:31.581  3225  3911 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | result: 0
+08-13 14:06:31.581  3225  3911 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuidLen: 36
+08-13 14:06:31.581  3225  3911 D DtsComm : getUuid (GET_DTS_TUNING_ACCESSORY_DTSCS) | uuid : f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.581  3225  3911 I DtsTimeoutEnforcer: getAccessoryUuid from IPC returned result: OK uuid: f08a4c48-0887-11e4-9191-0800200c9a13
+08-13 14:06:31.581  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:31.581  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.581  3225  3408 D AccessoryDatabaseHelper: Query for accessories returning 1 entr(ies)
+08-13 14:06:31.581  3225  3408 D AccessoryDatastoreScheduler: Accessory query took 4ms
+08-13 14:06:31.581  3225  3408 D AccessoryDatastoreScheduler: Executing QueryAccessoryTask
+08-13 14:06:31.582  3225  3912 I DtsTimeoutEnforcer: Calling getSpeakerModeOn
+08-13 14:06:31.582  3225  3912 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | result: 0
+08-13 14:06:31.582  3225  3912 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuidLen: 36
+08-13 14:06:31.583  3225  3912 D DtsComm : getUuid (GET_DTS_TUNING_SPEAKER_ON) | uuid : f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:31.583  3225  3912 I DtsTimeoutEnforcer: getSpeakerModeOn from IPC returned result: OK enabled: f08a4c48-0887-11e4-9191-0800200c9a19
+08-13 14:06:31.583  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 2.0ms
+08-13 14:06:31.586  3225  3225 D AudioRouteObserver: Reading value for device: 2
+08-13 14:06:31.586  3225  3225 D AudioRouteObserver: Reading value for all_devices: 4194307
+08-13 14:06:31.586  3225  3225 D MainFragment: onAudioRouteChanged: INTERNAL_SPEAKERS
+08-13 14:06:31.586  3225  3225 I DtsTimeoutEnforcer: DTS system API timeout is set to 3000ms. If it's 0, there is no timeout.
+08-13 14:06:31.587  3225  3913 I DtsTimeoutEnforcer: Calling getDtsEnabled
+08-13 14:06:31.587  3225  3408 D AccessoryDatabaseHelper: Query for accessories returning 1 entr(ies)
+08-13 14:06:31.587  3225  3408 D AccessoryDatastoreScheduler: Accessory query took 6ms
+08-13 14:06:31.587  3225  3408 D AccessoryDatastoreScheduler: Executing QueryAccessoryTask
+08-13 14:06:31.590  3225  3408 D AccessoryDatabaseHelper: Query for accessories returning 1 entr(ies)
+08-13 14:06:31.590  3225  3408 D AccessoryDatastoreScheduler: Accessory query took 3ms
+08-13 14:06:31.590  3225  3408 D AccessoryDatastoreScheduler: Executing QuerySpeakerModeTask
+08-13 14:06:31.593  3225  3408 D AccessoryDatabaseHelper: Query for speaker modes returning 1 entr(ies)
+08-13 14:06:31.593  3225  3408 D AccessoryDatastoreScheduler: SpeakerMode query took 3ms
+08-13 14:06:31.595  3225  3913 I DtsTimeoutEnforcer: getDtsEnabled from IPC returned result: OK enabled: true
+08-13 14:06:31.596  3225  3225 I DtsTimeoutEnforcer: [Timer] call to IPC and back took 10.0ms

@@ -1,0 +1,61 @@
+﻿#Verify Stereo mode traditional still remain after reboot device
+
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//Go to Personal Audio Preferences and scroll down 3 times
+	put global main.open_PersonalPref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//Change Stereo Preference to traditional and back to personal audio pref screen
+	put global personalpref.open_StereoPref()
+	if  global sp.select_traditional() is false then
+		put global functions .error("Change stereo preference fail")
+		cleanup
+	end if
+	
+	//close app and disconnect device
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	
+	//reboot device
+	put global functions.reboot()
+	
+	//open app again, go to Stereo Preference screen
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.open_StereoPref()
+	
+	//Expectation: Stereo Preference still remain traditional
+	if global sp.check_stereo_mode("traditional") is false then
+		put global functions.error("Stereo preference is not preserved after reboot")
+		cleanup
+	else
+		LogSuccess "Verify stereo preference is presserved"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put reason of exception
+	put global functions.error("Stereo preference is not preserved after reboot")
+	
+	//cleanup
+	cleanup
+End try
+
+to cleanup
+	//cleanup
+	PressBackButton
+	put global personalpref.reset_setting()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

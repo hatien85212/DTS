@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<testsuites>
+ <testsuite name="TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script" package="Dtsx_Ultra_Pixel2.suite" timestamp="2019-02-26 20:03:26.661 +0700"
+ tests="1" successes="(null)" errors="(null)" time="0.000000">
+  <properties>
+   <property name="RunDate" value="2019-02-26 20:03:26.661 +0700"/>
+   <property name="Status" value="Running"/>
+  </properties>
+  <testcase name="TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script" assertions="1" successes="0" errors="1" time="253.409">
+  </testcase>
+ </testsuite>
+</testsuites>

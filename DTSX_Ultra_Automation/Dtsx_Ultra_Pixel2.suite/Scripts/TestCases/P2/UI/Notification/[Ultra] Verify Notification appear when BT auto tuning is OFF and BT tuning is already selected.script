@@ -1,0 +1,52 @@
+﻿//[Ultra] Verify Notification appear when BT auto tuning is OFF and BT tuning is already selected
+
+//Preconditions
+//Root device and connect mobile
+put global functions.root()
+//Open app
+put global functions.open_app()
+//Go to Setting screen
+put global main.open_setting_screen()
+// Turn on Notification
+put global setting.change_state_Notification("ON")
+wait 2
+
+//Expand the status bar
+put global noti.the_status_bar("Expand")
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+put global noti. Tap_name_button("Search")
+put global bthp.select_name_Headphones ("Earbuds")
+PressBackButton
+//Disconnect BT headphone
+put global functions.change_state_deviceBT("OFF")
+
+
+//Connect BT headphone
+put global functions.change_state_deviceBT("ON")
+
+if global noti.Ear_bud_HP_apply() is true then
+	LogSuccess " Notification appear when BT auto tuning is OFF and BT tuning is already selected"
+	cleanup
+else
+	put global functions.error("Notification do NOT appear")
+	cleanup
+	return false	
+end if
+
+to cleanup
+	
+	put global noti.the_status_bar("Collapse")
+	// Turn off Notification
+	put global setting.change_state_Notification("OFF")
+	//Turn off USB auto tuning
+	put global setting.change_state_BT_auto_tuning("OFF")
+	put global functions.change_state_deviceBT("OFF")
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup1
+
+to cleanup
+	put global noti.the_status_bar("Collapse")
+	cleanup1
+end cleanup

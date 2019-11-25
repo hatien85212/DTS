@@ -1,0 +1,115 @@
+﻿#[Ultra] Verify listening profile message when user has already set up their profile
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	
+	//change value of listening profile
+	changesetting
+	wait 5
+	//open listening profile
+	put global main.open_LP_screen()
+	
+	//check if reset lp dialog appear
+	## need image for lp reset dialog
+	if global lp.check_lp_reset_dialog_appear() is false then
+		put global functions.error("Reset lp dialog not appear after user has already set up their profile")
+		cleanup
+	else
+		LogSuccess "Reset lp dialog appear after user has already set up their profile"
+	end if
+	
+	//click continue button on reset lp dialog appear
+	put  global lp. confirm_reset_lp("CONTINUE")
+	
+	//if connect with BT route, listening profile setup dialog will appear
+	//if connect with USB, then nothing happen
+	put global lp.click_ok_lpsetup_bt_dialog_appear()
+	wait 3
+	//check if app goes to lp profile screen 1
+	if global lp.check_layout("1") is false then
+		put global functions.error("App does not go to lp screen 1 after select continue at reset lp dialog")
+		cleanup
+	else
+		LogSuccess "App go to lp screen 1 after select continue at reset lp dialog"
+	end if
+	
+	//press back button to go to main screen
+	PressBackButton
+	wait 2
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 3
+	//Scroll down 3 times to show bottom of the screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check if date disappear after reset LP
+	if global main.check_lp_date_appear() then
+		put global functions.error("Date appear after reset listening profile")
+		cleanup
+	else
+		LogSuccess "Date not appear after reset listening profile"
+	end if
+	
+	put global main.open_demo_screen()
+	
+	//check if all current value -1 after reset lp
+	##need image for current value after reset LP
+	if global demo.check_current_value_after_resetLP() is false then
+		put global functions.error("LP values are not -1 after reset LP")
+		//reset listening profile
+		put global demo.reset_listening_profile()
+		cleanup
+	else
+		LogSuccess "LP values are -1 after reset LP"
+	end if
+	
+	//cleanup
+	cleanup1
+Catch exception
+	put exception 's error
+	cleanup1
+End try
+
+to cleanup
+	//press back button to go to main screen
+	PressBackButton
+	wait 2
+	put global lp.click_confirmation_dialog_exit("EXIT")
+	wait 3
+	//reopen app and reset listening profile at setting screen
+	put global functions.close_app()
+	wait 3
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	put global setting.reset_listening_profile()
+	
+	//close app and disconnect
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+to changesetting
+	Repeat 4 times
+		wait 2
+		put global lp.change_value()
+		wait 2
+		put global lp.click_next()
+	End repeat
+	wait 3
+	put global lp.click_ok_success_dialog_appear()
+end changesetting
+
+to cleanup1
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup1

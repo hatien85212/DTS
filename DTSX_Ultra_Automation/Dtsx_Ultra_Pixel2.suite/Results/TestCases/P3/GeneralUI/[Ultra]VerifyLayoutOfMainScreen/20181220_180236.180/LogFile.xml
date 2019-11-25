@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<testsuites>
+ <testsuite name="TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script" package="Dtsx_Ultra_Pixel2.suite" timestamp="2018-12-20 18:02:36.180 +0700"
+ tests="1" successes="2" errors="0" time="38.811000">
+  <properties>
+   <property name="RunDate" value="2018-12-20 18:02:36.180 +0700"/>
+   <property name="Status" value="Success"/>
+  </properties>
+  <testcase name="TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen.script" assertions="2" successes="2" errors="0" time="38.315">
+  </testcase>
+ </testsuite>
+</testsuites>

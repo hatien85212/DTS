@@ -1,0 +1,43 @@
+﻿##Everything relate to USBheadphoneScreen
+
+function USBheadphoneScreen()
+	return(\
+	usbhp_screen_portrait_img:"USBHP/USBHP_defaultlayout_portrait",\ 
+			usbhp_screen_landscape_img:"USBHP/USBHP_defaultlayout_landscape",\ 
+			OverEarHP_text: "Over-Ear Headphones",\
+			Earbuds_text: "Earbuds",\
+			Earpiece_text: "Earpiece",\
+			ExSpeaker_text: "External Speaker",\
+			Car_text: "Car Audio",\
+			)
+		end USBheadphoneScreen
+
+function check_default_layout(Scr_rotate)
+	If Scr_rotate is "portrait" and if functions.check_imagefound_image(USBheadphoneScreen().usbhp_screen_portrait_img) then
+		return true
+	else if Scr_rotate is "landscape" and if functions.check_imagefound_image(USBheadphoneScreen().usbhp_screen_landscape_img)
+		return true
+	else
+		return false
+	End if
+	
+end check_default_layout
+
+#select standard OE headphone
+function select_standardHP_OverEar()
+	if ImageFound(2, (text:USBheadphoneScreen().OverEarHP_text)) then
+		click FoundImageLocation()
+		return true
+	else
+		return false
+	end if
+end select_standardHP_OverEar
+
+function select_name_Headphones (Name)
+	if ImageFound(2, (text:Name)) then
+		click FoundImageLocation()
+		return true
+	else
+		return false
+	end if
+end select_name_Headphones

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+	<test verbose="2" name="Default test">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>	
+		<classes>
+			<class name="com.dts.adminportal.dts.test.DTSPrivilegesAppsDevices">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSPrivilegesAccessories">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSPrivilegesAudioRoutes">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSPrivilegesCompanies">
+			</class>
+			<class name="com.dts.adminportal.dts.test.DTSPrivilegesUsers">
+			</class>
+			<class name="com.dts.adminportal.partner.test.PartnerPrivilegesCompanies">
+			</class>
+			<class name="com.dts.adminportal.partner.test.PartnerPrivilegesProducts">
+			</class>
+			<class name="com.dts.adminportal.partner.test.PartnerPrivilegesUsers">
+			</class>
+		</classes>
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->

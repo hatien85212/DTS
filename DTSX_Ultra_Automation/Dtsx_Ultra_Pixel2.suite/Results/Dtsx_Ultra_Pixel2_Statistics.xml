@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<statistics>
+ <script name="TestCases/P3/GeneralUI/Verify_when_remove_or_no_DTS_license_file_include_reboot_device_after_that">
+  <LastStatus>Failure</LastStatus>
+  <NumberOfRuns>1</NumberOfRuns>
+  <NumberOfFails>1</NumberOfFails>
+  <FirstRun>2018-12-20 18:03:15 +0700</FirstRun>
+  <LastRun>2018-12-20 18:03:15 +0700</LastRun>
+  <TotalTimeOnSuccess>0.000000</TotalTimeOnSuccess>
+ </script>
+ <script name="TestCases/P3/GeneralUI/[Ultra]VerifyLayoutOfMainScreen">
+  <LastStatus>Success</LastStatus>
+  <NumberOfRuns>1</NumberOfRuns>
+  <NumberOfFails>0</NumberOfFails>
+  <FirstRun>2018-12-20 18:02:36 +0700</FirstRun>
+  <LastRun>2018-12-20 18:02:36 +0700</LastRun>
+  <TotalTimeOnSuccess>38.811000</TotalTimeOnSuccess>
+ </script>
+ <script name="TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available">
+  <LastStatus>Failure</LastStatus>
+  <NumberOfRuns>1</NumberOfRuns>
+  <NumberOfFails>1</NumberOfFails>
+  <FirstRun>2019-02-26 18:20:10 +0700</FirstRun>
+  <LastRun>2019-02-26 18:20:10 +0700</LastRun>
+  <TotalTimeOnSuccess>0.000000</TotalTimeOnSuccess>
+ </script>
+</statistics>

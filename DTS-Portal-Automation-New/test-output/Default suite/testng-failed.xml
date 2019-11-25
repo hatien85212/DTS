@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.dts.adminportal.dts.test.DTSProducts040DProductDetail">
+        <methods>
+          <include name="getTCnameBefore"/>
+          <include name="TC040DAD_24"/>
+          <include name="TC040DAD_22"/>
+          <include name="initializeDriver"/>
+          <include name="afterTest"/>
+          <include name="TC041DAVD_16"/>
+        </methods>
+      </class> <!-- com.dts.adminportal.dts.test.DTSProducts040DProductDetail -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

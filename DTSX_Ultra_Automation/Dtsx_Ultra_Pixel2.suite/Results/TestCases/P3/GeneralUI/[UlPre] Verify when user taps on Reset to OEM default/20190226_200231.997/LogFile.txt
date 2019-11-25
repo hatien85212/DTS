@@ -1,0 +1,6 @@
+﻿2019-02-26 20:02:32.378 +0700	START		Running TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script
+2019-02-26 20:02:32.558 +0700	launchapp		com.dts.dtsxultra	3	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:02:34.560 +0700	setdeviceorientation		Portrait	5	function_open_app	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:02:51.731 +0700	Exception	Main/setting	Unable To Find Any Image On Screen "Main/setting" within 5.00 seconds	15	function_check_imagefound_image	C:/WORKING/3_DTS/Eggplant/DTS auto source/DTSX_Ultra_Automation/Ultility.suite/Scripts/functions.script
+2019-02-26 20:02:52.186 +0700	EndTestCase		(Duration:"19.757", Errors:"1", Exceptions:"1", StartTime:"2019-02-26 20:02:32 +0700", Successes:"0", TestCase:"TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script", Warnings:"0")
+2019-02-26 20:02:52.189 +0700	ABORTED		Execution Time 0:00:21 TestCases/P3/GeneralUI/[UlPre] Verify when user taps on Reset to OEM default.script

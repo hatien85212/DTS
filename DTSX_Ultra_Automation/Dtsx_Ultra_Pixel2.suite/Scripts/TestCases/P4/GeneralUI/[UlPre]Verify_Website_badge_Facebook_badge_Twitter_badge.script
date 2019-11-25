@@ -1,0 +1,60 @@
+﻿##[UlPre]Verify_Website_badge_Facebook_badge_Twitter_badge##
+try
+	
+	#Connect device
+	put global functions.connect_mobile()
+	
+	#Make sure all webview close
+	put global functions.close_webview()
+	
+	#Open app
+	put global functions.open_app()
+	
+	#Open about screen
+	put global main.open_about_screen()
+	
+	#Check Website link
+	put global about.open_dtsweb()
+	if global about.check_dtsweb_link() is false then
+		put global functions.error("wrong_website_link")
+		cleanup
+	else
+		LogSuccess "Verify Website link done"
+	end if
+	PressBackButton
+	
+	
+	#Check fb link
+	put global about.open_fb()
+	if global about.check_fb_link() is false then
+		put global functions.error("wrong_fb_link")
+		cleanup
+	else
+		LogSuccess "Verify FB link done"
+	end if
+	PressBackButton
+	
+	#Check twitter link
+	put global about.open_twitter()
+	if global about.check_twitter_link() is false then
+		put global functions.error("wrong_twitter_link")
+		cleanup
+	else
+		LogSuccess "Verify twitter link done"
+	end if
+	PressBackButton
+	
+	#Close app
+	cleanup
+	
+catch exception
+	put exception 's reason
+	put global functions.error("Wrong_links_Or_no_badge")
+	cleanup
+end Try
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

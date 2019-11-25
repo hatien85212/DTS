@@ -1,0 +1,197 @@
+﻿##Everything relate to NotificationTray
+
+function NotificationTray()
+	put (\
+	DTSX_Ultra_img:"NotificationTray/DTSXUltra",\
+			DTSHeadphoneX_off:"NotificationTray/DTSHeadphoneX_off",\ 
+			DTSHeadphoneX_on:"NotificationTray/DTSHeadphoneX_on",\ 
+			Optimized_audio_speakers:"NotificationTray/Optimized_audio_speakers",\
+			Optimized_audio_selection:"NotificationTray/Optimized_audio_selection",\
+			Traditional_img:"NotificationTray/Traditional",\ 
+			Wide_img:"NotificationTray/Wide",\ 
+			Infront_img:"NotificationTray/Infront",\
+			Traditional_Bold_img:"NotificationTray/Traditional_Bold",\ 
+			Wide_Bold_img:"NotificationTray/Wide_Bold",\ 
+			Infront_Bold_img:"NotificationTray/Infront_Bold",\
+			Personalisedaudio:"NotificationTray/Personalisedaudio",\ 
+			headphone_icon:"NotificationTray/headphone_icon",\
+			Notificationsoff:"NotificationTray/Notificationsoff",\ 
+			Notificationson:"NotificationTray/Notificationson",\
+			Dummy_img:"NotificationTray/DTSXUltra_Dummy",\
+			int_speaker_noti_expand_img:"NotificationTray/Int_Speaker_expand",\
+			int_speaker_noti_collapse_img:"NotificationTray/int_speaker_collapse",\
+			Button_Change_img:"NotificationTray/Change_button",\
+			Button_Search_img:"NotificationTray/Search_button",\
+			Button_Dismiss_img:"NotificationTray/Dismiss_button",\
+			Button_OK_img:"NotificationTray/OK_button",\
+			Button_Sound_img:"NotificationTray/Sound_button",\
+			Button_DTS_img:"NotificationTray/DTSXUltra",\
+			Button_Close_img:"NotificationTray/Close_button",\
+			Kicker_CushBlue_expand_noti_img:"NotificationTray/KickerCushBlue_noti",\
+			Earbuds_expand_sound_noti_img:"NotificationTray/Earbuds_Sound_expand",\
+			Earbuds_expand_noti_img:"NotificationTray/Earbuds_noti_expand",\
+			BT_audio_connected_img:"NotificationTray/Bluetooth_audio_connected",\
+			USB_audio_connected_img:"NotificationTray/USB_audio_connected",\
+			OE_HP_apply_img:"NotificationTray/OverEar_Headphones_Apply",\
+			EB_HP_apply_img:"NotificationTray/Earbuds_HP_Apply_audio_tuning",\
+			Car_audio_auto_off_img:"NotificationTray/CarAudio_Apply_audio_tuning_off",\
+			) into NotificationTray
+			return NotificationTray
+end NotificationTray
+
+//Expand or collapse the status bar. Need run function root() prior run this function
+function the_status_bar (Expand, collapse)
+	if Expand is "Expand" then
+		ExecuteRemoteCommand("cmd statusbar expand-notifications")
+	else
+		ExecuteRemoteCommand("cmd statusbar collapse")
+	end if
+end the_status_bar
+
+
+//Check Dummy appear
+function Check_dummy_appear ()
+	if global functions.check_imagefound_image(NotificationTray().Dummy_img) is true then
+		return true
+	else
+		return false
+	end if
+end Check_dummy_appear
+
+//Check notification option 1 internal speaker
+function check_int_speaker_noti_expand()
+	if global functions.check_imagefound_image(NotificationTray().int_speaker_noti_expand_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_int_speaker_noti_expand
+
+
+function check_int_speaker_noti_collapse ()
+	if global functions.check_imagefound_image(NotificationTray().int_speaker_noti_collapse_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_int_speaker_noti_collapse
+
+function DTS_On_Notification()
+	if global functions.check_imagefound_image(NotificationTray().DTSHeadphoneX_on) is true then
+		return true
+	else
+		return false
+	end if
+end DTS_On_Notification
+
+function Tap_name_button(button_name)
+	put global functions.open_screen("image",NotificationTray().("Button_"&Button_name&"_img"))
+	wait 2
+end Tap_name_button
+
+//Check if Notification of CushBlu appear
+function check_Noti_CushBlu_appear() 
+	if global functions.check_imagefound_image(NotificationTray().Kicker_CushBlue_expand_noti_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_Noti_CushBlu_appear
+
+function check_earbud_expand_sound()
+	if global functions.check_imagefound_image(NotificationTray().Earbuds_expand_sound_noti_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_earbud_expand_sound
+
+function check_earbud_expand()
+	if global functions.check_imagefound_image(NotificationTray().Earbuds_expand_noti_img) is true then
+		return true
+	else
+		return false
+	end if
+end check_earbud_expand
+
+
+function BT_audio_connected()
+	if global functions.check_imagefound_image(NotificationTray().BT_audio_connected_img) is true then
+		return true
+	else
+		return false
+	end if
+end BT_audio_connected
+
+//Dismis Main Notification on the status bar
+
+
+function Over_ear_HP_apply()
+	if global functions.check_imagefound_image(NotificationTray().OE_HP_apply_img) is true then
+		return true
+	else
+		return false
+	end if
+end Over_ear_HP_apply
+
+function Ear_bud_HP_apply()
+	if global functions.check_imagefound_image(NotificationTray().EB_HP_apply_img) is true then
+		return true
+	else
+		return false
+	end if
+end Ear_bud_HP_apply
+
+
+
+function USB_audio_connected()
+	if global functions.check_imagefound_image(NotificationTray().USB_audio_connected_img) is true then
+		return true
+	else
+		return false
+	end if
+end USB_audio_connected
+
+function Check_noti_Car_audio_auto_tuning_off()
+	if global functions.check_imagefound_image(NotificationTray().Car_audio_auto_off_img) is true then
+		return true
+	else
+		return false
+	end if
+end Check_noti_Car_audio_auto_tuning_off
+
+function swipe_to_dismiss_main_notification() 
+	try
+		put ImageLocation(NotificationTray().int_speaker_noti_collapse_img) into (A,B)
+		put A - 200 into C
+		put A+ 200 into D
+		ExecuteRemoteCommand("input touchscreen swipe "&C&" "&B&" "&D&" "&B)
+	end try
+end swipe_to_dismiss_main_notification
+
+function swipe_to_dismiss_dummy_notification() 
+	try
+		put ImageLocation(NotificationTray().Dummy_img) into (A,B)
+		put A - 200 into C
+		put A+ 200 into D
+		ExecuteRemoteCommand("input touchscreen swipe "&C&" "&B&" "&D&" "&B)
+	end try
+end swipe_to_dismiss_dummy_notification
+
+function swipe_to_dismiss_main_notification_int_speaker_noti_expand() 
+	try
+		put ImageLocation(NotificationTray().int_speaker_noti_expand_img) into (A,B)
+		put A - 200 into C
+		put A+ 200 into D
+		ExecuteRemoteCommand("input touchscreen swipe "&C&" "&B&" "&D&" "&B)
+	end try
+end swipe_to_dismiss_main_notification_int_speaker_noti_expand
+
+
+
+
+
+
+
+
+

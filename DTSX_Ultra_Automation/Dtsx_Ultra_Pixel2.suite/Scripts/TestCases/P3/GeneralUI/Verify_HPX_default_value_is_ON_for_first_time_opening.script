@@ -1,0 +1,39 @@
+﻿##Verify_HPX_default_value_is_ON_for_first_time opening##
+
+try
+	#Connect mobile
+	(*put global functions.connect_mobile()*)
+	
+	#Delete persistent file and reboot device
+	put global functions.root()
+	put global functions.remove_datafile()
+	Disconnect
+	put global functions.Reboot()
+	
+	#Open app
+	put global functions.open_app()
+	
+	#Check for HPX toggle should be on
+	if global main.check_DTSX_toggle_default_on() is false then
+		put global functions.error("DTSX_toggle_default_off")
+		cleanup
+	else
+		LogSuccess "Verify DTSX Default ON"
+	end if
+	
+	#clean up for next tc
+	cleanup
+catch exception
+	put exception 's reason
+	put global functions.error("DTSX_default_Off")
+	cleanup
+end Try
+
+to cleanup
+	#Reset OEM for next tc
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

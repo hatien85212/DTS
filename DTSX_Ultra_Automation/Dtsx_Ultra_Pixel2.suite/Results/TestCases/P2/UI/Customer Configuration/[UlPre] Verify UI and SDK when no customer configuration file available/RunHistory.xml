@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<runHistory script="TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available">
+ <run>
+  <RunDate>2019-02-26 18:20:10.098 +0700</RunDate>
+  <Status>Failure</Status>
+  <Duration>131.194000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>0</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20190226_182010.098/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Script Error -- Number of Errors logged: 1</ErrorMessage>
+ </run>
+</runHistory>

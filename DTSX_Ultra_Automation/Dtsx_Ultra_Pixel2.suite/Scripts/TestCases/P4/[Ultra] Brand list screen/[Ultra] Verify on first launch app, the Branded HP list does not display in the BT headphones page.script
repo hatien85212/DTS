@@ -1,0 +1,43 @@
+﻿//[Ultra] Verify on first launch app, the Branded HP list does not display in the BT headphones page
+
+
+put global functions.root()
+//Remove dts_hpx_setting
+put global functions.remove_dts_setting()
+
+//Remove BrandedHeadphonePref.xml
+put global bthp.remove_BrandedHPpref_xml()
+//close app
+put global functions.close_app()
+//reboot device
+put global functions.reboot()
+
+//open app and go to BT Headphone screen
+put global functions.open_app()
+put global main.open_BTHPscreen()
+
+put global functions.swipeup()
+
+//Check if  "Branded Headphones" appear
+if global bthp.check_branded_HP_appear() is false then
+	LogSuccess "First launch app, The Branded HP list does not display"
+	cleanup
+else
+	put global functions.error("First launch app, The Branded HP list displays")
+	cleanup
+	return false	
+end if
+
+to cleanup
+	PressBackButton
+	put global main.open_setting_screen()
+	put global setting.reset_OEM_default()
+	PressBackButton
+	put global main.open_personalpref_screen()
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	put global personalpref.turn_off_geq()
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup

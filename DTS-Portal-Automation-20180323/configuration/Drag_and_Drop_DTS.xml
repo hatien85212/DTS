@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FireFox Test">
+<listeners>
+	<listener class-name="org.uncommons.reportng.HTMLReporter" />
+	<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+</listeners>
+	<test name="FireFoxTest">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="url" value="https://devportal.dts.com/saap"></parameter>
+		<classes>
+     		<class name="com.dts.adminportal.dts.test.DTSProducts051DProductEdit">
+      			<methods>
+      				<include name="TC051DAE_25()"></include>
+      				<include name="TC051DAE_39()"></include>
+      			</methods>	
+    		</class>
+    		<class name="com.dts.adminportal.dts.test.DTSCompanies072DEditBrandInfoNew">
+      			<methods>
+      				<include name="TC072DEBI_05()"></include>
+      			</methods>	
+    		</class>
+    		<class name="com.dts.adminportal.partner.test.PartnerProduct051PAccessoryEdit">
+      			<methods>
+      				<include name="TC051PAE_06()"></include>
+      			</methods>	
+    		</class>
+    		<class name="com.dts.adminportal.partner.test.PartnerProduct052PModelVariantEdit">
+      			<methods>
+      				<include name="TC052PMVE_02()"></include>
+      			</methods>	
+    		</class>
+  		</classes>
+	</test>
+</suite>

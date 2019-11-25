@@ -1,0 +1,23 @@
+﻿//[Ul/Pre] Verify layout for Boost sliders
+
+//connect device and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+// go to integration test screen
+put global main.open_integration_screen()
+// check if Boost sliders is shown
+if global integration.check_default_layout(GetDeviceOrientation()) is true then
+	LogSuccess "Boost sliders is shown"
+	//clean up
+	cleanup
+else
+	put global functions.error("Boost slides is NOT shown")
+	cleanup
+	return false
+end if
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup

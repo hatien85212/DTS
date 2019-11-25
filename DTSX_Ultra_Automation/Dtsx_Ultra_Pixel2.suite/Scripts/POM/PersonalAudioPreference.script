@@ -1,0 +1,341 @@
+﻿#Everything relate to PersonalAudioPreference
+
+function PersonalAudioPreference()
+	return (\
+	DTSHeadphoneX:"",\
+			PersonalPref_portrait_img1: "PersonalPrefScreen/PersonalPref_portrait_layout1",\ 
+			PersonalPref_portrait_img2: "PersonalPrefScreen/PersonalPref_portrait_layout2",\
+			PersonalPref_landscape_img1: "PersonalPrefScreen/PersonalPref_landscape_layout1",\ 
+			PersonalPref_landscape_img2: "PersonalPrefScreen/PersonalPref_landscape_layout2",\
+			PersonalPref_landscape_img3: "PersonalPrefScreen/PersonalPref_landscape_layout3",\
+			treble_icon_img: "PersonalPrefScreen/Treble_icon_img",\
+			DE_icon_img: "PersonalPrefScreen/DE_icon_img",\
+			bass_icon_img: "PersonalPrefScreen/Bass_icon_img",\ 
+			geq_txt:"Graphic Equalizer",\
+			GEQ_toggle_on_img: "PersonalPrefScreen/GEQ_on_img",\ 
+			GEQ_toggle_off_img: "PersonalPrefScreen/GEQ_off_img",\ 
+			StereoPref_txt: "Stereo preference",\
+			StereoPref_traditional_portrait_img: "PersonalPrefScreen/Stereopref_Traditional_por_img",\
+			StereoPref_front_portrait_img: "PersonalPrefScreen/Stereopref_front_por_img",\
+			StereoPref_wide_portrait_img: "PersonalPrefScreen/Stereopref_Wide_por_img",\
+			reset_btn_img: "PersonalPrefScreen/Reset_setting_btn",\ 
+			reset_setting_dialog_Reset_btn_img: "PersonalPrefScreen/RESET_btn",\ 
+			mode_disable_0: "PersonalPrefScreen/mode0_disabled_portrait_img",\
+			mode_disable_2: "PersonalPrefScreen/mode2_disabled_portrait_img",\
+			mode_disable_3: "PersonalPrefScreen/mode3_disabled_portrait_img",\
+			mode_disable_4: "PersonalPrefScreen/mode4_disabled_portrait_img",\
+			mode_disable_5: "PersonalPrefScreen/mode5_disabled_portrait_img",\
+			mode_disable_6: "PersonalPrefScreen/mode6_disabled_portrait_img",\
+			mode_disable_7: "PersonalPrefScreen/mode7_disabled_portrait_img",\
+			mode_disable_8: "PersonalPrefScreen/mode8_disabled_portrait_img",\
+			mode_enable_0: "PersonalPrefScreen/mode0_enabled_portrait_img",\
+			mode_enable_2: "PersonalPrefScreen/mode2_enabled_portrait_img",\
+			mode_enable_3: "PersonalPrefScreen/mode3_enabled_portrait_img",\
+			mode_enable_4: "PersonalPrefScreen/mode4_enabled_portrait_img",\
+			mode_enable_5: "PersonalPrefScreen/mode5_enabled_portrait_img",\
+			mode_enable_6: "PersonalPrefScreen/mode6_enabled_portrait_img",\
+			mode_enable_7: "PersonalPrefScreen/mode7_enabled_portrait_img",\
+			mode_enable_8: "PersonalPrefScreen/mode8_enabled_portrait_img",\
+			mode_2_default_treble_img:"",\
+			mode_2_default_de_img:"",\
+			mode_2_default_bass_img:"",\
+			mode_2_default_loudnesslvl_img:"",\
+			loudness_toggle_on: "PersonalPrefScreen/loudness_on_img",\
+			loudness_toggle_off: "PersonalPrefScreen/loudness_off_img",\ 
+			default_audiolevel_mode_0: "PersonalPrefScreen/default_audiolevel_mode0",\
+			default_audiolevel_mode_2: "PersonalPrefScreen/default_audiolevel_mode2",\
+			default_audiolevel_mode_3: "",\
+			default_audiolevel_mode_4: "",\
+			default_audiolevel_mode_5: "",\
+			default_audiolevel_mode_6: "PersonalPrefScreen/default_audiolevel_mode6",\
+			default_audiolevel_mode_7: "",\
+			default_audiolevel_mode_8: "",\
+			)
+		end PersonalAudioPreference
+
+function check_default_layout(Scr_rotate)
+	Wait 5
+	If Scr_rotate is "portrait" and if global functions.check_imagefound_image(PersonalAudioPreference().PersonalPref_portrait_img1) then
+		#scroll up
+		Repeat 5 times
+			put global functions.swipeup()
+		End repeat
+		
+		#check image exist
+		If global functions.check_imagefound_image(PersonalAudioPreference().PersonalPref_portrait_img2) then
+			#scroll down
+			Repeat 5 times
+				put global functions.swipedown()
+			End repeat
+			return true
+		Else
+			return false
+		End if
+	else if Scr_rotate is "Landscape" and if global functions.check_imagefound_image( PersonalAudioPreference().PersonalPref_landscape_img1)
+		#scroll up
+		Repeat 17 times
+			put global functions.swipeup()
+		End repeat
+		if global functions.check_imagefound_image( PersonalAudioPreference().PersonalPref_landscape_img2) then
+			return true
+			
+		else 
+			return false
+		end if
+	else
+		return false
+	End if
+end check_default_layout 
+
+
+function change_treble(LeftToRight)
+	Try
+		if global functions.check_imagefound_image(PersonalAudioPreference().treble_icon_img) then
+			Tap FoundImageLocation() + (LeftToRight,0)
+		else
+			put global functions.ScrollUntilFound("text",PersonalAudioPreference().treble_icon_img,"Up","Can't change treble boost")
+		end if
+	Catch exception
+		put exception 's reason
+		put global functions.error("Can't change treble boost")
+	End try
+end change_treble
+
+function change_DE(LeftToRight)
+	Try
+		if global functions.check_imagefound_image(PersonalAudioPreference().DE_icon_img) then
+			Tap FoundImageLocation() + (LeftToRight,0)
+		else
+			put global functions.ScrollUntilFound("text",PersonalAudioPreference().DE_icon_img,"Up","Can't change DE boost")
+		end if
+	Catch exception
+		put exception 's reason
+		put global functions.error("Can't change DE boost")
+	End try
+end change_DE
+
+function change_bass(LeftToRight)
+	Try
+		if global functions.check_imagefound_image(PersonalAudioPreference().bass_icon_img) then
+			Tap FoundImageLocation() + (LeftToRight,0)
+		else
+			put global functions.ScrollUntilFound("text",PersonalAudioPreference().bass_icon_img,"Up","Can't change bass boost")
+		end if
+	Catch exception
+		put exception 's reason
+		put global functions.error("Can't change bass boost")
+	End try
+end change_bass
+
+function open_GEQ()
+	try
+		if ImageFound(3, (text:PersonalAudioPreference().geq_txt)) then
+			click FoundImageLocation()
+		else
+			return false
+		end if
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end open_GEQ
+
+function open_StereoPref()
+	try
+		if ImageFound(3, (text:PersonalAudioPreference().StereoPref_txt)) then
+			click FoundImageLocation()
+		else 
+			return false
+		end if
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end open_StereoPref
+
+function reset_setting()
+	If global functions.open_screen("image",PersonalAudioPreference().reset_btn_img) is false or if global functions.open_screen("image",PersonalAudioPreference().reset_setting_dialog_Reset_btn_img) is false then
+		put global functions.error("no reset button")
+		
+	End if
+end reset_setting
+
+function select_mode(mode_num)
+	Try
+		if global functions.check_imagefound_image(PersonalAudioPreference().("mode_disable_"& mode_num)) then
+			click FoundImageLocation()
+		end if
+	Catch exception
+		put exception 's reason
+		return false
+	End try
+end select_mode
+
+function check_default_treble(mode_num)
+	If global functions.check_imagefound_image(PersonalAudioPreference()."mode_"+mode_num+"_default_treble_img")  then
+		return true
+	Else
+		return false
+	End if
+end check_default_treble
+
+function check_default_DE(mode_num)
+	If global functions.check_imagefound_image(PersonalAudioPreference()."mode_"+mode_num+"_default_treble_img")  then
+		return true
+	Else
+		return false
+	End if
+end check_default_DE
+
+function check_default_Bass(mode_num)
+	If global functions.check_imagefound_image(PersonalAudioPreference()."mode_"+mode_num+"_default_treble_img")  then
+		return true
+	Else
+		return false
+	End if
+end check_default_Bass
+
+function check_default_Loudness(mode_num)
+	If global functions.check_imagefound_image(PersonalAudioPreference()."mode_"+mode_num+"_default_treble_img")  then
+		return true
+	Else
+		return false
+	End if
+end check_default_Loudness
+
+function turn_on_loudness()
+	try
+		click ImageLocation(PersonalAudioPreference().loudness_toggle_off)+(400,0)
+	catch exception
+		put exception 's reason
+	end try
+end turn_on_loudness
+
+function turn_off_loudness()
+	try
+		click ImageLocation(PersonalAudioPreference().loudness_toggle_on)+(400,0)
+	catch exception
+		put exception 's reason
+	end try
+end turn_off_loudness
+
+function turn_on_geq()
+	try
+		click ImageLocation(PersonalAudioPreference().GEQ_toggle_off_img)+(400,0)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_on_geq
+
+function turn_off_geq()
+	try
+		click ImageLocation(PersonalAudioPreference().GEQ_toggle_on_img)+(400,0)
+	catch exception
+		put exception 's reason
+		return false
+	end try
+end turn_off_geq
+
+#return true when on. return false when off
+function check_state_loudness()
+	if global functions.check_imagefound_image(PersonalAudioPreference().loudness_toggle_on) then
+		return true
+	end if
+	return false
+end check_state_loudness
+
+#return true when on. return false when off
+function check_state_geq()
+	if global functions.check_imagefound_image(PersonalAudioPreference().GEQ_toggle_off_img) then
+		return false
+	else
+		return true
+	end if
+end check_state_geq
+
+#return true when GEQ text appear. return false if not
+function check_geq_appear()
+	put PersonalAudioPreference().geq_txt into geq_txt
+	
+	if ImageFound(2, (text:geq_txt)) then
+		return true
+	end if
+	return false
+end check_geq_appear
+
+function check_default_audiolevel_group(mode_num)
+	If global functions.check_imagefound_image(PersonalAudioPreference().("default_audiolevel_mode_"&mode_num)) is false then
+		return false
+	End If
+end check_default_audiolevel_group
+
+#return true when appear. return false when not
+#mode includes 3 variable: traditional, front, wide
+function check_state_stereopref(mode)
+	if global functions.check_imagefound_image(PersonalAudioPreference().("StereoPref_"&mode&"_portrait_img")) then
+		return true
+	end if
+	return false
+end check_state_stereopref
+
+#return true when appear. return false when not
+function check_stereopref_appear()
+	put PersonalAudioPreference().StereoPref_txt into StereoPref_txt
+	
+	if ImageFound(2, text: StereoPref_txt) then
+		return true
+	end	 if
+	return false
+end check_stereopref_appear
+
+
+function check_default_audiolevel_group(mode_num)
+	If 	global functions.check_imagefound_image(PersonalAudioPreference().("default_audiolevel_mode_"&mode_num)) is false then
+		return false
+	End If
+end check_default_audiolevel_group
+
+#check state of content mode, return true when enabled and false when disabled
+function check_contentmode_state(mode_num)
+	if global functions.check_imagefound_image(PersonalAudioPreference().("mode_enable_"&mode_num)) then
+		return true
+	end if
+	return false
+end check_contentmode_state
+
+(*function turn_on_geq()
+	Try
+		if(ImageFound("2",image: Property.HomePage().graphic_equalizer_off,scale: Property.Scale().Size))then
+			Click (image:"HomePage/graphic_equalizer_off",scale: Property.Scale().Size)
+		end if
+	Catch
+		
+		put exception's reason
+		CaptureScreen 
+		put  close_app()
+		exit to top
+	End try
+	
+	
+end turn_on_geq
+
+function turn_off_geq()
+	Try
+		if(ImageFound("2", image:"HomePage/graphic_equalizer_on",scale: Property.Scale().Size))then
+			Click(image:"HomePage/graphic_equalizer_on",scale: Property.Scale().Size)
+		end if
+		#updated on 2016/12/29 GEQ_disable is removed.
+		#		if(ImageFound("2", image:"HomePage/graphic_equalizer_disable",scale: Property.Scale().Size))then
+		#			Click (image:"HomePage/graphic_equalizer_disable",scale: Property.Scale().Size)
+		#		end if
+	Catch
+		put exception's reason
+		LogError "False"
+		CaptureScreen 
+		put  close_app()
+		exit to top
+	End try
+end turn_off_geq*)
+
+

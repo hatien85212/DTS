@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<testsuites>
+ <testsuite name="TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available.script" package="Dtsx_Ultra_Pixel2.suite" timestamp="2019-02-26 18:20:10.098 +0700"
+ tests="1" successes="0" errors="1" time="131.194000">
+  <properties>
+   <property name="RunDate" value="2019-02-26 18:20:10.098 +0700"/>
+   <property name="Status" value="Failure"/>
+  </properties>
+  <testcase name="TestCases/P2/UI/Customer Configuration/[UlPre] Verify UI and SDK when no customer configuration file available.script" assertions="1" successes="0" errors="1" time="130.326">
+    <failure type="LogError">Can't connect mobile again</failure>
+  </testcase>
+ </testsuite>
+</testsuites>

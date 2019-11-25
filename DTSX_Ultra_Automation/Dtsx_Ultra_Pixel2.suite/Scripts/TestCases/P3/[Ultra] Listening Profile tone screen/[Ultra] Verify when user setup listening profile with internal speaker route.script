@@ -1,0 +1,34 @@
+﻿#[Ultra] Verify when user setup listening profile with internal speaker route
+Try
+	//connect device and open app
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	
+	//open listening profile
+	put global main.open_LP_screen()
+	
+	//check if Connect headphone dialog appear
+	##need to capture image for connect headphone dialog
+	if global lp.check_connectHP_dialog_appear() is false then
+		put global functions.error("Connect headphone dialog not appear with speaker route")
+		cleanup
+	else
+		LogSuccess "Connect headphone dialog appear with speaker route"
+	end if
+	
+	//cleanup
+	cleanup
+Catch exception
+	put exception 's error
+	cleanup
+End try
+
+to cleanup
+	//close app and disconnect
+	PressBackButton
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+
+

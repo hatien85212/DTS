@@ -1,0 +1,61 @@
+﻿#[Ultra] Verify when user taps on Reset Listening Profile option
+
+Try
+	//connect device, open app and go to setting screen
+	put global functions.connect_mobile()
+	put global functions.open_app()
+	put global main.open_setting_screen()
+	
+	//Reset listening profile
+	if global setting.check_reset_listening_profile_toast() is false then
+		put global functions.error("Can't reset listening profile")
+		cleanup
+	end if
+	
+	//back to main screen
+	wait 3
+	PressBackButton
+	
+	//scroll down for 3 times to show lprofile and integration screen
+	Repeat 3 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check Listening profile: no date issued under listening profile tab
+	if global main.check_listening_profile_with_nodate() is false then
+		put global functions.error("No listening profile with no date issued appear")
+		cleanup
+	else
+		LogSuccess "Verify no date issued under listening profile tab"
+	end if
+	
+	//Go to integration screen
+	put global main.open_integration_screen()
+	
+	//Scroll down 11 times to show api test
+	Repeat 11 times
+		put global functions.swipeup()
+	End repeat
+	
+	//check getlisteningtest api: -1
+	if global integration.check_getlisteningtestAPI_minus1() is false then
+		put global functions.error("Get listening test API value is not -1")
+		cleanup
+	else
+		LogSuccess "Verify listening test API value is -1"
+	end if
+	
+	//cleanup
+	cleanup
+	Catch exception
+	put exception 's reason
+	cleanup
+End try
+
+to cleanup
+	//close app and disconnect device
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+	exit to top
+end cleanup
+

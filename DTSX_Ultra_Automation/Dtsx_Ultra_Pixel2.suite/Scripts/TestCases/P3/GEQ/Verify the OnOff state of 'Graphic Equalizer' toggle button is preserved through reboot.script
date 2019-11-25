@@ -1,0 +1,49 @@
+﻿//Verify the On/Off state of 'Graphic Equalizer' toggle button is preserved through reboot
+
+
+//connect mobile and open app
+put global functions.connect_mobile()
+put global functions.open_app()
+//go to personal audio preference 
+put global main.open_PersonalPref_screen()
+Repeat 2 times
+	put global functions.swipeup()
+End repeat
+//turn off GEQ and reboot device
+put global personalpref.turn_on_geq()
+put global functions.reboot()
+//open app and go to personal audio preference
+put global functions.open_app()
+put global main.open_PersonalPref_screen()
+Repeat 2 times
+	put global functions.swipeup()
+End repeat
+
+//check if the On/Off state of 'Graphic Equalizer' toggle button is preserved
+if global personalpref.check_state_geq() is true then
+	//turn on geq and reboot device
+	put global personalpref.turn_off_geq()
+	put global functions.reboot()
+	//open app ancd go to personal audio preference
+	put global functions.open_app()
+	put global main.open_PersonalPref_screen()
+	Repeat 2 times
+		put global functions.swipeup()
+	End repeat
+	if global personalpref.check_state_geq() is false then
+		LogSuccess "the 'Graphic Equalizer' option is at the state"
+		cleanup
+	else
+		put global functions.error("the 'Graphic Equalizer' option is NOT at the state")
+		cleanup
+	end if
+else
+	put global functions.error("the 'Graphic Equalizer' option is NOT at the state")
+	cleanup
+end if
+
+
+to cleanup
+	put global functions.close_app()
+	put global functions.disconnect_mobile()
+end cleanup
